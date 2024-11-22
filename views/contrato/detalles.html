@@ -1,0 +1,440 @@
+{{extend 'layout_frontend.html'}}
+
+<div class="card-box pd-20 height-100-p mb-30">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <img
+        class="empresa-logo"
+        src="{{=URL('static', 'images/banner-img.png')}}"
+        alt=""
+      />
+    </div>
+    <div class="col-md-8">
+      <h4 class="font-20 weight-600 mb-10 test text-capitalize">
+        Contrato No. 15
+        <div class="weight-600 font-30 text-blue">Guajitiros S.R.L.</div>
+      </h4>
+      <p class="font-18 max-width-600 weight-600">
+        Fecha de Vencimiento: 26/4/2027
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row pb-10">
+  <div class="col-xl-4 col-lg-4 col-md-12 mb-20">
+    <div class="card-box height-100-p widget-style3">
+      <div class="d-flex flex-wrap">
+        <div class="widget-data">
+          <div class="weight-700 font-24 text-dark">Servicios</div>
+          <div class="font-14 text-secondary weight-500">
+            Naturaleza de Contrato
+          </div>
+        </div>
+        <div class="widget-icon">
+          <div
+            class="icon"
+            data-color="#00eccf"
+            style="color: rgb(0, 236, 207)"
+          >
+            <i class="icon-copy dw dw-analytics1"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-12 mb-20">
+    <div class="card-box height-100-p widget-style3">
+      <div class="d-flex flex-wrap">
+        <div class="widget-data">
+          <div class="weight-700 font-24 text-dark">Proveedores</div>
+          <div class="font-14 text-secondary weight-500">Tipo de Contrato</div>
+        </div>
+        <div class="widget-icon">
+          <div
+            class="icon"
+            data-color="#00eccf"
+            style="color: rgb(0, 236, 207)"
+          >
+            <i class="icon-copy dw dw-trolley"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-12 mb-20">
+    <div class="card-box height-100-p widget-style3">
+      <div class="d-flex flex-wrap">
+        <div class="widget-data">
+          <div class="weight-700 font-24 text-dark">Archivado</div>
+          <div class="font-14 text-secondary weight-500">
+            Estado de Contrato
+          </div>
+        </div>
+        <div class="widget-icon">
+          <div
+            class="icon"
+            data-color="#00eccf"
+            style="color: rgb(0, 236, 207)"
+          >
+            <i class="icon-copy dw dw-file-16"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-20">
+  <!-- List of Contacts -->
+  <div class="col-lg-6 mb-30 col-md-6 col-sm-12">
+    <div class="card-box height-100-p pd-20 min-height-200px">
+      <div class="d-flex justify-content-between pb-10">
+        <div class="h5 mb-0">Listado de Contactos</div>
+      </div>
+      <div class="user-list">
+        <ul>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <span style="font-size: 12px; font-weight: 600"
+                  >Corporativo</span
+                >
+                <div class="font-14 weight-600">Yosley Suarez Zamora</div>
+                <div
+                  class="font-12 weight-500"
+                  style="color: rgb(122, 122, 124)"
+                >
+                  Director de Servicios Tecnicos
+                </div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">5350966764</a>
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <span style="font-size: 12px; font-weight: 600"
+                  >Corporativo</span
+                >
+                <div class="font-14 weight-600">Fraidy Gonzalez Reinaldo</div>
+                <div
+                  class="font-12 weight-500"
+                  style="color: rgb(122, 122, 124)"
+                >
+                  Director de Servicios Tecnicos
+                </div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">5350966764</a>
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <span style="font-size: 12px; font-weight: 600"
+                  >Corporativo</span
+                >
+                <div class="font-14 weight-600">
+                  Ronaldo Willian Perez Esposito
+                </div>
+                <div
+                  class="font-12 weight-500"
+                  style="color: rgb(122, 122, 124)"
+                >
+                  Director de Servicios Tecnicos
+                </div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">5350966764</a>
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <span style="font-size: 12px; font-weight: 600"
+                  >Corporativo</span
+                >
+                <div class="font-14 weight-600">Jose Luis Guerrero Gascon</div>
+                <div
+                  class="font-12 weight-500"
+                  style="color: rgb(122, 122, 124)"
+                >
+                  Director de Servicios Tecnicos
+                </div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">5350966764</a>
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <span style="font-size: 12px; font-weight: 600"
+                  >Corporativo</span
+                >
+                <div class="font-14 weight-600">Dayana Miranda Diaz</div>
+                <div
+                  class="font-12 weight-500"
+                  style="color: rgb(122, 122, 124)"
+                >
+                  Director de Servicios Tecnicos
+                </div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">5350966764</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Listado de firmas autorizadas -->
+  <div class="col-lg-6 mb-30 col-md-6 col-sm-12">
+    <div class="card-box height-100-p pd-20 min-height-200px">
+      <div class="d-flex justify-content-between pb-10">
+        <div class="h5 mb-0">Listado de Firmas Autorizadas</div>
+      </div>
+      <div class="user-list">
+        <ul>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <div class="font-14 weight-600">Yosley Suarez Zamora</div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary"
+                >Director de Servicios Tecnicos</a
+              >
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <div class="font-14 weight-600">Yosley Suarez Zamora</div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary"
+                >Director de Servicios Tecnicos</a
+              >
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <div class="font-14 weight-600">Yosley Suarez Zamora</div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary"
+                >Director de Servicios Tecnicos</a
+              >
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <div class="font-14 weight-600">Yosley Suarez Zamora</div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary"
+                >Director de Servicios Tecnicos</a
+              >
+            </div>
+          </li>
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img
+                  src="{{=URL('static', 'images/photo1.jpg')}}"
+                  class="border-radius-100 box-shadow"
+                  width="50"
+                  height="50"
+                  alt=""
+                />
+              </div>
+              <div class="txt">
+                <div class="font-14 weight-600">Yosley Suarez Zamora</div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary"
+                >Director de Servicios Tecnicos</a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+  .pdf-single-pro .media {
+      width: 100% !important;
+      overflow-x: auto;
+      overflow-y: auto;
+      height: 100%;
+      margin-bottom: 30px;
+  }
+</style>
+
+
+<div class="pdf-single-pro">
+  <a class="media" href="{{=URL('static', 'pdf/pdf-test.pdf')}}"></a>
+</div>
+
+
+<!-- pdf JS	============================================ -->
+
+<script src="{{=URL('static', 'js/jquery.media.js')}}"></script>
+
+<script>
+  (function ($) {
+      "use strict";
+      $('a.media').media({ width: 1920, height: 1080 });
+
+  })(jQuery);
+</script>
+
+
+
+<style>
+  .empresa-logo {
+    width: 100%;
+  }
+  .test {
+    margin-top: 20px;
+  }
+</style>
+
+<style>
+  /*!
+Version: 3.0.0
+Author: Ankit Hingarajiya - DeskApp
+*/
+  .card-box,
+  .da-card {
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
+  }
+  .widget-style3 {
+    padding: 0;
+    overflow: hidden;
+  }
+  .widget-style3 .widget-data {
+    width: calc(100% - 80px);
+    padding: 20px 15px;
+  }
+  .widget-style3 .widget-icon {
+    width: 80px;
+    font-size: 30px;
+    line-height: 1;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: #334148;
+    color: #fff;
+  }
+</style>

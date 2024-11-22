@@ -1,5 +1,12 @@
 @auth.requires(
     auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo')
+)
+def detalles():
+    return dict()
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Servicios')
 )

@@ -1,14 +1,8 @@
 {{extend 'layout_frontend.html'}} {{block head}}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{{=URL('static/frontend', 'src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}"
-/>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{{=URL('static/frontend', 'src/plugins/datatables/css/responsive.bootstrap4.min.css')}}"
-/>
+<link rel="stylesheet" type="text/css"
+  href="{{=URL('static/frontend', 'src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}" />
+<link rel="stylesheet" type="text/css"
+  href="{{=URL('static/frontend', 'src/plugins/datatables/css/responsive.bootstrap4.min.css')}}" />
 {{end head}}
 
 <!-- Simple Datatable start -->
@@ -35,48 +29,35 @@
           <td>{{if row.mantenimiento_contrato.id:}}Si{{else:}}No{{pass}}</td>
           <td>
             <div class="dropdown">
-              <a
-                class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-              >
+              <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button"
+                data-toggle="dropdown">
                 <i class="dw dw-more"></i>
               </a>
-              <div
-                class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-              >
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 
-               
-              {{if row.mantenimiento_contrato.id:}}
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('mantenimiento', 'deshabilitar_mantenimiento', args = row.contrato.id)}}"
-                  ><i class="dw dw-switch"></i>Desactivar</a
-                >
+
+                {{if row.mantenimiento_contrato.id:}}
+                <a class="dropdown-item"
+                  href="{{=URL('mantenimiento', 'deshabilitar_mantenimiento', args = row.contrato.id)}}"><i
+                    class="dw dw-switch"></i>Desactivar</a>
                 {{else:}}
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('mantenimiento', 'habilitar_mantenimiento', args = row.contrato.id)}}"
-                  ><i class="dw dw-switch"></i>Activar</a
-                >
+                <a class="dropdown-item"
+                  href="{{=URL('mantenimiento', 'habilitar_mantenimiento', args = row.contrato.id)}}"><i
+                    class="dw dw-switch"></i>Activar</a>
                 {{pass}}
 
                 {{if row.mantenimiento_contrato.id:}}
+                <a class="dropdown-item" href="{{=URL('mantenimiento', 'detalles', args = row.contrato.id)}}"><i
+                    class="dw dw-eye"></i>Detalles</a>
+                <a class="dropdown-item"
+                  href="{{=URL('mantenimiento', 'crear', args = row.mantenimiento_contrato.id)}}"><i
+                    class="dw dw-add"></i> Agregar Mantenimiento</a>
 
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('mantenimiento', 'crear', args = row.mantenimiento_contrato.id)}}"
-                  ><i class="dw dw-add"></i> Agregar Mantenimiento</a
-                >
-
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('mantenimiento', 'administrar', args = row.mantenimiento_contrato.id)}}"
-                  ><i class="dw dw-server"></i> Administrar Mantenimientos</a
-                >
+                <a class="dropdown-item"
+                  href="{{=URL('mantenimiento', 'administrar', args = row.mantenimiento_contrato.id)}}"><i
+                    class="dw dw-server"></i> Administrar Mantenimientos</a>
                 {{pass}}
-               
+
               </div>
             </div>
           </td>

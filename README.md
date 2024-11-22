@@ -30,3 +30,18 @@
 ## Notas
 >>> Lo ultimo que valide fue contactos
 >>> Voy a trabajar en los permisos
+
+## Dashboard
+>>> Cant. Usuarios
+>>> Cant. Empresas Clientes
+>>> Cant. Empresas Proveedoras
+>>> Ultimo Contrato Cliente Servicio
+>>> Ultimo Contrato Cliente Compraventa
+>>> Total Contratos
+>>> Total Contratos no archivado
+>>> Porciento No Archivados/total
+>>> Cantidad de empresas con mantenimiento habilitado
+>>> Porciento respecto al total de empresas de cliente con servicio
+>>> Empresa con mas mantenimientos / cantidad [primeras 5]
+>>> Empresa con menos mantenimiento mantenimientos / cantidad [primeras 5]
+

@@ -3,6 +3,14 @@
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
+def detalles():
+    return dict()
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Jurídico')
+)
 def administrar():
     if session.contrato: del(session.contrato)
     rows = db(db.contrato.id > 0).select()

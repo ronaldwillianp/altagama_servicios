@@ -11,6 +11,7 @@ def index():
     total_usuarios = db(db.auth_user.id>0).count()
     return dict(total_usuarios= total_usuarios)
 
+@auth.requires_login()
 def pdf_viewer():
     return dict()
 
