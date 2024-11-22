@@ -14780,3 +14780,264 @@ success!
 success!
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM "notificacion";
+DELETE FROM sqlite_sequence WHERE name='notificacion'
+success!
+DELETE FROM "mantenimiento";
+DELETE FROM sqlite_sequence WHERE name='mantenimiento'
+success!
+DELETE FROM "mantenimiento_contrato";
+DELETE FROM sqlite_sequence WHERE name='mantenimiento_contrato'
+success!
+DELETE FROM "firma_autorizada";
+DELETE FROM sqlite_sequence WHERE name='firma_autorizada'
+success!
+DELETE FROM "contacto";
+DELETE FROM sqlite_sequence WHERE name='contacto'
+success!
+DELETE FROM "contrato";
+DELETE FROM sqlite_sequence WHERE name='contrato'
+success!
+success!
+success!
+success!
+DELETE FROM "notificacion";
+DELETE FROM sqlite_sequence WHERE name='notificacion'
+success!
+DELETE FROM "mantenimiento";
+DELETE FROM sqlite_sequence WHERE name='mantenimiento'
+success!
+DELETE FROM "mantenimiento_contrato";
+DELETE FROM sqlite_sequence WHERE name='mantenimiento_contrato'
+success!
+DELETE FROM "firma_autorizada";
+DELETE FROM sqlite_sequence WHERE name='firma_autorizada'
+success!
+DELETE FROM "contacto";
+DELETE FROM sqlite_sequence WHERE name='contacto'
+success!
+DELETE FROM "contrato";
+DELETE FROM sqlite_sequence WHERE name='contrato'
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+DELETE FROM "contrato";
+DELETE FROM sqlite_sequence WHERE name='contrato'
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
