@@ -114,13 +114,23 @@ auth.settings.on_failed_authorization = URL('usuario', 'no_autorizado')
 # -------------------------------------------------------------------------
 # configure email
 # -------------------------------------------------------------------------
+# mail = auth.settings.mailer
+# mail.settings.server = 'logging' if request.is_local else configuration.get(
+#     'smtp.server')
+# mail.settings.sender = configuration.get('smtp.sender')
+# mail.settings.login = configuration.get('smtp.login')
+# mail.settings.tls = configuration.get('smtp.tls') or False
+# mail.settings.ssl = configuration.get('smtp.ssl') or False
+
+# Fully configured Web2py Mailer with GMAIL
+# Needed enable 2-steps authentication
+# Create Password for the app in 'App Password' from Google
 mail = auth.settings.mailer
-mail.settings.server = 'logging' if request.is_local else configuration.get(
-    'smtp.server')
-mail.settings.sender = configuration.get('smtp.sender')
-mail.settings.login = configuration.get('smtp.login')
-mail.settings.tls = configuration.get('smtp.tls') or False
-mail.settings.ssl = configuration.get('smtp.ssl') or False
+mail.settings.server = 'smtp.gmail.com:587'
+mail.settings.sender = 'directordesarrollo.altagamasrl@gmail.com'
+mail.settings.login = 'directordesarrollo.altagamasrl@gmail.com:nkpk lmjz oljr hfok '
+mail.settings.tls = True
+mail.settings.ssl = False
 
 # -------------------------------------------------------------------------
 # configure auth policy

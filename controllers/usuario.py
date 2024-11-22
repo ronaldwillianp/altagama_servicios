@@ -268,3 +268,16 @@ def eliminar():
 @auth.requires_login()
 def no_autorizado():
     return locals()
+
+
+def send_mail():
+    
+    status = mail.send(to=['ronaldwillianp@gmail.com'],
+        subject='Dear client2:',
+        message = 'We like to inform you that automatic mailer is configured!'
+    )
+    if status == True:
+        redirect(URL('default', 'index'))
+    else:
+        redirect(URL('contrato', 'administrar'))
+    return dict()
