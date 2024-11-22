@@ -1,0 +1,30 @@
+{{extend 'layout_frontend.html'}}
+
+<style>
+    .pdf-single-pro .media {
+        width: 100% !important;
+        overflow-x: auto;
+        overflow-y: auto;
+        height: 100%;
+    }
+</style>
+
+
+<div class="pdf-single-pro">
+    <a class="media" href="{{=URL('static', 'pdf/pdf-test.pdf')}}"></a>
+</div>
+
+
+<!-- pdf JS	============================================ -->
+
+<script src="{{=URL('static', 'js/jquery.media.js')}}"></script>
+
+<script>
+    (function ($) {
+        "use strict";
+
+        $('a.media').media({ width: 1920, height: 1080 });
+
+
+    })(jQuery);
+</script>

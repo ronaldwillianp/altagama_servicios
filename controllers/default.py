@@ -11,6 +11,9 @@ def index():
     total_usuarios = db(db.auth_user.id>0).count()
     return dict(total_usuarios= total_usuarios)
 
+def pdf_viewer():
+    return dict()
+
 # ---- Embedded wiki (example) ----
 
 
