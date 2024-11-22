@@ -1,0 +1,99 @@
+{{extend 'layout_frontend.html'}} {{block head}}
+<style>
+  .no_display {
+    display: none !important;
+  }
+
+  .select2-container {
+    width: 100% !important;
+  }
+</style>
+{{end head}}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="mb-3">
+      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('contrato',
+      'administrar',args=[]), _class='btn btn-success')}}
+    </div>
+
+    <div id="container">
+      <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+          <h4 class="text-blue h4">Crear contrato</h4>
+        </div>
+
+        <div class="mt-4">
+          {{=form.custom.begin}}
+
+          <div class="row">
+
+            <div class="col-sm-6">
+                {{=form.custom.label.numero}} <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.numero}}</div>
+              </div>
+
+            <div class="col-sm-6">
+              {{=form.custom.label.empresa}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.empresa}}</div>
+            </div>
+
+            <div class="col-sm-6">
+              {{=form.custom.label.tipo_contrato}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.tipo_contrato}}</div>
+            </div>
+
+            <div class="col-sm-6">
+              {{=form.custom.label.estado_contrato}}
+              <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.estado_contrato}}</div>
+            </div>
+
+            <div class="col-sm-6">
+              {{=form.custom.label.fecha_vencimiento}}
+              <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.fecha_vencimiento}}</div>
+            </div>
+
+            <div class="col-sm-6">
+              {{=form.custom.label.naturaleza}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.naturaleza}}</div>
+            </div>
+
+            <div class="col-md-12">
+              <hr />
+            </div>
+
+              
+              <div class="col-sm-6">
+                {{=form.custom.label.contrato_file}} <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.contrato_file}}</div>
+              </div>
+            
+              <div class="col-sm-6">
+                {{=form.custom.label.ficha_cliente_file}}
+                <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.ficha_cliente_file}}</div>
+              </div>
+
+
+            
+          </div>
+
+          <br />
+          {{=form.custom.submit}} {{=form.custom.end}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{=form.errors or ''}}
+
+{{block page_js}}
+
+<script>
+  $("select").select2();
+</script>
+
+{{end page_js}}
