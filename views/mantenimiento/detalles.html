@@ -1,104 +1,37 @@
 {{extend 'layout_frontend.html'}}
 
 <div class="container">
-   <div class="mb-3">
-      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('mantenimiento',
-      'contrato_servicio_mantenimiento',args=[]), _class='btn btn-success')}}
-    </div>
+  <div class="mb-3">
+    {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('mantenimiento',
+    'contrato_servicio_mantenimiento',args=[]), _class='btn btn-success')}}
+  </div>
   <div class="card-box mb-30">
     <div class="pd-15">
       <div class="profile-timeline">
         <div class="timeline-month">
-          <h5>August, 2020</h5>
+          <h5>Resumen:</h5>
         </div>
         <div class="profile-timeline-list">
           <ul>
+            {{for mantenimiento in mantenimientos:}}
             <li>
-              <div class="date">12 Aug</div>
+              <div class="date">{{=mantenimiento.fecha.strftime('%d/%m/%Y')}}</div>
               <div class="task-name">
-                <i class="ion-android-alarm-clock"></i> Task Added
+                <i class="icon-copy ion-android-checkbox-outline"></i> Mantenimiento Completado
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-            <li>
-              <div class="date">10 Aug</div>
-              <div class="task-name">
-                <i class="ion-ios-chatboxes"></i> Task Added
+              <p>{{=mantenimiento.observaciones or '--Sin Observaciones--'}}</p>
+              <div class="task-time">
+                Registrado por: {{=mantenimiento.created_by.first_name + ' ' + mantenimiento.created_by.last_name}}
+                {{if (mantenimiento.created_by != mantenimiento.modified_by) and (mantenimiento.created_on != mantenimiento.modified_on):}}
+                  <span class="error">[Actualizado]</span>
+                {{pass}}
+                {{if mantenimiento.created_by != mantenimiento.modified_by:}}
+                  <span class="error">[Modificado]</span>
+                {{pass}}
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
             </li>
-            <li>
-              <div class="date">10 Aug</div>
-              <div class="task-name">
-                <i class="ion-ios-clock"></i> Event Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-            <li>
-              <div class="date">10 Aug</div>
-              <div class="task-name">
-                <i class="ion-ios-clock"></i> Event Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-          </ul>
-        </div>
-        <div class="timeline-month">
-          <h5>July, 2020</h5>
-        </div>
-        <div class="profile-timeline-list">
-          <ul>
-            <li>
-              <div class="date">12 July</div>
-              <div class="task-name">
-                <i class="ion-android-alarm-clock"></i> Task Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-            <li>
-              <div class="date">10 July</div>
-              <div class="task-name">
-                <i class="ion-ios-chatboxes"></i> Task Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-          </ul>
-        </div>
-        <div class="timeline-month">
-          <h5>June, 2020</h5>
-        </div>
-        <div class="profile-timeline-list">
-          <ul>
-            <li>
-              <div class="date">12 June</div>
-              <div class="task-name">
-                <i class="ion-android-alarm-clock"></i> Task Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-            <li>
-              <div class="date">10 June</div>
-              <div class="task-name">
-                <i class="ion-ios-chatboxes"></i> Task Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
-            <li>
-              <div class="date">10 June</div>
-              <div class="task-name">
-                <i class="ion-ios-clock"></i> Event Added
-              </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              <div class="task-time">09:30 am</div>
-            </li>
+            {{pass}}
+            
           </ul>
         </div>
       </div>

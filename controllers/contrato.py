@@ -4,7 +4,15 @@
     auth.has_membership(role='Jurídico')
 )
 def detalles():
-    return dict()
+    if not request.args(0):
+        redirect(URL('contrato','administrar'))
+
+    registro = db.contrato(request.args(0, cast=int)
+                            ) or redirect(URL('contrato','administrar'))
+    
+    contactos = db(db.contacto.contrato == registro.id).select()
+    firmas = db(db.firma_autorizada.contrato == registro.id).select()
+    return dict(contrato=registro, contactos=contactos, firmas=firmas)
 
 @auth.requires(
     auth.has_membership(role='Administrador') or 
@@ -95,3 +103,9 @@ def eliminar():
     redirect(URL("administrar"))
 
     return dict()
+
+@cache.action()
+def stream_pdf():
+    pdf = request.args(0)
+    (filename, route) = db.contrato.contrato_file.retrieve(pdf, nameonly=True)
+    return response.stream(route)

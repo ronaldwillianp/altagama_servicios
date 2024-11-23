@@ -38,10 +38,10 @@
 >>> Ultimo Contrato Cliente Servicio
 >>> Ultimo Contrato Cliente Compraventa
 >>> Total Contratos
->>> Total Contratos no archivado
+>>> Total[primeras 5] Contratos no archivado
 >>> Porciento No Archivados/total
 >>> Cantidad de empresas con mantenimiento habilitado
 >>> Porciento respecto al total de empresas de cliente con servicio
 >>> Empresa con mas mantenimientos / cantidad [primeras 5]
->>> Empresa con menos mantenimiento mantenimientos / cantidad [primeras 5]
+>>> Empresa con menos mantenimiento mantenimientos / cantidad 
 

@@ -274,6 +274,7 @@ db.define_table('mantenimiento',
                 Field('cantidad_pc', 'integer'),
                 Field('observaciones', 'text'),
                 Field('fecha', 'date', default=datetime.date.today()),
+                auth.signature
 )
 
 db.define_table('notificacion',

@@ -3,7 +3,12 @@
     auth.has_membership(role='Administrativo')
 )
 def detalles():
-    return dict()
+    registro = db.contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
+    
+    mantenimientos = db(
+        db.mantenimiento.mantenimiento_contrato == db(db.mantenimiento_contrato.contrato == registro.id).select().first().id
+        ).select(orderby = ~db.mantenimiento.fecha)
+    return dict(mantenimientos = mantenimientos)
 
 @auth.requires(
     auth.has_membership(role='Administrador') or 
