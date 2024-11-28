@@ -1,14 +1,17 @@
+#################################################################################################
+#                                       Clientes                                                #
+#################################################################################################
 @auth.requires(
     auth.has_membership(role='Administrador') or 
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
-def detalles():
+def contrato_cliente_detalles():
     if not request.args(0):
-        redirect(URL('contrato','administrar'))
+        redirect(URL('contrato','contrato_cliente_administrar'))
 
-    registro = db.contrato(request.args(0, cast=int)
-                            ) or redirect(URL('contrato','administrar'))
+    registro = db.contrato_cliente(request.args(0, cast=int)
+                            ) or redirect(URL('contrato','contrato_cliente_administrar'))
     
     contactos = db(db.contacto.contrato == registro.id).select()
     firmas = db(db.firma_autorizada.contrato == registro.id).select()
@@ -19,9 +22,13 @@ def detalles():
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
-def administrar():
-    if session.contrato: del(session.contrato)
-    rows = db(db.contrato.id > 0).select()
+def contrato_cliente_administrar():
+    rows = db(
+        (db.contrato_cliente.id > 0)  &
+        (db.contrato_cliente.anho == get_current_year)
+        ).select(
+            orderby=db.contrato_cliente.id
+        )
     return dict(rows=rows)
 
 @auth.requires(
@@ -31,20 +38,19 @@ def administrar():
 )
 def preprocess_contrato(form):
     numero = form.vars.numero
-    empresa = form.vars.empresa
-    naturaleza = form.vars.naturaleza
+    anho = form.vars.anho
     tipo_contrato = form.vars.tipo_contrato
 
-    contrato_db = db(
-        (db.contrato.numero == numero) &
-        (db.contrato.empresa == empresa) &
-        (db.contrato.naturaleza == naturaleza) &
-        (db.contrato.tipo_contrato == tipo_contrato)
+    contratos = db(
+        (db.contrato_cliente.numero == numero) &
+        (db.contrato_cliente.anho == anho) &
+        (db.contrato_cliente.tipo_contrato == tipo_contrato)
     ).count()
 
-    if contrato_db>0:
-        form.errors.numero = 'Ya existe este contrato'
-
+    if contratos > 0:
+        form.errors.numero = 'Ya existe un contrato este número.'
+        form.errors.anho = 'Ya existe un contrato este año.'
+        form.errors.tipo_contrato = 'Ya existe un contrato de este tipo.'
 
 @auth.requires(
     auth.has_membership(role='Administrador') or 
@@ -53,18 +59,21 @@ def preprocess_contrato(form):
 )
 def postprocess_contrato(form):
     numero = form.vars.numero
-    naturaleza = form.vars.naturaleza
+    anho = form.vars.anho
     tipo_contrato = form.vars.tipo_contrato
+    cliente_id = form.vars.cliente_id
 
-    contrato_db = db(
-        (db.contrato.numero == numero) &
-        (db.contrato.naturaleza == naturaleza) &
-        (db.contrato.tipo_contrato == tipo_contrato)
+    contratos = db(
+        (db.contrato_cliente.numero == numero) &
+        (db.contrato_cliente.anho == anho) &
+        (db.contrato_cliente.tipo_contrato == tipo_contrato) &
+        (db.contrato_cliente.id != cliente_id)
     ).count()
 
-    if contrato_db>0:
-        form.errors.numero = 'Ya existe este contrato'
-
+    if contratos > 0:
+        form.errors.numero = 'Ya existe un contrato este número.'
+        form.errors.anho = 'Ya existe un contrato este año.'
+        form.errors.tipo_contrato = 'Ya existe un contrato de este tipo.'
     
 
 @auth.requires(
@@ -72,12 +81,13 @@ def postprocess_contrato(form):
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
-def crear():
-    form = SQLFORM(db.contrato)
+def contrato_cliente_crear():
+    form = SQLFORM(db.contrato_cliente)
     if form.process(onvalidation=preprocess_contrato).accepted:
         session.status = True
         session.msg = 'Contrato creado correctamente'
-        redirect(URL('contacto','crear', args=form.vars.id))
+        # redirect(URL('contacto','crear', args=form.vars.id))
+        redirect(URL('contrato','contrato_cliente_administrar'))
     elif form.errors:
         session.error = True
         session.msg = 'El formulario tiene errores'
@@ -88,18 +98,19 @@ def crear():
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
-def editar():
+def contrato_cliente_editar():
     if not request.args(0):
-        redirect(URL('index'))
+        redirect(URL('contrato_cliente_administrar'))
 
-    registro = db.contrato(request.args(0, cast=int)
-                            ) or redirect(URL('index'))
+    registro = db.contrato_cliente(request.args(0, cast=int)) or redirect(URL('contrato_cliente_administrar'))
 
-    form = SQLFORM(db.contrato, registro)
-    if form.process(onvalidation=[preprocess_contrato, postprocess_contrato]).accepted:
+    form = SQLFORM(db.contrato_cliente, registro)
+    form.vars.cliente_id = registro.id
+
+    if form.process(onvalidation=postprocess_contrato).accepted:
         session.status = True
         session.msg = 'Contrato actualizado correctamente'
-        redirect(URL('administrar'))
+        redirect(URL('contrato_cliente_administrar'))
     elif form.errors:
         session.error = True
         session.msg = 'El formulario tiene errores'
@@ -111,23 +122,27 @@ def editar():
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
-def eliminar():
+def contrato_cliente_elimina():
     if not request.args(0):
-        redirect(URL('administrar'))
+        redirect(URL('contrato_cliente_administrar'))
 
-    registro = db.contrato(request.args(0, cast=int)
-                           ) or redirect(URL('administrar'))
-    x = registro.id
+    registro = db.contrato_cliente(request.args(0, cast=int)) or redirect(URL('contrato_cliente_administrar'))
 
-    db(db.contrato.id == x).delete()
+    db(db.contrato_cliente.id == registro.id).delete()
     session.status = True
     session.msg = 'Contrato eliminado correctamente'
-    redirect(URL("administrar"))
+    redirect(URL("contrato_cliente_administrar"))
 
     return dict()
 
 @cache.action()
-def stream_pdf():
+def contrato_cliente_stream_pdf():
+    if not request.args(0):
+        redirect(URL('contrato_cliente_administrar'))
     pdf = request.args(0)
-    (filename, route) = db.contrato.contrato_file.retrieve(pdf, nameonly=True)
+    (filename, route) = db.contrato_cliente.contrato_file.retrieve(pdf, nameonly=True)
     return response.stream(route)
+
+#################################################################################################
+#                                       Proveedores                                             #
+#################################################################################################

@@ -1,0 +1,103 @@
+{{extend 'layout_frontend.html'}} {{block head}}
+<style>
+  .no_display {
+    display: none !important;
+  }
+
+  .select2-container {
+    width: 100% !important;
+  }
+</style>
+{{end head}}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="mb-3">
+      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('contrato',
+      'contrato_cliente_administrar'), _class='btn btn-success')}}
+    </div>
+
+  </div>
+</div>
+
+<div class="pd-20 card-box mb-30">
+  <h5 class="h4 text-blue mb-20">Registrar Contrato</h5>
+  <div class="tab">
+    <ul class="nav nav-tabs customtab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#general" role="tab" aria-selected="true">General</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#otros" role="tab" aria-selected="false">Otros</a>
+      </li>
+    </ul>
+    {{=form.custom.begin}}
+    <div class="tab-content">
+      <div class="tab-pane fade active show" id="general" role="tabpanel">
+        <div class="pd-20">
+          <div class="row">
+            <div class="col-sm-6">
+              {{=form.custom.label.empresa}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.empresa}}</div>
+            </div>
+
+            <div class="col-sm-3">
+              {{=form.custom.label.numero}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.numero}}</div>
+            </div>
+
+            <div class="col-sm-3">
+              {{=form.custom.label.anho}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.anho}}</div>
+            </div>
+
+            <div class="col-sm-3">
+              {{=form.custom.label.tipo_contrato}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.tipo_contrato}}</div>
+            </div>
+
+            <div class="col-sm-3">
+              {{=form.custom.label.estado_contrato}}
+              <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.estado_contrato}}</div>
+            </div>
+
+            <div class="col-sm-3">
+              {{=form.custom.label.fecha_confeccion}}
+              <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.fecha_confeccion}}</div>
+            </div>
+
+            <div class="col-sm-3">
+              {{=form.custom.label.fecha_vencimiento}}
+              <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.fecha_vencimiento}}</div>
+            </div>
+          </div>
+          <br>
+          {{=form.custom.submit}}
+        </div>
+      </div>
+      <div class="tab-pane fade" id="otros" role="tabpanel">
+        <div class="pd-20">
+          <div class="row">
+            <div class="col-sm-12">
+              {{=form.custom.label.observaciones}} 
+              <div class="mb-2">{{=form.custom.widget.observaciones}}</div>
+            </div>
+
+            <div class="col-sm-12">
+              {{=form.custom.label.contrato_file}}
+              <div class="mb-2">{{=form.custom.widget.contrato_file}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{=form.custom.end}}
+  </div>
+</div>
+
+{{block page_js}}
+{{include 'components/select2.html'}}
+{{end page_js}}

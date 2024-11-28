@@ -6,8 +6,6 @@
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
-import uuid
-import datetime
 
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
@@ -182,13 +180,15 @@ if configuration.get('scheduler.enabled'):
 T.force('es')
 
 contrato_model = db.Table(db,'contrato',
-                Field('numero'),
-                Field('anho'),
+                Field('numero', label=T('Número')),
+                Field('anho', label=T('Año')),
                 Field('empresa'),
-                Field('tipo_contrato'),  # Set
-                Field('estado_contrato'),  # Set
-                Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today()+datetime.timedelta(days=365*5))),
+                Field('tipo_contrato', label=T('Tipo de Contrato')),  # Set
+                Field('estado_contrato', label=T('Estado del Contrato')),  # Set
+                Field('fecha_confeccion', 'date', default=lambda: (datetime.date.today()), label=T('Fecha de Confección')),
+                Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today() + +datetime.timedelta(days=365)), label=T('Fecha de Vencimiento')),
                 Field('contrato_file', 'upload', autodelete=True),
+                Field('observaciones', 'text'),
                 auth.signature,
                 format='%(numero)s %(empresa)s'
 )
@@ -199,11 +199,12 @@ contrato_model.empresa.requires = IS_NOT_EMPTY()
 contrato_model.anho.requires = IS_IN_SET(ANHOS_CONTRATO, zero=None)
 contrato_model.tipo_contrato.requires = IS_IN_SET(TIPO_CONTRATO, zero=None)
 contrato_model.estado_contrato.requires = IS_IN_SET(ESTADO_CONTRATO, zero=None)
-contrato_model.fecha_vencimiento.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today())
+contrato_model.fecha_confeccion.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today())
+contrato_model.fecha_vencimiento.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today() + +datetime.timedelta(days=365))
 contrato_model.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
 
 # Corrigiendo widgets
-# db.contrato.numero.widget = lambda field, value: SQLFORM.widgets.string.widget(field, value, _class='form-control', _type='text', _placeholder='01/2020')
+contrato_model.numero.widget = lambda field, value: SQLFORM.widgets.integer.widget(field, value, _class='form-control', _type='number',_min=1, _max=120, _step=1, _placeholder='No. Contrato')
 
 db.define_table('contrato_proveedor',
                 contrato_model
@@ -212,9 +213,6 @@ db.define_table('contrato_proveedor',
 db.define_table('contrato_cliente',
                 contrato_model
 )
-
-
-
 
 # db.define_table('contacto',
 #                 Field('nombre'),

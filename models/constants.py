@@ -1,3 +1,5 @@
+import datetime
+
 TIPO_CONTRATO = {
     'sv': 'Servicios',
     'vt': 'Venta'
@@ -33,3 +35,6 @@ PLANIFICACION_MANTENIMIENTO = {
         'se': 'Semestral',
         'an': 'Anual',
 }
+
+def get_current_year():
+    return datetime.datetime.now().year

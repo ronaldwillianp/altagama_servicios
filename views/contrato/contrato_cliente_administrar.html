@@ -12,7 +12,7 @@
 {{end head}}
 
 <div class="pb-20">
-  <a href="{{=URL('contrato', 'crear')}}" class="btn btn-success">
+  <a href="{{=URL('contrato', 'contrato_cliente_crear')}}" class="btn btn-success">
     <span><i class="fa fa-plus"></i></span> Nuevo contrato</a
   >
 </div>
@@ -31,20 +31,20 @@
           <th>Empresa</th>
           <th>Tipo Contrato</th>
           <th>Estado</th>
-          <th>Vence</th>
-          <th>Naturaleza</th>
+          <th>Confeccionado</th>
+          <th>Vencimiento</th>
           <th class="datatable-nosort">Administrar</th>
         </tr>
       </thead>
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.numero}}</td>
+          <td class="table-plus">{{=row.numero}}/{{=row.anho}}</td>
           <td>{{=row.empresa}}</td>
           <td>{{=TIPO_CONTRATO[row.tipo_contrato]}}</td>
           <td>{{=ESTADO_CONTRATO[row.estado_contrato]}}</td>
+          <td>{{=row.fecha_confeccion.strftime('%d/%m/%Y')}}</td>
           <td>{{=row.fecha_vencimiento.strftime('%d/%m/%Y')}}</td>
-          <td>{{=NATURALEZA_CONTRATO[row.naturaleza]}}</td>
           <td>
             <div class="dropdown">
               <a
@@ -79,7 +79,7 @@
 
                 <a
                   class="dropdown-item"
-                  href="{{=URL('contrato', 'editar', args=row.id)}}"
+                  href="{{=URL('contrato', 'contrato_cliente_editar', args=row.id)}}"
                   ><i class="dw dw-edit2"></i> Editar</a
                 >
                 <a
@@ -100,22 +100,7 @@
 <!-- Simple Datatable End -->
 
 {{block page_js}}
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/responsive.bootstrap4.min.js')}}"></script>
-<!-- buttons for Export datatable -->
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.print.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.html5.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.flash.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/pdfmake.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/vfs_fonts.js')}}"></script>
-
-<!-- DateTime -->
-<script src="{{=URL('static','vendor/moment/moment.js')}}"></script>
-<script src="{{=URL('static','vendor/moment/moment.dataTables.js')}}"></script>
+{{include 'components/datatables.html'}}
 
 <script>
   function eliminar(id, numero) {
@@ -133,7 +118,7 @@
       },
       function (isConfirm) {
         if (isConfirm) {
-          var url = "{{=URL('contrato','eliminar')}}";
+          var url = "{{=URL('contrato','contrato_cliente_eliminar')}}";
           location.href = url + "/" + id;
         } else {
           // event.preventDefault();
@@ -142,53 +127,6 @@
       }
     );
   }
-</script>
-
-<script>
-  $("document").ready(function () {
-    $.fn.dataTable.moment("DD/MM/YYYY");
-
-    $(".data-table").DataTable({
-      scrollCollapse: true,
-      autoWidth: false,
-      responsive: true,
-      columnDefs: [
-        {
-          targets: "datatable-nosort",
-          orderable: false,
-        },
-      ],
-      lengthMenu: [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"],
-      ],
-      language: {
-        decimal: "",
-        emptyTable: "{{=T('No hay información')}}",
-        info: "{{=T('Mostrando _START_ a _END_ de _TOTAL_ Entradas')}}",
-        infoEmpty: "{{=T('Mostrando 0 to 0 of 0 Entradas')}}",
-        infoFiltered: "{{=T('(Filtrado de _MAX_ total entradas)')}}",
-        infoPostFix: "",
-        thousands: ",",
-        lengthMenu: "{{=T('Mostrar _MENU_ Entradas')}}",
-        loadingRecords: "{{=T('Cargando...')}}",
-        processing: "{{=T('Procesando...')}}",
-        search: "{{=T('Buscar:')}}",
-        zeroRecords: "{{=T('Sin resultados encontrados')}}",
-        paginate: {
-          first: "{{=T('Primero')}}",
-          last: "{{=T('Último')}}",
-          next: "{{=T('Siguiente')}}",
-          previous: "{{=T('Anterior')}}",
-        },
-        buttons: {
-          copy: "Copiar",
-          print: "Imprimir",
-          colvis: "Columnas visibles",
-        },
-      },
-    });
-  });
 </script>
 
 {{end page_js}}
