@@ -17304,3 +17304,339 @@ success!
 success!
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:27:18.416214
+CREATE TABLE "contrato_model"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "numero" INTEGER,
+    "anho" INTEGER,
+    "fecha_vencimiento" DATE,
+    "contrato" CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:29:06.133800
+ALTER TABLE "contrato_model" ADD "tipo_contrato" CHAR(512);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:35:40.523752
+CREATE TABLE "payment"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "amount" DOUBLE,
+    "is_active" CHAR(1),
+    "created_on" TIMESTAMP,
+    "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "modified_on" TIMESTAMP,
+    "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:38:15.573128
+CREATE TABLE "contrato_cliente"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "numero" INTEGER,
+    "anho" INTEGER,
+    "tipo_contrato" CHAR(512),
+    "fecha_vencimiento" DATE,
+    "contrato" CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:39:35.417162
+CREATE TABLE "contrato_proveedor"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "numero" INTEGER,
+    "anho" INTEGER,
+    "tipo_contrato" CHAR(512),
+    "fecha_vencimiento" DATE,
+    "contrato" CHAR(512)
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:41:22.785681
+ALTER TABLE "contrato_proveedor" ADD "is_active" CHAR(1);
+timestamp: 2024-11-27T22:41:22.792493
+ALTER TABLE "contrato_proveedor" ADD "created_on" TIMESTAMP;
+timestamp: 2024-11-27T22:41:22.797023
+ALTER TABLE "contrato_proveedor" ADD "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+timestamp: 2024-11-27T22:41:22.802024
+ALTER TABLE "contrato_proveedor" ADD "modified_on" TIMESTAMP;
+timestamp: 2024-11-27T22:41:22.807024
+ALTER TABLE "contrato_proveedor" ADD "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-27T22:51:06.129361
+CREATE TABLE "person"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "name" CHAR(512),
+    "job" CHAR(512)
+);
+success!
+timestamp: 2024-11-27T22:51:06.135362
+CREATE TABLE "superhero"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "name" CHAR(512),
+    "real_identity" INTEGER REFERENCES "person" ("id") ON DELETE CASCADE ON UPDATE CASCADE  
+);
+success!
+timestamp: 2024-11-27T22:51:06.141363
+CREATE TABLE "superpower"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "description" CHAR(512)
+);
+success!
+timestamp: 2024-11-27T22:51:06.147363
+CREATE TABLE "tag"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "superhero" INTEGER REFERENCES "superhero" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "superpower" INTEGER REFERENCES "superpower" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ,
+    "strength" INTEGER
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2024-11-28T02:17:10.110015
+ALTER TABLE "contrato_proveedor" ADD "empresa" CHAR(512);
+timestamp: 2024-11-28T02:17:10.125210
+ALTER TABLE "contrato_proveedor" ADD "estado_contrato" CHAR(512);
+timestamp: 2024-11-28T02:17:10.129469
+ALTER TABLE "contrato_proveedor" ADD "contrato_file" CHAR(512);
+success!
+timestamp: 2024-11-28T02:17:10.140987
+ALTER TABLE "contrato_cliente" ADD "empresa" CHAR(512);
+timestamp: 2024-11-28T02:17:10.145331
+ALTER TABLE "contrato_cliente" ADD "estado_contrato" CHAR(512);
+timestamp: 2024-11-28T02:17:10.150343
+ALTER TABLE "contrato_cliente" ADD "contrato_file" CHAR(512);
+timestamp: 2024-11-28T02:17:10.154345
+ALTER TABLE "contrato_cliente" ADD "is_active" CHAR(1);
+timestamp: 2024-11-28T02:17:10.158860
+ALTER TABLE "contrato_cliente" ADD "created_on" TIMESTAMP;
+timestamp: 2024-11-28T02:17:10.163225
+ALTER TABLE "contrato_cliente" ADD "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+timestamp: 2024-11-28T02:17:10.167227
+ALTER TABLE "contrato_cliente" ADD "modified_on" TIMESTAMP;
+timestamp: 2024-11-28T02:17:10.171578
+ALTER TABLE "contrato_cliente" ADD "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!

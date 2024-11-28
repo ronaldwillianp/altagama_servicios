@@ -181,106 +181,87 @@ if configuration.get('scheduler.enabled'):
 # lazy_tables = True
 T.force('es')
 
-# Sistema nuevo
-
-TIPO_CONTRATO = {
-    'cl': 'Clientes',
-    'pv': 'Proveedores'
-}
-
-NATURALEZA_CONTRATO = {
-    'sv': 'Servicios',
-    'vt': 'Venta'
-}
-
-ESTADO_CONTRATO = {
-    'el': 'Elaboración',
-    'ec': 'Entregado [Cliente]',
-    'ee': 'Entregado [Alta Gama]',
-    'dc': 'Dictaminando [Cliente]',
-    'de': 'Dictaminando [Alta Gama]',
-    'ar': 'Archivado'
-}
-
-db.define_table('contrato',
+contrato_model = db.Table(db,'contrato',
                 Field('numero'),
+                Field('anho'),
                 Field('empresa'),
-                Field('naturaleza'), # Set
                 Field('tipo_contrato'),  # Set
                 Field('estado_contrato'),  # Set
                 Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today()+datetime.timedelta(days=365*5))),
                 Field('contrato_file', 'upload', autodelete=True),
-                Field('ficha_cliente_file', 'upload', autodelete=True),
                 auth.signature,
                 format='%(numero)s %(empresa)s'
 )
 
 # Validadores para Contrato
-db.contrato.numero.requires = IS_MATCH('^(\d{2})\/(\d{4})$')
-db.contrato.empresa.requires = IS_NOT_EMPTY()
-db.contrato.naturaleza.requires = IS_IN_SET(NATURALEZA_CONTRATO, zero=None)
-db.contrato.tipo_contrato.requires = IS_IN_SET(TIPO_CONTRATO, zero=None)
-db.contrato.estado_contrato.requires = IS_IN_SET(ESTADO_CONTRATO, zero=None)
-db.contrato.fecha_vencimiento.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today())
-db.contrato.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
-db.contrato.ficha_cliente_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
+contrato_model.numero.requires = IS_INT_IN_RANGE(1, 121)
+contrato_model.empresa.requires = IS_NOT_EMPTY()
+contrato_model.anho.requires = IS_IN_SET(ANHOS_CONTRATO, zero=None)
+contrato_model.tipo_contrato.requires = IS_IN_SET(TIPO_CONTRATO, zero=None)
+contrato_model.estado_contrato.requires = IS_IN_SET(ESTADO_CONTRATO, zero=None)
+contrato_model.fecha_vencimiento.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today())
+contrato_model.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
 
 # Corrigiendo widgets
-db.contrato.numero.widget = lambda field, value: SQLFORM.widgets.string.widget(field, value, _class='form-control', _type='text', _placeholder='01/2020')
+# db.contrato.numero.widget = lambda field, value: SQLFORM.widgets.string.widget(field, value, _class='form-control', _type='text', _placeholder='01/2020')
 
-TIPO_CONTACTO = {
-    'co': 'Corporativo',
-    'pv': 'Privado',
-    'fi': 'Fijo',
-    'ot': 'Otros'
-}
-
-db.define_table('contacto',
-                Field('nombre'),
-                Field('cargo'),
-                Field('tipo'),  # Set
-                Field('numero'),
-                Field('contrato', 'reference contrato')
+db.define_table('contrato_proveedor',
+                contrato_model
 )
 
-db.contacto.nombre.requires = IS_NOT_EMPTY()
-db.contacto.tipo.requires = IS_IN_SET(TIPO_CONTACTO, zero=None)
-db.contacto.numero.requires = [IS_LENGTH(8, minsize=8), IS_MATCH('^\d+$', error_message='Número telefónico no válido')]
-db.contacto.contrato.requires = IS_IN_DB(db, 'contrato.numero')
-
-db.define_table('firma_autorizada',
-                Field('nombre_completo'),
-                Field('cargo'),
-                Field('contrato', 'reference contrato'),
-)
-db.firma_autorizada.nombre_completo.requires = IS_NOT_EMPTY()
-db.firma_autorizada.contrato.requires = IS_IN_DB(db, 'contrato.numero')
-
-PLANIFICACION_MANTENIMIENTO = {
-        'me': 'Mensual',
-        'tr': 'Trimestral',
-        'se': 'Semestral',
-        'an': 'Anual',
-}
-
-db.define_table('mantenimiento_contrato',
-                Field('planificacion'), # Set
-                Field('contrato', 'reference contrato'),
-)
-db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
-
-db.define_table('mantenimiento',
-                Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),
-                Field('cantidad_pc', 'integer'),
-                Field('observaciones', 'text'),
-                Field('fecha', 'date', default=datetime.date.today()),
-                auth.signature
+db.define_table('contrato_cliente',
+                contrato_model
 )
 
-db.define_table('notificacion',
-                Field('mensaje'),
-                Field('grupo'),
-)
+
+
+
+# db.define_table('contacto',
+#                 Field('nombre'),
+#                 Field('cargo'),
+#                 Field('tipo'),  # Set
+#                 Field('numero'),
+#                 Field('contrato', 'reference contrato')
+# )
+
+# db.contacto.nombre.requires = IS_NOT_EMPTY()
+# db.contacto.tipo.requires = IS_IN_SET(TIPO_CONTACTO, zero=None)
+# db.contacto.numero.requires = [IS_LENGTH(8, minsize=8), IS_MATCH('^\d+$', error_message='Número telefónico no válido')]
+# db.contacto.contrato.requires = IS_IN_DB(db, 'contrato.numero')
+
+# db.define_table('firma_autorizada',
+#                 Field('nombre_completo'),
+#                 Field('cargo'),
+#                 Field('contrato', 'reference contrato'),
+# )
+# db.firma_autorizada.nombre_completo.requires = IS_NOT_EMPTY()
+# db.firma_autorizada.contrato.requires = IS_IN_DB(db, 'contrato.numero')
+
+
+
+# db.define_table('mantenimiento_contrato',
+#                 Field('planificacion'), # Set
+#                 Field('contrato', 'reference contrato'),
+# )
+# db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
+
+# db.define_table('mantenimiento',
+#                 Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),
+#                 Field('cantidad_pc', 'integer'),
+#                 Field('observaciones', 'text'),
+#                 Field('fecha', 'date', default=datetime.date.today()),
+#                 auth.signature
+# )
+
+# db.define_table('notificacion',
+#                 Field('mensaje'),
+#                 Field('grupo'),
+# )
+
+
+
+
+
 
 if not auth:
     redirect(URL('default', 'user/login'))
