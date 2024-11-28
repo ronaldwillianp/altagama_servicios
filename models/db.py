@@ -216,7 +216,7 @@ db.define_table('contrato',
 )
 
 # Validadores para Contrato
-db.contrato.numero.requires = [IS_NOT_EMPTY(), IS_INT_IN_RANGE(1,1000)]
+db.contrato.numero.requires = IS_MATCH('^(\d{2})\/(\d{4})$')
 db.contrato.empresa.requires = IS_NOT_EMPTY()
 db.contrato.naturaleza.requires = IS_IN_SET(NATURALEZA_CONTRATO, zero=None)
 db.contrato.tipo_contrato.requires = IS_IN_SET(TIPO_CONTRATO, zero=None)
@@ -226,7 +226,7 @@ db.contrato.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
 db.contrato.ficha_cliente_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
 
 # Corrigiendo widgets
-db.contrato.numero.widget = lambda field, value: SQLFORM.widgets.integer.widget(field, value, _class='form-control integer', _type='number', _min='1', _placeholder='Número')
+db.contrato.numero.widget = lambda field, value: SQLFORM.widgets.string.widget(field, value, _class='form-control', _type='text', _placeholder='01/2020')
 
 TIPO_CONTACTO = {
     'co': 'Corporativo',

@@ -1,6 +1,7 @@
 @auth.requires(
     auth.has_membership(role='Administrador') or 
-    auth.has_membership(role='Administrativo')
+    auth.has_membership(role='Administrativo') or 
+    auth.has_membership(role='Servicios')
 )
 def detalles():
     registro = db.contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))

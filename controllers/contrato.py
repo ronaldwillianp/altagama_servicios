@@ -45,6 +45,28 @@ def preprocess_contrato(form):
     if contrato_db>0:
         form.errors.numero = 'Ya existe este contrato'
 
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Jurídico')
+)
+def postprocess_contrato(form):
+    numero = form.vars.numero
+    naturaleza = form.vars.naturaleza
+    tipo_contrato = form.vars.tipo_contrato
+
+    contrato_db = db(
+        (db.contrato.numero == numero) &
+        (db.contrato.naturaleza == naturaleza) &
+        (db.contrato.tipo_contrato == tipo_contrato)
+    ).count()
+
+    if contrato_db>0:
+        form.errors.numero = 'Ya existe este contrato'
+
+    
+
 @auth.requires(
     auth.has_membership(role='Administrador') or 
     auth.has_membership(role='Administrativo') or
@@ -74,7 +96,7 @@ def editar():
                             ) or redirect(URL('index'))
 
     form = SQLFORM(db.contrato, registro)
-    if form.process(onvalidation=preprocess_contrato).accepted:
+    if form.process(onvalidation=[preprocess_contrato, postprocess_contrato]).accepted:
         session.status = True
         session.msg = 'Contrato actualizado correctamente'
         redirect(URL('administrar'))

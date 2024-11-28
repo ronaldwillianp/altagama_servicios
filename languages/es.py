@@ -212,6 +212,7 @@
 'Internal State': 'Estado Interno',
 'Introduction': 'Introducción',
 'Invalid email': 'Correo electrónico inválido',
+'Invalid expression': 'Invalid expression',
 'Invalid key': 'Invalid key',
 'Invalid login': 'Inicio de sesión inválido',
 'Invalid password': 'Invalid password',

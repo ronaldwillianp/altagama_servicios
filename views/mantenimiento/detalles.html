@@ -17,7 +17,7 @@
             <li>
               <div class="date">{{=mantenimiento.fecha.strftime('%d/%m/%Y')}}</div>
               <div class="task-name">
-                <i class="icon-copy ion-android-checkbox-outline"></i> Mantenimiento Completado
+                <i class="icon-copy ion-android-checkbox-outline"></i> Mantenimiento Completado ({{=mantenimiento.cantidad_pc}})
               </div>
               <p>{{=mantenimiento.observaciones or '--Sin Observaciones--'}}</p>
               <div class="task-time">
