@@ -72,3 +72,6 @@
 # db.contrato_cliente.validate_and_insert(numero=26, anho=2024, empresa='Hotel Caminos del Mar', tipo_contrato='sv', estado_contrato='ej', fecha_vencimiento=(datetime.date.today()+datetime.timedelta(days=365*5)))
 # db.contrato_cliente.validate_and_insert(numero=27, anho=2024, empresa='Hotel Caminos del Mar', tipo_contrato='vt', estado_contrato='ej', fecha_vencimiento=(datetime.date.today()+datetime.timedelta(days=365*5)))
 # db.contrato_cliente.validate_and_insert(numero=28, anho=2024, empresa='UEB Hotel Vigía', tipo_contrato='sv', estado_contrato='ej', fecha_vencimiento=(datetime.date.today()+datetime.timedelta(days=365*5)))
+
+# db.contrato_proveedor.truncate()
+# db.contrato_proveedor.validate_and_insert(numero=1, anho=2024, empresa='Logística Hidráulica Ciego de Ávila', tipo_contrato='vt', estado_contrato='ej', fecha_vencimiento=(datetime.date.today()+datetime.timedelta(days=365*5)))

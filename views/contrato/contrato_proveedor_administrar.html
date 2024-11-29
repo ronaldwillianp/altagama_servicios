@@ -12,7 +12,7 @@
 {{end head}}
 
 <div class="pb-20">
-  <a href="{{=URL('contrato', 'contrato_cliente_crear')}}" class="btn btn-success">
+  <a href="{{=URL('contrato', 'contrato_proveedor_crear')}}" class="btn btn-success">
     <span><i class="fa fa-plus"></i></span> Nuevo contrato</a
   >
 </div>
@@ -20,7 +20,7 @@
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
   <div class="pd-20">
-    <h4 class="text-blue h4">Contratos de Clientes</h4>
+    <h4 class="text-blue h4">Contratos de Proveedores</h4>
   </div>
 
   <div class="pb-20">
@@ -29,6 +29,7 @@
         <tr>
           <th class="table-plus">No. Contrato</th>
           <th>Empresa</th>
+          <th>Año</th>
           <th>Tipo Contrato</th>
           <th>Estado</th>
           <th>Confeccionado</th>
@@ -39,12 +40,13 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.numero}}/{{=row.anho}}</td>
+          <td class="table-plus">{{=row.numero or 'Sin número'}}</td>
           <td>{{=row.empresa}}</td>
+          <td>{{=row.anho}}</td>
           <td>{{=TIPO_CONTRATO[row.tipo_contrato]}}</td>
           <td>{{=ESTADO_CONTRATO[row.estado_contrato]}}</td>
-          <td>{{=row.fecha_confeccion.strftime('%d/%m/%Y')}}</td>
-          <td>{{=row.fecha_vencimiento.strftime('%d/%m/%Y')}}</td>
+          <td>{{if row.fecha_confeccion:}}{{=row.fecha_confeccion.strftime('%d/%m/%Y')}}{{else:}}Sin fecha{{pass}}</td>
+          <td>{{if row.fecha_vencimiento:}}{{=row.fecha_vencimiento.strftime('%d/%m/%Y')}}{{else:}}Sin fecha{{pass}}</td>
           <td>
             <div class="dropdown">
               <a
@@ -79,7 +81,7 @@
 
                 <a
                   class="dropdown-item"
-                  href="{{=URL('contrato', 'contrato_cliente_editar', args=row.id)}}"
+                  href="{{=URL('contrato', 'contrato_proveedor_editar', args=row.id)}}"
                   ><i class="dw dw-edit2"></i> Editar</a
                 >
                 <a
@@ -118,7 +120,7 @@
       },
       function (isConfirm) {
         if (isConfirm) {
-          var url = "{{=URL('contrato','contrato_cliente_eliminar')}}";
+          var url = "{{=URL('contrato','contrato_proveedor_eliminar')}}";
           location.href = url + "/" + id;
         } else {
           // event.preventDefault();

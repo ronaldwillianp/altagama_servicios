@@ -1,0 +1,226 @@
+{{extend 'layout_frontend.html'}}
+
+<div class="card-box pd-20 height-100-p mb-30">
+  <div class="row align-items-center">
+    <div class="col-md-4">
+      <img class="empresa-logo" src="{{=URL('static', 'images/banner-img.png')}}" alt="" />
+    </div>
+    <div class="col-md-8">
+      <h4 class="font-20 weight-600 mb-10 test text-capitalize">
+        Contrato No. {{=contrato.numero}}
+        <div class="weight-600 font-30 text-blue">{{=contrato.empresa}}</div>
+      </h4>
+      <p class="font-18 max-width-600 weight-600">
+        Fecha de Vencimiento: {{=contrato.fecha_vencimiento}}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="row pb-10">
+  <div class="col-xl-4 col-lg-4 col-md-12 mb-20">
+    <div class="card-box height-100-p widget-style3">
+      <div class="d-flex flex-wrap">
+        <div class="widget-data">
+          <div class="weight-700 font-24 text-dark">{{=NATURALEZA_CONTRATO[contrato.naturaleza]}}</div>
+          <div class="font-14 text-secondary weight-500">
+            Naturaleza de Contrato
+          </div>
+        </div>
+        <div class="widget-icon">
+          <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207)">
+            <i class="icon-copy dw dw-analytics1"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-12 mb-20">
+    <div class="card-box height-100-p widget-style3">
+      <div class="d-flex flex-wrap">
+        <div class="widget-data">
+          <div class="weight-700 font-24 text-dark">{{=TIPO_CONTRATO[contrato.tipo_contrato]}}</div>
+          <div class="font-14 text-secondary weight-500">Tipo de Contrato</div>
+        </div>
+        <div class="widget-icon">
+          <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207)">
+            <i class="icon-copy dw dw-trolley"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-4 col-lg-4 col-md-12 mb-20">
+    <div class="card-box height-100-p widget-style3">
+      <div class="d-flex flex-wrap">
+        <div class="widget-data">
+          <div class="weight-700 font-24 text-dark">{{=ESTADO_CONTRATO[contrato.estado_contrato]}}</div>
+          <div class="font-14 text-secondary weight-500">
+            Estado de Contrato
+          </div>
+        </div>
+        <div class="widget-icon">
+          <div class="icon" data-color="#00eccf" style="color: rgb(0, 236, 207)">
+            <i class="icon-copy dw dw-file-16"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-20">
+  {{if contactos:}}
+  <!-- List of Contacts -->
+  <div class="col-lg-6 mb-30 col-md-6 col-sm-12">
+    <div class="card-box height-100-p pd-20 min-height-200px">
+      <div class="d-flex justify-content-between pb-10">
+        <div class="h5 mb-0">Listado de Contactos</div>
+      </div>
+      <div class="user-list">
+        <ul>
+          {{for contacto in contactos:}}
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img src="{{=URL('static', 'images/photo1.jpg')}}" class="border-radius-100 box-shadow" width="50"
+                  height="50" alt="" />
+              </div>
+              <div class="txt">
+                <span style="font-size: 12px; font-weight: 600">{{=TIPO_CONTACTO[contacto.tipo]}}</span>
+                <div class="font-14 weight-600">{{=contacto.nombre}}</div>
+                <div class="font-12 weight-500" style="color: rgb(122, 122, 124)">
+                  {{=contacto.cargo}}
+                </div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">{{=contacto.numero}}</a>
+            </div>
+          </li>
+          {{pass}}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {{pass}}
+
+  {{if firmas:}}
+  <!-- Listado de firmas autorizadas -->
+  <div class="col-lg-6 mb-30 col-md-6 col-sm-12">
+    <div class="card-box height-100-p pd-20 min-height-200px">
+      <div class="d-flex justify-content-between pb-10">
+        <div class="h5 mb-0">Listado de Firmas Autorizadas</div>
+      </div>
+      <div class="user-list">
+        <ul>
+          {{for firma in firmas:}}
+          <li class="d-flex mb-20 align-items-center justify-content-between">
+            <div class="name-avatar d-flex align-items-center pr-2">
+              <div class="avatar mr-2 flex-shrink-0">
+                <img src="{{=URL('static', 'images/photo1.jpg')}}" class="border-radius-100 box-shadow" width="50"
+                  height="50" alt="" />
+              </div>
+              <div class="txt">
+                <div class="font-14 weight-600">{{=firma.nombre_completo}}</div>
+              </div>
+            </div>
+            <div class="cta flex-shrink-0">
+              <a href="#" class="btn btn-sm btn-outline-primary">{{=firma.cargo}}</a>
+            </div>
+          </li>
+          {{pass}}
+        </ul>
+      </div>
+    </div>
+  </div>
+  {{pass}}
+
+</div>
+
+
+{{if contrato.contrato_file:}}
+<div class="pdf-single-pro">
+  <a class="media" href="{{=URL('contrato', 'stream_pdf', args=contrato.contrato_file)}}"></a>
+</div>
+{{pass}}
+
+<style>
+  .pdf-single-pro .media {
+    width: 100% !important;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
+    margin-bottom: 30px;
+  }
+</style>
+
+
+
+
+
+<!-- pdf JS	============================================ -->
+
+<script src="{{=URL('static', 'js/jquery.media.js')}}"></script>
+
+<script>
+  (function ($) {
+    "use strict";
+    $('a.media').media({ width: 1920, height: 1080 });
+
+  })(jQuery);
+</script>
+
+
+
+<style>
+  .empresa-logo {
+    width: 100%;
+  }
+
+  .test {
+    margin-top: 20px;
+  }
+</style>
+
+<style>
+  /*!
+Version: 3.0.0
+Author: Ankit Hingarajiya - DeskApp
+*/
+  .card-box,
+  .da-card {
+    background-color: #fff;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 0 28px rgba(0, 0, 0, 0.08);
+  }
+
+  .widget-style3 {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .widget-style3 .widget-data {
+    width: calc(100% - 80px);
+    padding: 20px 15px;
+  }
+
+  .widget-style3 .widget-icon {
+    width: 80px;
+    font-size: 30px;
+    line-height: 1;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: #334148;
+    color: #fff;
+  }
+</style>
