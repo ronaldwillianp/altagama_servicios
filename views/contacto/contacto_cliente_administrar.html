@@ -12,11 +12,11 @@
 {{end head}}
 
 <div class="pb-20">
-  <a href="{{=URL('contrato', 'administrar')}}" class="btn btn-success">
+  <a href="{{=URL('contrato', 'contrato_cliente_administrar')}}" class="btn btn-success">
     <span><i class="fa fa-file"></i></span> Contratos</a
   >
 
-  <a href="{{=URL('contacto', 'crear', args = request.args(0, cast=int)) or redirect(URL('contrato','administrar'))}}" class="btn btn-success">
+  <a href="{{=URL('contacto', 'contacto_cliente_crear', args = request.args(0, cast=int)) or redirect(URL('contrato','administrar'))}}" class="btn btn-success">
     <span><i class="fa fa-plus"></i></span> Nuevo contacto</a
   >
 </div>
@@ -41,10 +41,10 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.nombre}}</td>
-          <td>{{=row.cargo}}</td>
-          <td>{{=TIPO_CONTACTO[row.tipo]}}</td>
-          <td>{{=row.numero}}</td>
+          <td class="table-plus">{{=row['nombre']}}</td>
+          <td>{{=row['cargo']}}</td>
+          <td>{{=TIPO_CONTACTO[row['tipo']]}}</td>
+          <td>{{=row['numero']}}</td>
 
           <td>
             <div class="dropdown">
@@ -62,7 +62,7 @@
                 <a
                   class="dropdown-item"
                   href="#"
-                  onclick="eliminar('{{=row.id}}', '{{=row.numero}}')"
+                  onclick="eliminar('{{=registro.id}}', '{{=row['id']}}', '{{=row['numero']}}')"
                   ><i class="dw dw-delete-3"></i> Eliminar</a
                 >
               </div>
@@ -95,7 +95,7 @@
 <script src="{{=URL('static','vendor/moment/moment.dataTables.js')}}"></script>
 
 <script>
-  function eliminar(id, numero) {
+  function eliminar(id_contrato, id_contacto, numero) {
     swal(
       {
         title: "¿Está seguro de eliminar?",
@@ -110,9 +110,8 @@
       },
       function (isConfirm) {
         if (isConfirm) {
-          var url = "{{=URL('contacto','eliminar')}}";
-          //{{session.contrato = request.args(0, cast=int)}}
-          location.href = url + "/" + id;
+          var url = "{{=URL('contacto','contacto_cliente_eliminar')}}";
+          location.href = url + "/" + id_contrato + "/" + id_contacto;
         } else {
           // event.preventDefault();
           //swal("Cancelled !!", "Hey, your imaginary file is safe !!", "error");

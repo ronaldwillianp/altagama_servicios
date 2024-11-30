@@ -189,6 +189,7 @@ db.define_table('contrato_cliente',
                 Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today() + +datetime.timedelta(days=365)), label=T('Fecha de Vencimiento')),
                 Field('contrato_file', 'upload', autodelete=True),
                 Field('observaciones', 'text'),
+                Field('firma_autorizada','json'),
                 auth.signature,
                 format='%(numero)s %(empresa)s'
 )
@@ -230,25 +231,34 @@ db.contrato_proveedor.fecha_confeccion.requires = IS_EMPTY_OR(IS_DATE())
 db.contrato_proveedor.fecha_vencimiento.requires = IS_EMPTY_OR(IS_DATE())
 db.contrato_proveedor.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
 
+db.define_table('contacto',
+                Field('nombre', label=T('Nombre Completo')),
+                Field('cargo'),
+                Field('tipo'),  # Set
+                Field('numero'),
+)
 
-# db.define_table('contacto',
-#                 Field('nombre'),
-#                 Field('cargo'),
-#                 Field('tipo'),  # Set
-#                 Field('numero'),
-#                 Field('contrato', 'reference contrato')
-# )
+db.contacto.nombre.requires = IS_NOT_EMPTY()
+db.contacto.tipo.requires = IS_IN_SET(TIPO_CONTACTO, zero=None)
+db.contacto.numero.requires = [IS_LENGTH(8, minsize=8), IS_MATCH('^\d+$', error_message='Número telefónico no válido')]
 
-# db.contacto.nombre.requires = IS_NOT_EMPTY()
-# db.contacto.tipo.requires = IS_IN_SET(TIPO_CONTACTO, zero=None)
-# db.contacto.numero.requires = [IS_LENGTH(8, minsize=8), IS_MATCH('^\d+$', error_message='Número telefónico no válido')]
-# db.contacto.contrato.requires = IS_IN_DB(db, 'contrato.numero')
+db.define_table('contacto_contrato_cliente',
+                Field('contacto', 'reference contacto'),
+                Field('contrato', 'reference contrato_cliente')
+)
+db.contacto_contrato_cliente.contrato.requires = IS_IN_DB(db, 'contrato_cliente.id')
+
+db.define_table('contacto_contrato_proveedor',
+                Field('contacto', 'reference contacto'),
+                Field('contrato', 'reference contrato_proveedor')
+)
+db.contacto_contrato_proveedor.contrato.requires = IS_IN_DB(db, 'contrato_proveedor.id')
 
 # db.define_table('firma_autorizada',
 #                 Field('nombre_completo'),
 #                 Field('cargo'),
-#                 Field('contrato', 'reference contrato'),
 # )
+
 # db.firma_autorizada.nombre_completo.requires = IS_NOT_EMPTY()
 # db.firma_autorizada.contrato.requires = IS_IN_DB(db, 'contrato.numero')
 
