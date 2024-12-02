@@ -13,8 +13,22 @@ def contrato_cliente_detalles():
     registro = db.contrato_cliente(request.args(0, cast=int)
                             ) or redirect(URL('contrato','contrato_cliente_administrar'))
     
-    contactos = db(db.contacto.contrato == registro.id).select()
-    firmas = db(db.firma_autorizada.contrato == registro.id).select()
+    contactos = db(
+        db.contacto_contrato_cliente.contrato == registro.id
+
+    ).select(
+        db.contacto.nombre,
+        db.contacto.numero,
+        db.contacto.tipo,
+        db.contacto.cargo
+    )
+    firmas = db(
+        db.firma_autorizada_contrato_cliente.contrato == registro.id
+
+    ).select(
+        db.firma_autorizada.nombre_completo,
+        db.firma_autorizada.cargo
+    )
     return dict(contrato=registro, contactos=contactos, firmas=firmas)
 
 @auth.requires(
@@ -150,16 +164,31 @@ def contrato_cliente_stream_pdf():
 @auth.requires(
     auth.has_membership(role='Administrador') or 
     auth.has_membership(role='Administrativo') or
-    auth.has_membership(role='Jurídico'))
+    auth.has_membership(role='Jurídico')
+)
 def contrato_proveedor_detalles():
     if not request.args(0):
-        redirect(URL('contrato','contrato_cliente_administrar'))
+        redirect(URL('contrato','contrato_proveedor_administrar'))
 
-    registro = db.contrato_cliente(request.args(0, cast=int)
-                            ) or redirect(URL('contrato','contrato_cliente_administrar'))
+    registro = db.contrato_proveedor(request.args(0, cast=int)
+                            ) or redirect(URL('contrato','contrato_proveedor_administrar'))
     
-    contactos = db(db.contacto.contrato == registro.id).select()
-    firmas = db(db.firma_autorizada.contrato == registro.id).select()
+    contactos = db(
+        db.contacto_contrato_proveedor.contrato == registro.id
+
+    ).select(
+        db.contacto.nombre,
+        db.contacto.numero,
+        db.contacto.tipo,
+        db.contacto.cargo
+    )
+    firmas = db(
+        db.firma_autorizada_contrato_proveedor.contrato == registro.id
+
+    ).select(
+        db.firma_autorizada.nombre_completo,
+        db.firma_autorizada.cargo
+    )
     return dict(contrato=registro, contactos=contactos, firmas=firmas)
 
 @auth.requires(

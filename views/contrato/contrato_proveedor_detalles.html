@@ -11,7 +11,7 @@
         <div class="weight-600 font-30 text-blue">{{=contrato.empresa}}</div>
       </h4>
       <p class="font-18 max-width-600 weight-600">
-        Fecha de Vencimiento: {{=contrato.fecha_vencimiento}}
+        Fecha de Vencimiento: {{=contrato.fecha_vencimiento.strftime('%d/%m/%Y')}}
       </p>
     </div>
   </div>
@@ -22,9 +22,9 @@
     <div class="card-box height-100-p widget-style3">
       <div class="d-flex flex-wrap">
         <div class="widget-data">
-          <div class="weight-700 font-24 text-dark">{{=NATURALEZA_CONTRATO[contrato.naturaleza]}}</div>
+          <div class="weight-700 font-24 text-dark">Cliente</div>
           <div class="font-14 text-secondary weight-500">
-            Naturaleza de Contrato
+            Tipo de Personalidad Jurídica
           </div>
         </div>
         <div class="widget-icon">
@@ -139,9 +139,10 @@
 </div>
 
 
+
 {{if contrato.contrato_file:}}
 <div class="pdf-single-pro">
-  <a class="media" href="{{=URL('contrato', 'stream_pdf', args=contrato.contrato_file)}}"></a>
+  <a class="media" href="{{=URL('contrato', 'contrato_cliente_stream_pdf', args=contrato.contrato_file)}}"></a>
 </div>
 {{pass}}
 
