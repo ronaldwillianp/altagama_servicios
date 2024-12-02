@@ -254,14 +254,25 @@ db.define_table('contacto_contrato_proveedor',
 )
 db.contacto_contrato_proveedor.contrato.requires = IS_IN_DB(db, 'contrato_proveedor.id')
 
-# db.define_table('firma_autorizada',
-#                 Field('nombre_completo'),
-#                 Field('cargo'),
-# )
+db.define_table('firma_autorizada',
+                Field('nombre_completo'),
+                Field('cargo'),
+)
 
-# db.firma_autorizada.nombre_completo.requires = IS_NOT_EMPTY()
-# db.firma_autorizada.contrato.requires = IS_IN_DB(db, 'contrato.numero')
+db.firma_autorizada.nombre_completo.requires = IS_NOT_EMPTY()
+db.firma_autorizada.cargo.requires = IS_NOT_EMPTY()
 
+db.define_table('firma_autorizada_contrato_cliente',
+                Field('firma_autorizada', 'reference firma_autorizada'),
+                Field('contrato', 'reference contrato_cliente')
+)
+db.firma_autorizada_contrato_cliente.contrato.requires = IS_IN_DB(db, 'contrato_cliente.id')
+
+db.define_table('firma_autorizada_contrato_proveedor',
+                Field('firma_autorizada', 'reference firma_autorizada'),
+                Field('contrato', 'reference contrato_proveedor')
+)
+db.firma_autorizada_contrato_proveedor.contrato.requires = IS_IN_DB(db, 'contrato_proveedor.id')
 
 
 # db.define_table('mantenimiento_contrato',

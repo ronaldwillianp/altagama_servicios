@@ -13,7 +13,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="mb-3">
-      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('firma_autorizada',
+      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('contacto',
       'administrar',args = request.args(0, cast=int)) or redirect(URL('contrato','administrar')), _class='btn btn-success')}}
     </div>
 
@@ -34,10 +34,9 @@
               </div>
 
             <div class="col-sm-6">
-              {{=form.custom.label.cargo}} <span class="error">*</span>
+              {{=form.custom.label.cargo}}
               <div class="mb-2">{{=form.custom.widget.cargo}}</div>
             </div>
-
             <div class="col-md-12">
               <hr />
             </div>
