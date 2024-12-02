@@ -189,7 +189,6 @@ db.define_table('contrato_cliente',
                 Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today() + +datetime.timedelta(days=365)), label=T('Fecha de Vencimiento')),
                 Field('contrato_file', 'upload', autodelete=True),
                 Field('observaciones', 'text'),
-                Field('firma_autorizada','json'),
                 auth.signature,
                 format='%(numero)s %(empresa)s'
 )
@@ -275,11 +274,11 @@ db.define_table('firma_autorizada_contrato_proveedor',
 db.firma_autorizada_contrato_proveedor.contrato.requires = IS_IN_DB(db, 'contrato_proveedor.id')
 
 
-# db.define_table('mantenimiento_contrato',
-#                 Field('planificacion'), # Set
-#                 Field('contrato', 'reference contrato'),
-# )
-# db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
+db.define_table('mantenimiento_contrato',
+                Field('planificacion'), # Set
+                Field('contrato', 'reference contrato_cliente'),
+)
+db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
 
 # db.define_table('mantenimiento',
 #                 Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),

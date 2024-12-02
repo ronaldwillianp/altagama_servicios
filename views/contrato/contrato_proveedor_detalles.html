@@ -11,7 +11,7 @@
         <div class="weight-600 font-30 text-blue">{{=contrato.empresa}}</div>
       </h4>
       <p class="font-18 max-width-600 weight-600">
-        Fecha de Vencimiento: {{=contrato.fecha_vencimiento.strftime('%d/%m/%Y')}}
+        Fecha de Vencimiento: {{if contrato.fecha_vencimiento:}}{{=contrato.fecha_vencimiento.strftime('%d/%m/%Y')}}{{else:}}--Sin fecha definida--{{pass}}
       </p>
     </div>
   </div>

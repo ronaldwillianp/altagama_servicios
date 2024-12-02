@@ -7,7 +7,8 @@ def detalles():
     registro = db.contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
     
     mantenimientos = db(
-        db.mantenimiento.mantenimiento_contrato == db(db.mantenimiento_contrato.contrato == registro.id).select().first().id
+        db.mantenimiento.mantenimiento_contrato == db(
+            db.mantenimiento_contrato.contrato == registro.id).select().first().id
         ).select(orderby = ~db.mantenimiento.fecha)
     return dict(mantenimientos = mantenimientos)
 
@@ -80,7 +81,7 @@ def deshabilitar_mantenimiento():
 def administrar():
     registro = db.mantenimiento_contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
     rows = db(
-        (db.contrato.id == registro.contrato) &
+        (db.contrato_cliente.id == registro.contrato) &
         (db.mantenimiento.mantenimiento_contrato == registro.id)
     ).select(
         db.mantenimiento.id,
