@@ -3,3 +3,4 @@
 /sessions/
 */databases/
 *.log
+databases/*.log

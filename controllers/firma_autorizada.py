@@ -108,7 +108,7 @@ def firma_autorizada_proveedor_crear():
 
     if form.process().accepted:
         id_firma = form.vars.id
-        db.firma_autorizada_contrato_cliente.validate_and_insert(
+        db.firma_autorizada_contrato_proveedor.validate_and_insert(
             firma_autorizada = id_firma,
             contrato = registro.id
         )
