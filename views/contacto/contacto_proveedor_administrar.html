@@ -12,11 +12,11 @@
 {{end head}}
 
 <div class="pb-20">
-  <a href="{{=URL('contrato', 'contrato_cliente_administrar')}}" class="btn btn-success">
+  <a href="{{=URL('contrato', 'contrato_proveedor_administrar')}}" class="btn btn-success">
     <span><i class="fa fa-file"></i></span> Contratos</a
   >
 
-  <a href="{{=URL('contacto', 'contacto_cliente_crear', args = request.args(0, cast=int)) or redirect(URL('contrato','contrato_cliente_administrar'))}}" class="btn btn-success">
+  <a href="{{=URL('contacto', 'contacto_proveedor_crear', args = request.args(0, cast=int)) or redirect(URL('contrato','contrato_proveedor_administrar'))}}" class="btn btn-success">
     <span><i class="fa fa-plus"></i></span> Nuevo contacto</a
   >
 </div>
@@ -110,7 +110,7 @@
       },
       function (isConfirm) {
         if (isConfirm) {
-          var url = "{{=URL('contacto','contacto_cliente_eliminar')}}";
+          var url = "{{=URL('contacto','contacto_proveedor_eliminar')}}";
           location.href = url + "/" + id_contrato + "/" + id_contacto;
         } else {
           // event.preventDefault();

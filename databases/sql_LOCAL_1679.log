@@ -19581,7 +19581,6 @@ success!
 success!
 success!
 success!
-<<<<<<< HEAD
 timestamp: 2024-12-02T12:17:11.744623
 CREATE TABLE "firma_autorizada_contrato_cliente"(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20131,8 +20130,6 @@ success!
 success!
 success!
 success!
-=======
->>>>>>> d672b0e4c7ba4184692800f83362e0b7723a975f
 success!
 success!
 success!
