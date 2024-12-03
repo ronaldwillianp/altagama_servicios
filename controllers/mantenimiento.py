@@ -19,14 +19,14 @@ def detalles():
 )
 def contrato_servicio_mantenimiento():
     rows = db(
-        (db.contrato.id > 0) &
-        (db.contrato.estado_contrato == 'ar') &
-        (db.contrato.tipo_contrato == 'cl') &
-        (db.contrato.naturaleza == 'sv')
+        (db.contrato_cliente.id > 0) &
+        (db.contrato_cliente.estado_contrato == 'ej') &
+        (db.contrato_cliente.tipo_contrato == 'sv') 
         ).select(
-            db.contrato.id,
-            db.contrato.numero,
-            db.contrato.empresa,
+            db.contrato_cliente.id,
+            db.contrato_cliente.numero,
+            db.contrato_cliente.anho,
+            db.contrato_cliente.empresa,
             db.mantenimiento_contrato.id,
             left=db.mantenimiento_contrato.on(db.contrato.id==db.mantenimiento_contrato.contrato)
         )
