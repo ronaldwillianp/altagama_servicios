@@ -4,7 +4,7 @@
     auth.has_membership(role='Servicios')
 )
 def detalles():
-    registro = db.contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
+    registro = db.contrato_cliente(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
     
     mantenimientos = db(
         db.mantenimiento.mantenimiento_contrato == db(
@@ -28,7 +28,7 @@ def contrato_servicio_mantenimiento():
             db.contrato_cliente.anho,
             db.contrato_cliente.empresa,
             db.mantenimiento_contrato.id,
-            left=db.mantenimiento_contrato.on(db.contrato.id==db.mantenimiento_contrato.contrato)
+            left=db.mantenimiento_contrato.on(db.contrato_cliente.id==db.mantenimiento_contrato.contrato)
         )
     return dict(rows=rows)
 
@@ -38,7 +38,7 @@ def contrato_servicio_mantenimiento():
     auth.has_membership(role='Servicios')
 )
 def habilitar_mantenimiento():
-    registro = db.contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
+    registro = db.contrato_cliente(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
     
     db.mantenimiento_contrato.contrato.writable = False
     form = SQLFORM(db.mantenimiento_contrato)
@@ -59,7 +59,7 @@ def habilitar_mantenimiento():
     auth.has_membership(role='Servicios')
 )
 def deshabilitar_mantenimiento():
-    registro = db.contrato(request.args(0, cast=int)) or redirect(URL('administrar'))
+    registro = db.contrato_cliente(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
     row = db(db.mantenimiento_contrato.contrato == registro.id).select().first()    
     mantenimientos = db(db.mantenimiento.mantenimiento_contrato == row.id).count()
 
@@ -89,10 +89,10 @@ def administrar():
         db.mantenimiento.cantidad_pc,
         orderby=db.mantenimiento.fecha|~db.mantenimiento.id
     )
-    contrato = db(db.contrato.id == registro.contrato).select(
-        db.contrato.id,
-        db.contrato.numero,
-        db.contrato.empresa,
+    contrato = db(db.contrato_cliente.id == registro.contrato).select(
+        db.contrato_cliente.id,
+        db.contrato_cliente.numero,
+        db.contrato_cliente.empresa,
     ).first()
 
     return dict(rows=rows, contrato=contrato)

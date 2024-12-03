@@ -5,6 +5,7 @@
   href="{{=URL('static/frontend', 'src/plugins/datatables/css/responsive.bootstrap4.min.css')}}" />
 {{end head}}
 
+
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
   <div class="pd-20">
@@ -24,8 +25,8 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.contrato.numero}}</td>
-          <td>{{=row.contrato.empresa}}</td>
+          <td class="table-plus">{{=row.contrato_cliente.numero}}</td>
+          <td>{{=row.contrato_cliente.empresa}}</td>
           <td>{{if row.mantenimiento_contrato.id:}}Si{{else:}}No{{pass}}</td>
           <td>
             <div class="dropdown">
@@ -38,16 +39,16 @@
 
                 {{if row.mantenimiento_contrato.id:}}
                 <a class="dropdown-item"
-                  href="{{=URL('mantenimiento', 'deshabilitar_mantenimiento', args = row.contrato.id)}}"><i
+                  href="{{=URL('mantenimiento', 'deshabilitar_mantenimiento', args = row.contrato_cliente.id)}}"><i
                     class="dw dw-switch"></i>Desactivar</a>
                 {{else:}}
                 <a class="dropdown-item"
-                  href="{{=URL('mantenimiento', 'habilitar_mantenimiento', args = row.contrato.id)}}"><i
+                  href="{{=URL('mantenimiento', 'habilitar_mantenimiento', args = row.contrato_cliente.id)}}"><i
                     class="dw dw-switch"></i>Activar</a>
                 {{pass}}
 
                 {{if row.mantenimiento_contrato.id:}}
-                <a class="dropdown-item" href="{{=URL('mantenimiento', 'detalles', args = row.contrato.id)}}"><i
+                <a class="dropdown-item" href="{{=URL('mantenimiento', 'detalles', args = row.contrato_cliente.id)}}"><i
                     class="dw dw-eye"></i>Detalles</a>
                 <a class="dropdown-item"
                   href="{{=URL('mantenimiento', 'crear', args = row.mantenimiento_contrato.id)}}"><i

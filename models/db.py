@@ -280,13 +280,13 @@ db.define_table('mantenimiento_contrato',
 )
 db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
 
-# db.define_table('mantenimiento',
-#                 Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),
-#                 Field('cantidad_pc', 'integer'),
-#                 Field('observaciones', 'text'),
-#                 Field('fecha', 'date', default=datetime.date.today()),
-#                 auth.signature
-# )
+db.define_table('mantenimiento',
+                Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),
+                Field('cantidad_pc', 'integer'),
+                Field('observaciones', 'text'),
+                Field('fecha', 'date', default=datetime.date.today()),
+                auth.signature
+)
 
 # db.define_table('notificacion',
 #                 Field('mensaje'),
