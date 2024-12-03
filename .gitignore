@@ -1,6 +1,6 @@
 */__pycache__/
 /errors/
 /sessions/
-*/databases/
-*.log
-databases/*.log
+/databases/
+**/*.log
+**/*.sqlite
