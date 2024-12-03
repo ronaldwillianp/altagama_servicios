@@ -48,6 +48,9 @@
                 {{pass}}
 
                 {{if row.mantenimiento_contrato.id:}}
+                <a class="dropdown-item"
+                  href="{{=URL('mantenimiento', 'editar_planificacion', args = row.contrato_cliente.id)}}"><i
+                    class="dw dw-add"></i> Cambiar Frecuencia</a>
                 <a class="dropdown-item" href="{{=URL('mantenimiento', 'detalles', args = row.contrato_cliente.id)}}"><i
                     class="dw dw-eye"></i>Detalles</a>
                 <a class="dropdown-item"

@@ -171,4 +171,29 @@ def eliminar():
 
     return dict()
 
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Servicios')
+)
+def editar_planificacion():
 
+    if not request.args(0):
+        redirect(URL('mantenimiento','contrato_servicio_mantenimiento', args=request.args(0)))
+
+    contrato = db.contrato_cliente(request.args(0, cast=int)) or redirect(URL('mantenimiento','contrato_servicio_mantenimiento', args=request.args(0)))
+
+    registro = db(db.mantenimiento_contrato.contrato == contrato.id).select().first()
+
+    db.mantenimiento_contrato.contrato.writable = False
+    form = SQLFORM(db.mantenimiento_contrato, registro)
+
+    if form.process().accepted:
+        session.status = True
+        session.msg = 'Frecuencia de mantenimiento actualizada correctamente'
+        redirect(URL('mantenimiento', 'contrato_servicio_mantenimiento', args=request.args(0)))
+    elif form.errors:
+        session.error = True
+        session.msg = 'El formulario tiene errores'
+
+    return dict(form=form)

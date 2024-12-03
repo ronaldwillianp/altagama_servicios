@@ -296,8 +296,6 @@ db.define_table('mantenimiento',
 
 
 
-
-
 if not auth:
     redirect(URL('default', 'user/login'))
 # -------------------------------------------------------------------------
