@@ -1,17 +1,17 @@
 # Control de Cambios
 
 ## Contratos
->>> Agregar un filtro para seleccionar anhos especificos y generales del backend
->>> Actualizar el componente input-file con lo de fraidy
->>> Queda pendiente el testeo de la funcion de Streamming de PDFs perteneciente a la vista de Detalles de Contrato 
-
+>>> Agregar un filtro para seleccionar anhos especificos y generales del backend                                        No necesario [Se seleccionan todos los contratos no archivados]
+>>> Actualizar el componente input-file con lo de fraidy                                                                OK
+>>> Queda pendiente el testeo de la funcion de Streamming de PDFs perteneciente a la vista de Detalles de Contrato      OK
+>>> Crear Interfaz para ver los archivados...
 
 ## Dashboard
->>> Cant. Empresas Clientes
->>> Cant. Empresas Proveedoras
->>> Ultimo Contrato Cliente Servicio
->>> Ultimo Contrato Cliente Compraventa
->>> Total Contratos
+>>> Cant. Empresas Clientes                                                                 OK                                                                         
+>>> Cant. Empresas Proveedoras                                                              OK
+>>> Ultimo Contrato Cliente Servicio                                                        P
+>>> Ultimo Contrato Cliente Compraventa                                                     P
+>>> Total Contratos                                                                         OK
 >>> Total[primeras 5] Contratos no archivado
 >>> Porciento No Archivados/total
 >>> Cantidad de empresas con mantenimiento habilitado

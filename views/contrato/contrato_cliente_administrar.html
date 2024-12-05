@@ -1,4 +1,5 @@
 {{extend 'layout_frontend.html'}} {{block head}}
+
 <link rel="stylesheet" type="text/css"
   href="{{=URL('static/frontend', 'src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}" />
 <link rel="stylesheet" type="text/css"
@@ -45,31 +46,31 @@
           <td>
             <div>
               <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_detalles', args=row.id)}}"><i
-                class="fa fa-info"></i></a>
-            <div class="dropdown">
-              <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button"
-                data-toggle="dropdown">
-                <i class="dw dw-more"></i>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_detalles', args=row.id)}}"><i
-                    class="dw dw-eye"></i> Detalles</a>
+                  class="fa fa-info"></i></a>
+              <div class="dropdown">
+                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button"
+                  data-toggle="dropdown">
+                  <i class="dw dw-more"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                  <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_detalles', args=row.id)}}"><i
+                      class="dw dw-eye"></i> Detalles</a>
 
-                <a class="dropdown-item" href="{{=URL('contacto', 'contacto_cliente_administrar', args=row.id)}}"><i
-                    class="dw dw-phone-call"></i> Contactos</a>
+                  <a class="dropdown-item" href="{{=URL('contacto', 'contacto_cliente_administrar', args=row.id)}}"><i
+                      class="dw dw-phone-call"></i> Contactos</a>
 
-                <a class="dropdown-item"
-                  href="{{=URL('firma_autorizada', 'firma_autorizada_cliente_administrar', args=row.id)}}"><i
-                    class="dw dw-file-411"></i> Firmas Autorizadas</a>
+                  <a class="dropdown-item"
+                    href="{{=URL('firma_autorizada', 'firma_autorizada_cliente_administrar', args=row.id)}}"><i
+                      class="dw dw-file-411"></i> Firmas Autorizadas</a>
 
-                <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_editar', args=row.id)}}"><i
-                    class="dw dw-edit2"></i> Editar</a>
-                <a class="dropdown-item" href="#" onclick="eliminar('{{=row.id}}', '{{=row.numero}}')"><i
-                    class="dw dw-delete-3"></i> Eliminar</a>
+                  <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_editar', args=row.id)}}"><i
+                      class="dw dw-edit2"></i> Editar</a>
+                  <a class="dropdown-item" href="#" onclick="eliminar('{{=row.id}}', '{{=row.numero}}')"><i
+                      class="dw dw-delete-3"></i> Eliminar</a>
+                </div>
               </div>
             </div>
-            </div>
-            
+
           </td>
         </tr>
         {{pass}}
@@ -81,7 +82,6 @@
 
 {{block page_js}}
 {{include 'components/datatables.html'}}
-
 <script>
   function eliminar(id, numero) {
     swal(

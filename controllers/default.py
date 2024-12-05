@@ -8,8 +8,16 @@
 
 @auth.requires_login()
 def index():
-    total_usuarios = db(db.auth_user.id>0).count()
-    return dict(total_usuarios= total_usuarios)
+    total_contratos_clientes = db(db.contrato_cliente.id>0).count()
+    total_contratos_proveedores = db(db.contrato_proveedor.id>0).count()
+    total_contratos = total_contratos_clientes + total_contratos_proveedores
+    total_archivados = db(db.contrato_cliente.estado_contrato == 'ar').count() + db(db.contrato_proveedor.estado_contrato == 'ar').count() 
+    return dict(
+        total_contratos_clientes = total_contratos_clientes,
+        total_contratos_proveedores= total_contratos_proveedores,
+        total_contratos = total_contratos,
+        total_archivados = total_archivados,
+    )
 
 # ---- Embedded wiki (example) ----
 

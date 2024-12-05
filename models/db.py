@@ -199,8 +199,8 @@ db.contrato_cliente.empresa.requires = IS_NOT_EMPTY()
 db.contrato_cliente.anho.requires = IS_IN_SET(ANHOS_CONTRATO, zero=None)
 db.contrato_cliente.tipo_contrato.requires = IS_IN_SET(TIPO_CONTRATO, zero=None)
 db.contrato_cliente.estado_contrato.requires = IS_IN_SET(ESTADO_CONTRATO, zero=None)
-db.contrato_cliente.fecha_confeccion.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today())
-db.contrato_cliente.fecha_vencimiento.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today() + +datetime.timedelta(days=365))
+db.contrato_cliente.fecha_confeccion.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today()-datetime.timedelta(days=365))
+db.contrato_cliente.fecha_vencimiento.requires = IS_DATE_IN_RANGE(format=T('%Y-%m-%d'), minimum=datetime.date.today() + datetime.timedelta(days=365))
 db.contrato_cliente.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
 
 # Corrigiendo widgets
