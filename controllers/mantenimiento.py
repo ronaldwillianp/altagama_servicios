@@ -199,4 +199,4 @@ def editar_planificacion():
 
 def cronograma():
     mantenimientos = db(db.mantenimiento.id>0).select()
-    return dict()
+    return dict(mantenimientos = mantenimientos)
