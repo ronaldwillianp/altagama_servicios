@@ -12,7 +12,7 @@
 >>> Ultimo Contrato Cliente Servicio                                                        P
 >>> Ultimo Contrato Cliente Compraventa                                                     P
 >>> Total Contratos                                                                         OK
->>> Total[primeras 5] Contratos no archivado
+>>> Total[primeras 5] Contratos no archivado                                                P
 >>> Porciento No Archivados/total
 >>> Cantidad de empresas con mantenimiento habilitado
 >>> Porciento respecto al total de empresas de cliente con servicio
@@ -27,8 +27,8 @@
 
 
 ## Yosley
->>> Mostrar solo los contratos(clientes/proveedores) que no esten archivados
->>> Poner filtro (años)
+>>> Mostrar solo los contratos(clientes/proveedores) que no esten archivados                OK
+>>> Poner filtro (años)                                                                     Innecesario
 >>> Saber cuando toca mantenimiento
 >>> Cronograma de mantenimientos
 >>> Una semana antes notificar mantenimiento

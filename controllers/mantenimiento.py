@@ -177,7 +177,6 @@ def eliminar():
     auth.has_membership(role='Servicios')
 )
 def editar_planificacion():
-
     if not request.args(0):
         redirect(URL('mantenimiento','contrato_servicio_mantenimiento', args=request.args(0)))
 
@@ -197,3 +196,7 @@ def editar_planificacion():
         session.msg = 'El formulario tiene errores'
 
     return dict(form=form)
+
+def cronograma():
+    mantenimientos = db(db.mantenimiento.id>0).select()
+    return dict()
