@@ -1,24 +1,16 @@
 {{extend 'layout_frontend.html'}} {{block head}}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{{=URL('static/frontend', 'src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}"
-/>
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{{=URL('static/frontend', 'src/plugins/datatables/css/responsive.bootstrap4.min.css')}}"
-/>
+<link rel="stylesheet" type="text/css"
+  href="{{=URL('static/frontend', 'src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}" />
+<link rel="stylesheet" type="text/css"
+  href="{{=URL('static/frontend', 'src/plugins/datatables/css/responsive.bootstrap4.min.css')}}" />
 {{end head}}
 
 <div class="pb-20">
   <a href="{{=URL('contrato', 'contrato_proveedor_administrar')}}" class="btn btn-success">
-    <span><i class="fa fa-users"></i></span> Proveedores</a
-  >
+    <span><i class="fa fa-users"></i></span> Proveedores</a>
 
   <a href="{{=URL('contrato', 'contrato_cliente_crear')}}" class="btn btn-success">
-    <span><i class="fa fa-plus"></i></span> Nuevo contrato</a
-  >
+    <span><i class="fa fa-plus"></i></span> Nuevo contrato</a>
 </div>
 
 
@@ -32,8 +24,8 @@
     <table class="data-table table stripe hover nowrap">
       <thead>
         <tr>
-          <th class="table-plus">No. Contrato</th>
-          <th>Empresa</th>
+          <th class="table-plus">Empresa</th>
+          <th>No. Contrato</th>
           <th>Tipo Contrato</th>
           <th>Estado</th>
           <th>Confeccionado</th>
@@ -44,56 +36,40 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.numero}}/{{=row.anho}}</td>
-          <td>{{=row.empresa}}</td>
+          <td class="table-plus">{{=row.empresa}}</td>
+          <td>{{=row.numero}}/{{=row.anho}}</td>
           <td>{{=TIPO_CONTRATO[row.tipo_contrato]}}</td>
           <td>{{=ESTADO_CONTRATO[row.estado_contrato]}}</td>
           <td>{{=row.fecha_confeccion.strftime('%d/%m/%Y')}}</td>
           <td>{{=row.fecha_vencimiento.strftime('%d/%m/%Y')}}</td>
           <td>
+            <div>
+              <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_detalles', args=row.id)}}"><i
+                class="fa fa-info"></i></a>
             <div class="dropdown">
-              <a
-                class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                href="#"
-                role="button"
-                data-toggle="dropdown"
-              >
+              <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button"
+                data-toggle="dropdown">
                 <i class="dw dw-more"></i>
               </a>
-              <div
-                class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-              >
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('contrato', 'contrato_cliente_detalles', args=row.id)}}"
-                  ><i class="dw dw-eye"></i> Detalles</a
-                >
+              <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_detalles', args=row.id)}}"><i
+                    class="dw dw-eye"></i> Detalles</a>
 
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('contacto', 'contacto_cliente_administrar', args=row.id)}}"
-                  ><i class="dw dw-phone-call"></i> Contactos</a
-                >
+                <a class="dropdown-item" href="{{=URL('contacto', 'contacto_cliente_administrar', args=row.id)}}"><i
+                    class="dw dw-phone-call"></i> Contactos</a>
 
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('firma_autorizada', 'firma_autorizada_cliente_administrar', args=row.id)}}"
-                  ><i class="dw dw-file-411"></i> Firmas Autorizadas</a
-                >
+                <a class="dropdown-item"
+                  href="{{=URL('firma_autorizada', 'firma_autorizada_cliente_administrar', args=row.id)}}"><i
+                    class="dw dw-file-411"></i> Firmas Autorizadas</a>
 
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('contrato', 'contrato_cliente_editar', args=row.id)}}"
-                  ><i class="dw dw-edit2"></i> Editar</a
-                >
-                <a
-                  class="dropdown-item"
-                  href="#"
-                  onclick="eliminar('{{=row.id}}', '{{=row.numero}}')"
-                  ><i class="dw dw-delete-3"></i> Eliminar</a
-                >
+                <a class="dropdown-item" href="{{=URL('contrato', 'contrato_cliente_editar', args=row.id)}}"><i
+                    class="dw dw-edit2"></i> Editar</a>
+                <a class="dropdown-item" href="#" onclick="eliminar('{{=row.id}}', '{{=row.numero}}')"><i
+                    class="dw dw-delete-3"></i> Eliminar</a>
               </div>
             </div>
+            </div>
+            
           </td>
         </tr>
         {{pass}}

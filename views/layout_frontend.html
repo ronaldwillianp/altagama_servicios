@@ -84,34 +84,18 @@
                 <div class="dropdown">
                     <a class="dropdown-toggle no-arrow" href="#" role="button" data-toggle="dropdown">
                         <i class="icon-copy dw dw-notification"></i>
-                        {{if NOTIFICACIONES:}}
                         <span class="badge notification-active"></span>
-                        {{pass}}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="notification-list mx-h-350 customscroll">
                             <ul>
-                                {{if REPORTES_PENDIENTES:}}
                                 <li>
                                     <a href="#">
                                         <img src="vendors/images/img.jpg" alt="">
                                         <h3>{{=T('Sistema')}}</h3>
-                                        <p>Existen {{=len(REPORTES_PENDIENTES)}} reporte(s) pendientes</p>
+                                        <p>Existen reporte(s) pendientes</p>
                                     </a>
                                 </li>
-                                {{pass}}
-                                {{for reporte in REPORTES_VENCIDOS:}}
-                                <li>
-                                    <a href="{{=URL('reporte','detalles',args=[reporte.id])}}">
-                                        <img src="vendors/images/photo1.jpg" alt="">
-                                        <h3>{{=T('Sistema')}}</h3>
-                                        <p>El reporte [{{=reporte.codigo}}] ha expirado hace
-                                            {{=expired_since(reporte.created_on)}} dias.</p>
-                                    </a>
-                                </li>
-
-                                {{pass}}
-
                             </ul>
                         </div>
                     </div>

@@ -7,7 +7,6 @@
 
 
 ## Dashboard
->>> Cant. Usuarios
 >>> Cant. Empresas Clientes
 >>> Cant. Empresas Proveedoras
 >>> Ultimo Contrato Cliente Servicio
@@ -20,4 +19,25 @@
 >>> Empresa con mas mantenimientos / cantidad [primeras 5]
 >>> Empresa con menos mantenimiento mantenimientos / cantidad 
 
+
+# Yosley Dashboard
+>>> Proximos mantenniminetos 7 dias
+>>> Contratos a menos de un mes de vencer
+>>> Contratos con estados de Entregado o Recogido
+
+
+## Yosley
+>>> Mostrar solo los contratos(clientes/proveedores) que no esten archivados
+>>> Poner filtro (años)
+>>> Saber cuando toca mantenimiento
+>>> Cronograma de mantenimientos
+>>> Una semana antes notificar mantenimiento
+>>> Cambio de estados y aplazamientos para los mantenimientos
+>>> Planificado/Confirmado/Aplazado/Cancelado/Ejecutado
+>>> Notificar si en las fechas hay otros mantenimientos que coinciden
+>>> Agregar correo electronico a los contactos
+>>> Modificar en contactos el verificar_mantenimiento, correo
+>>> Intercambiar en los contratos el numero y la empresa (swap) para la vista movil
+>>> Sacar el icono de detalles fuera de los 3 puntos en los contratos
+>>> Las notificaciones por correo serian para contratos vencidos y mantenimientos
 

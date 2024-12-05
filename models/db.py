@@ -176,7 +176,7 @@ if configuration.get('scheduler.enabled'):
 # >>> rows = db(db.mytable.myfield == 'value').select(db.mytable.ALL)
 # >>> for row in rows: print row.id, row.myfield
 # -------------------------------------------------------------------------
-# lazy_tables = True
+lazy_tables = True
 T.force('es')
 
 db.define_table('contrato_cliente',
@@ -235,6 +235,8 @@ db.define_table('contacto',
                 Field('cargo'),
                 Field('tipo'),  # Set
                 Field('numero'),
+                Field('verificacion_mantenimiento', 'boolean', default=False),
+                Field('correo')
 )
 
 db.contacto.nombre.requires = IS_NOT_EMPTY()
@@ -285,16 +287,25 @@ db.define_table('mantenimiento',
                 Field('cantidad_pc', 'integer'),
                 Field('observaciones', 'text'),
                 Field('fecha', 'date', default=datetime.date.today()),
+                Field('fecha_siguiente_mantenimiento', 'date', default=datetime.date.today()),
                 auth.signature
 )
 
-# db.define_table('notificacion',
-#                 Field('mensaje'),
-#                 Field('grupo'),
-# )
+db.define_table('notificacion_sistema',
+    Field('titulo'),
+    Field('mensaje'),
+    Field('observaciones', 'text'),
+    Field('usuarios', 'list:reference auth_user'),
+    Field('created_on', 'datetime', default=request.now),
+    Field('estado', default='No leída'),
+)
+db.notificacion_sistema.titulo.requires = IS_NOT_EMPTY()
+db.notificacion_sistema.mensaje.requires = IS_NOT_EMPTY()
 
-
-
+# Seleccionar todas las notificaciones de un usuario
+# notificaciones = db(db.notificacion_sistema.usuarios == user_id).select()
+# Seleccionar las no leidas
+# notificaciones_no_leidas = db(db.notificacion_sistema.estado == 'no leída').select()
 
 if not auth:
     redirect(URL('default', 'user/login'))

@@ -38,8 +38,8 @@ def contrato_cliente_detalles():
 )
 def contrato_cliente_administrar():
     rows = db(
-        (db.contrato_cliente.id > 0)  &
-        (db.contrato_cliente.anho == get_current_year)
+        (db.contrato_cliente.id > 0) &
+        (db.contrato_cliente.estado_contrato != 'ar')
         ).select(
             orderby=db.contrato_cliente.id
         )
@@ -97,7 +97,15 @@ def postprocess_contrato_cliente(form):
 )
 def contrato_cliente_crear():
     form = SQLFORM(db.contrato_cliente)
+    # Obtain the IDs of users with the 'Servicios' role
+    query = (db.auth_membership.group_id == db(db.auth_group.role == 'Servicios').select(db.auth_group.id).first().id)
+    rows = db(query).select(db.auth_membership.user_id)
+
+    # Extract user IDs into a list
+    user_ids = [row.user_id for row in rows]
+
     if form.process(onvalidation=preprocess_contrato_cliente).accepted:
+        db.notificacion_sistema.validate_and_insert(titulo="Nueva Notificación", mensaje="Contrato agregado al sistema", usuarios=user_ids)
         session.status = True
         session.msg = 'Contrato creado correctamente'
         # redirect(URL('contacto','crear', args=form.vars.id))
@@ -105,7 +113,8 @@ def contrato_cliente_crear():
     elif form.errors:
         session.error = True
         session.msg = 'El formulario tiene errores'
-    return dict(form=form)
+    # return dict(form=form)
+    return locals()
 
 @auth.requires(
     auth.has_membership(role='Administrador') or 
@@ -197,9 +206,8 @@ def contrato_proveedor_detalles():
     auth.has_membership(role='Jurídico'))
 def contrato_proveedor_administrar():
     rows = db(
-        (db.contrato_proveedor.id > 0) 
-        # (db.contrato_proveedor.id > 0)  &
-        # (db.contrato_proveedor.anho == get_current_year)
+        (db.contrato_proveedor.id > 0) &
+        (db.contrato_proveedor.estado_contrato != 'ar')
         ).select(
             orderby=db.contrato_proveedor.id
         )
