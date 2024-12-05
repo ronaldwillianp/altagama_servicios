@@ -1,4 +1,7 @@
-{{extend 'layout_frontend.html'}} {{block head}}
+{{extend 'layout_frontend.html'}}
+{{include 'components/switchery.html'}}
+
+{{block head}}
 <style>
   .no_display {
     display: none !important;
@@ -39,14 +42,28 @@
             </div>
 
             <div class="col-sm-6">
+              {{=form.custom.label.numero}}
+              <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.numero}}</div>
+            </div>
+
+            <div class="col-sm-6">
+              {{=form.custom.label.correo}}
+              <div class="mb-2">{{=form.custom.widget.correo}}</div>
+            </div>
+
+            <div class="col-sm-6">
               {{=form.custom.label.tipo}} <span class="error">*</span>
               <div class="mb-2">{{=form.custom.widget.tipo}}</div>
             </div>
 
             <div class="col-sm-6">
-              {{=form.custom.label.numero}}
-              <span class="error">*</span>
-              <div class="mb-2">{{=form.custom.widget.numero}}</div>
+              <div  style="margin-top: 28px;">
+                <input type="checkbox" id="contacto_verificacion_mantenimiento" name="verificacion_mantenimiento" class="switch-btn" data-size="" data-color="#0099ff" data-secondary-color="red">
+                <span id="span_mantenimiento" class="ml-2" style="cursor: pointer;"
+                onclick="document.getElementById('contacto_verificacion_mantenimiento').click()"
+                >Notificar mantenimientos</span>
+              </div>
             </div>
 
 
@@ -69,6 +86,12 @@
 
 <script>
   $("select").select2();
+
+	var elems = Array.prototype.slice.call(document.querySelectorAll('.switch-btn'));
+	$('.switch-btn').each(function() {
+		new Switchery($(this)[0], $(this).data());
+	});
 </script>
 
 {{end page_js}}
+

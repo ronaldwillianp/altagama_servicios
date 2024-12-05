@@ -242,6 +242,7 @@ db.define_table('contacto',
 db.contacto.nombre.requires = IS_NOT_EMPTY()
 db.contacto.tipo.requires = IS_IN_SET(TIPO_CONTACTO, zero=None)
 db.contacto.numero.requires = [IS_LENGTH(8, minsize=8), IS_MATCH('^\d+$', error_message='Número telefónico no válido')]
+db.contacto.correo.requires = IS_EMPTY_OR(IS_EMAIL())
 
 db.define_table('contacto_contrato_cliente',
                 Field('contacto', 'reference contacto'),

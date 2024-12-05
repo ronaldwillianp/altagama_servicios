@@ -27,6 +27,18 @@ def contacto_cliente_administrar():
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Jurídico')
 )
+def preprocess_contacto(form):
+    correo = form.vars.correo
+    verificacion = form.vars.verificacion_mantenimiento
+    if (correo == '') or (correo is None):
+        if verificacion == 'on':
+            form.errors.correo = 'No puede activar las notificaciones sin definir un correo'
+    
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Jurídico')
+)
 def contacto_cliente_crear():
     if not request.args(0):
         redirect(URL('contrato','contacto_cliente_administrar'))
@@ -35,7 +47,7 @@ def contacto_cliente_crear():
 
     form = SQLFORM(db.contacto)
 
-    if form.process().accepted:
+    if form.process(onvalidation=preprocess_contacto).accepted:
         id_contacto = form.vars.id
         db.contacto_contrato_cliente.validate_and_insert(
             contacto = id_contacto,
