@@ -41,7 +41,7 @@ if db(db.auth_user).count()==0:
     db.mantenimiento_contrato.truncate()
     db.firma_autorizada.truncate()
     db.contacto.truncate()
-    db.contrato.truncate()
+    # db.contrato.truncate()
 
 # Contratacion Real 2024
     db.contrato_cliente.truncate()
