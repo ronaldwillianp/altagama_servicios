@@ -36,7 +36,7 @@ if db(db.auth_user).count()==0:
     db.auth_membership.validate_and_insert(user_id = 8, group_id = 5)
     db.auth_membership.validate_and_insert(user_id = 9, group_id = 5)
 
-    db.notificacion.truncate()
+    # db.notificacion.truncate()
     db.mantenimiento.truncate()
     db.mantenimiento_contrato.truncate()
     db.firma_autorizada.truncate()
