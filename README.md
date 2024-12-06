@@ -39,11 +39,3 @@
 >>> Intercambiar en los contratos el numero y la empresa (swap) para la vista movil
 >>> Sacar el icono de detalles fuera de los 3 puntos en los contratos
 >>> Las notificaciones por correo serian para contratos vencidos y mantenimientos
-
-
-# Hoy
->>> models/db.py
->>> README.md
->>> components/switchery.js
->>> views/contacto/contacto_cliente_crear
->>> controllers/contacto.py
