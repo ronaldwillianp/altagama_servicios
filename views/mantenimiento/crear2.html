@@ -1,0 +1,72 @@
+{{extend 'layout_frontend.html'}} {{block head}}
+<style>
+  .no_display {
+    display: none !important;
+  }
+
+  .select2-container {
+    width: 100% !important;
+  }
+</style>
+{{end head}}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="mb-3">
+      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('mantenimiento',
+      'contrato_servicio_mantenimiento'), _class='btn btn-success')}}
+    </div>
+
+    <div id="container">
+      <div class="pd-20 card-box mb-30">
+        <div class="clearfix">
+          <h4 class="text-blue h4">Agregar Mantenimiento</h4>
+        </div>
+
+        <div class="mt-4">
+          {{=form.custom.begin}}
+
+          <div class="row">
+
+            <div class="col-sm-6">
+                {{=form.custom.label.mantenimiento_contrato}} <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.mantenimiento_contrato}}</div>
+              </div>
+
+              <div class="col-sm-3">
+                {{=form.custom.label.cantidad_pc}} <span class="error">*</span>
+                <div class="mb-2"><input class="string form-control" id="mantenimiento_cantidad_pc" min="0" value="0" name="cantidad_pc" type="number"></div>
+              </div>
+
+              <div class="col-sm-3">
+                {{=form.custom.label.fecha}} <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.fecha}}</div>
+              </div>
+
+            <div class="col-sm-12">
+              {{=form.custom.label.observaciones}} <span class="error">*</span>
+              <div class="mb-2">{{=form.custom.widget.observaciones}}</div>
+            </div>
+
+
+            <div class="col-md-12">
+              <hr />
+            </div>
+
+          </div>
+
+          <br />
+          {{=form.custom.submit}} {{=form.custom.end}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{block page_js}}
+
+<script>
+  $("select").select2();
+</script>
+
+{{end page_js}}

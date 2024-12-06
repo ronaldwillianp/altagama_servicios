@@ -15,15 +15,6 @@
     <span><i class="fa fa-plus"></i></span> Nuevo contrato</a>
 </div>
 
-<style>
-  .dataTable td:first-child {
-    max-width: 200px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-</style>
-
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
   <div class="pd-20">
@@ -46,8 +37,7 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus" data-toggle="tooltip" title="{{=row.empresa}}" data-placement="top">{{=row.empresa}}
-          </td>
+          <td class="table-plus" data-toggle="tooltip" title="{{=row.empresa}}" data-placement="top">{{=row.empresa}}</td>
           <td>{{=row.numero}}/{{=row.anho}}</td>
           <td>{{=TIPO_CONTRATO[row.tipo_contrato]}}</td>
           <td>{{=ESTADO_CONTRATO[row.estado_contrato]}}</td>
@@ -95,10 +85,6 @@
 {{block page_js}}
 {{include 'components/datatables.html'}}
 <script>
-  $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-  })
-
   function eliminar(id, numero) {
     swal(
       {

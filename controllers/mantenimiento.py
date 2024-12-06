@@ -200,3 +200,19 @@ def editar_planificacion():
 def cronograma():
     mantenimientos = db(db.mantenimiento.id>0).select()
     return dict(mantenimientos = mantenimientos)
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Servicios')
+)
+def crear2():
+    form = SQLFORM(db.mantenimiento)
+    if form.process().accepted:
+        session.status = True
+        session.msg = 'Mantenimiento agregado correctamente'
+        redirect(URL('mantenimiento','cronograma'))
+    elif form.errors:
+        session.error = True
+        session.msg = 'El formulario tiene errores'
+    return dict(form=form)

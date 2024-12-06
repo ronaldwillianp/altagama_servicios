@@ -279,7 +279,7 @@ db.firma_autorizada_contrato_proveedor.contrato.requires = IS_IN_DB(db, 'contrat
 
 db.define_table('mantenimiento_contrato',
                 Field('planificacion'), # Set
-                Field('contrato', 'reference contrato_cliente'),
+                Field('contrato', 'reference contrato_cliente')
 )
 db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
 
@@ -291,6 +291,7 @@ db.define_table('mantenimiento',
                 Field('fecha_siguiente_mantenimiento', 'date', default=datetime.date.today()),
                 auth.signature
 )
+db.mantenimiento.mantenimiento_contrato.requires = IS_IN_DB(db, 'mantenimiento_contrato.id', lambda row: row.contrato.numero + '/' + row.contrato.anho + ' ' + row.contrato.empresa, zero=None)
 
 db.define_table('notificacion_sistema',
     Field('titulo'),

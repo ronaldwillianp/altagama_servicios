@@ -18,6 +18,14 @@
                 // dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
                 // dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
                 allDayText: 'Todo el Día',
+                customButtons: {
+                    add_event: {
+                        text: 'Agregar Evento',
+                        click: function () {
+                            location.href = "{{=URL('mantenimiento','crear2')}}"; 
+                        }
+                    }
+                },
                 buttonText: {
                     today: 'Hoy',
                     day: 'Día',
@@ -32,12 +40,12 @@
                 headerToolbar: {
                     left: 'prev,next',
                     center: 'title',
-                    right: 'today,dayGridMonth,timeGridWeek,timeGridDay,listWeek,' // user can switch between the two
+                    right: 'add_event,today,dayGridMonth,timeGridWeek,timeGridDay,listWeek,' // user can switch between the two
                 }
             });
             // {{for item in mantenimientos:}}
             calendar.addEvent({
-                title: '{{=item.observaciones}}',
+                title: '{{if item.observaciones:}}{{=item.observaciones}}{{else:}}Sin Descripción{{pass}}',
                 // description: 'Descripcion del evento',
                 start: '{{=item.fecha}}',
             })

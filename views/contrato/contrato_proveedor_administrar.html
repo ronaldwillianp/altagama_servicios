@@ -31,8 +31,8 @@
     <table class="data-table table stripe hover nowrap">
       <thead>
         <tr>
-          <th class="table-plus">No. Contrato</th>
-          <th>Empresa</th>
+          <th class="table-plus">Empresa</th>
+          <th>No. Contrato</th>
           <th>Año</th>
           <th>Tipo Contrato</th>
           <th>Estado</th>
@@ -44,15 +44,20 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.numero or 'Sin número'}}</td>
-          <td>{{=row.empresa}}</td>
+          <td class="table-plus" data-toggle="tooltip" title="{{=row.empresa}}" data-placement="top">{{=row.empresa}}</td>
+          <td>{{=row.numero or 'Sin número'}}</td>
           <td>{{=row.anho}}</td>
           <td>{{=TIPO_CONTRATO[row.tipo_contrato]}}</td>
           <td>{{=ESTADO_CONTRATO[row.estado_contrato]}}</td>
           <td>{{if row.fecha_confeccion:}}{{=row.fecha_confeccion.strftime('%d/%m/%Y')}}{{else:}}Sin fecha{{pass}}</td>
           <td>{{if row.fecha_vencimiento:}}{{=row.fecha_vencimiento.strftime('%d/%m/%Y')}}{{else:}}Sin fecha{{pass}}</td>
           <td>
-            <div class="dropdown">
+            <div class="btn-group" style="align-items: baseline;">
+              <a class="btn btn-primary btn-sm m-2 rounded" href="{{=URL('contrato', 'contrato_proveedor_detalles', args=row.id)}}">
+                <i class="fa fa-info"></i>
+             </a>
+  
+            <div class="dropdown" style="z-index: 999;">
               <a
                 class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
                 href="#"
@@ -64,12 +69,6 @@
               <div
                 class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
               >
-                <a
-                  class="dropdown-item"
-                  href="{{=URL('contrato', 'contrato_proveedor_detalles', args=row.id)}}"
-                  ><i class="dw dw-eye"></i> Detalles</a
-                >
-
                 <a
                   class="dropdown-item"
                   href="{{=URL('contacto', 'contacto_proveedor_administrar', args=row.id)}}"
@@ -96,6 +95,7 @@
                 >
               </div>
             </div>
+          </div>
           </td>
         </tr>
         {{pass}}
