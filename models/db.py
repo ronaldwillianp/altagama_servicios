@@ -186,7 +186,7 @@ db.define_table('contrato_cliente',
                 Field('tipo_contrato', label=T('Tipo de Contrato')),  # Set
                 Field('estado_contrato', label=T('Estado del Contrato')),  # Set
                 Field('fecha_confeccion', 'date', default=lambda: (datetime.date.today()), label=T('Fecha de Confección')),
-                Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today() + +datetime.timedelta(days=365)), label=T('Fecha de Vencimiento')),
+                Field('fecha_vencimiento', 'date', default=lambda: (datetime.date.today()), label=T('Fecha de Vencimiento')),
                 Field('contrato_file', 'upload', autodelete=True),
                 Field('observaciones', 'text'),
                 auth.signature,
@@ -285,6 +285,7 @@ db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTE
 
 db.define_table('mantenimiento',
                 Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),
+                Field('estado'), # Set
                 Field('cantidad_pc', 'integer'),
                 Field('observaciones', 'text'),
                 Field('fecha', 'date', default=datetime.date.today()),
@@ -292,6 +293,7 @@ db.define_table('mantenimiento',
                 auth.signature
 )
 db.mantenimiento.mantenimiento_contrato.requires = IS_IN_DB(db, 'mantenimiento_contrato.id', lambda row: row.contrato.numero + '/' + row.contrato.anho + ' ' + row.contrato.empresa, zero=None)
+db.mantenimiento.estado.requires = IS_IN_SET(ESTADO_MANTENIMIENTO, zero=None)
 
 db.define_table('notificacion_sistema',
     Field('titulo'),

@@ -22,7 +22,7 @@
                     add_event: {
                         text: 'Agregar Evento',
                         click: function () {
-                            location.href = "{{=URL('mantenimiento','crear2')}}"; 
+                            location.href = "{{=URL('mantenimiento','crear2')}}";
                         }
                     }
                 },
@@ -31,8 +31,8 @@
                     day: 'Día',
                     week: 'Semana',
                     month: 'Mes',
-                    prev: 'Anterior',
-                    next: 'Siguiente',
+                    // prev: 'Anterior',
+                    // next: 'Siguiente',
                     prevYear: 'Año Anterior',
                     nextYear: 'Año Siguiente',
                 },
@@ -40,7 +40,7 @@
                 headerToolbar: {
                     left: 'prev,next',
                     center: 'title',
-                    right: 'add_event,today,dayGridMonth,timeGridWeek,timeGridDay,listWeek,' // user can switch between the two
+                    right: 'add_event,today,dayGridMonth,timeGridDay,listWeek,' // user can switch between the two
                 }
             });
             // {{for item in mantenimientos:}}
@@ -48,6 +48,7 @@
                 title: '{{if item.observaciones:}}{{=item.observaciones}}{{else:}}Sin Descripción{{pass}}',
                 // description: 'Descripcion del evento',
                 start: '{{=item.fecha}}',
+                color: 'red',
             })
             // {{pass}}
             calendar.render();

@@ -28,14 +28,19 @@
 
           <div class="row">
 
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 {{=form.custom.label.cantidad_pc}} <span class="error">*</span>
                 <div class="mb-2"><input class="string form-control" id="mantenimiento_cantidad_pc" min="0" value="{{=registro.cantidad_pc}}" name="cantidad_pc" type="number"></div>
               </div>
 
-              <div class="col-sm-6">
+              <div class="col-sm-4">
                 {{=form.custom.label.fecha}} <span class="error">*</span>
                 <div class="mb-2">{{=form.custom.widget.fecha}}</div>
+              </div>
+
+              <div class="col-sm-4">
+                {{=form.custom.label.estado}} <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.estado}}</div>
               </div>
 
             <div class="col-sm-12">

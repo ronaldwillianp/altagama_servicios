@@ -1,8 +1,10 @@
-{{extend 'layout_frontend.html'}} {{block head}}
+{{extend 'layout_frontend.html'}}{{block head}}
+
 <link rel="stylesheet" type="text/css"
   href="{{=URL('static/frontend', 'src/plugins/datatables/css/dataTables.bootstrap4.min.css')}}" />
 <link rel="stylesheet" type="text/css"
   href="{{=URL('static/frontend', 'src/plugins/datatables/css/responsive.bootstrap4.min.css')}}" />
+
 {{end head}}
 
 <div class="pb-20">
@@ -21,8 +23,8 @@
     <table class="data-table table stripe hover nowrap">
       <thead>
         <tr>
-          <th class="table-plus">No. Contrato</th>
-          <th>Empresa</th>
+          <th class="table-plus">Empresa</th>
+          <th>No. Contrato</th>
           <th>Mantenimiento</th>
           <th class="datatable-nosort">Administrar</th>
         </tr>
@@ -30,8 +32,8 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.contrato_cliente.numero}}</td>
-          <td>{{=row.contrato_cliente.empresa}}</td>
+          <td class="table-plus" data-toggle="tooltip" title="{{=row.contrato_cliente.empresa}}" data-placement="top">{{=row.contrato_cliente.empresa}}</td>
+          <td>{{=row.contrato_cliente.numero}}</td>
           <td>{{if row.mantenimiento_contrato.id:}}Si{{else:}}No{{pass}}</td>
           <td>
             <div class="dropdown">
@@ -79,22 +81,8 @@
 <!-- Simple Datatable End -->
 
 {{block page_js}}
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/jquery.dataTables.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/dataTables.responsive.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/responsive.bootstrap4.min.js')}}"></script>
-<!-- buttons for Export datatable -->
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/dataTables.buttons.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.print.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.html5.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/buttons.flash.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/pdfmake.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/datatables/js/vfs_fonts.js')}}"></script>
+{{include 'components/datatables.html'}}
 
-<!-- DateTime -->
-<script src="{{=URL('static','vendor/moment/moment.js')}}"></script>
-<script src="{{=URL('static','vendor/moment/moment.dataTables.js')}}"></script>
 
 <script>
   function eliminar(id, numero) {
@@ -121,53 +109,6 @@
       }
     );
   }
-</script>
-
-<script>
-  $("document").ready(function () {
-    $.fn.dataTable.moment("DD/MM/YYYY");
-
-    $(".data-table").DataTable({
-      scrollCollapse: true,
-      autoWidth: false,
-      responsive: true,
-      columnDefs: [
-        {
-          targets: "datatable-nosort",
-          orderable: false,
-        },
-      ],
-      lengthMenu: [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"],
-      ],
-      language: {
-        decimal: "",
-        emptyTable: "{{=T('No hay información')}}",
-        info: "{{=T('Mostrando _START_ a _END_ de _TOTAL_ Entradas')}}",
-        infoEmpty: "{{=T('Mostrando 0 to 0 of 0 Entradas')}}",
-        infoFiltered: "{{=T('(Filtrado de _MAX_ total entradas)')}}",
-        infoPostFix: "",
-        thousands: ",",
-        lengthMenu: "{{=T('Mostrar _MENU_ Entradas')}}",
-        loadingRecords: "{{=T('Cargando...')}}",
-        processing: "{{=T('Procesando...')}}",
-        search: "{{=T('Buscar:')}}",
-        zeroRecords: "{{=T('Sin resultados encontrados')}}",
-        paginate: {
-          first: "{{=T('Primero')}}",
-          last: "{{=T('Último')}}",
-          next: "{{=T('Siguiente')}}",
-          previous: "{{=T('Anterior')}}",
-        },
-        buttons: {
-          copy: "Copiar",
-          print: "Imprimir",
-          colvis: "Columnas visibles",
-        },
-      },
-    });
-  });
 </script>
 
 {{end page_js}}

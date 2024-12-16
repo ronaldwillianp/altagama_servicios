@@ -34,6 +34,7 @@
         <tr>
           <th class="table-plus">Cantidad de PCs</th>
           <th>Fecha</th>
+          <th>Estado</th>
           <th class="datatable-nosort">Administrar</th>
         </tr>
       </thead>
@@ -42,6 +43,7 @@
         <tr>
           <td class="table-plus">{{=row.cantidad_pc}}</td>
           <td>{{=row.fecha}}</td>
+          <td>{{=ESTADO_MANTENIMIENTO[row.estado]}}</td>
           <td>
             <div class="dropdown">
               <a

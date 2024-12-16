@@ -76,3 +76,4 @@ if db(db.auth_user).count()==0:
 
     db.contrato_proveedor.truncate()
     db.contrato_proveedor.validate_and_insert(numero=1, anho=2024, empresa='Logística Hidráulica Ciego de Ávila', tipo_contrato='vt', estado_contrato='ej', fecha_vencimiento=(datetime.date.today()+datetime.timedelta(days=365*5)))
+

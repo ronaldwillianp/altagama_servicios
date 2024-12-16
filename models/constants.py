@@ -36,5 +36,12 @@ PLANIFICACION_MANTENIMIENTO = {
         'an': 'Anual',
 }
 
+ESTADO_MANTENIMIENTO = {
+        'pl': 'Planificado',
+        # 'ps': 'Pospuesto',          
+        'ca': 'Cancelado',
+        'ej': 'Ejecutado',
+}
+
 def get_current_year():
     return datetime.datetime.now().year

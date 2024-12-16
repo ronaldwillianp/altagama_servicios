@@ -87,6 +87,7 @@ def administrar():
         db.mantenimiento.id,
         db.mantenimiento.fecha,
         db.mantenimiento.cantidad_pc,
+        db.mantenimiento.estado,
         orderby=db.mantenimiento.fecha|~db.mantenimiento.id
     )
     contrato = db(db.contrato_cliente.id == registro.contrato).select(
@@ -134,6 +135,11 @@ def editar():
     registro = db.mantenimiento(request.args(0, cast=int)) or redirect(URL('mantenimiento','administrar', args=request.args(1)))
     
     db.mantenimiento.mantenimiento_contrato.writable = False
+
+    if (registro.estado == 'ca') or (registro.estado == 'ej'):
+        session.error = True
+        session.msg = 'No se puede editar un mantenimiento ' + str(ESTADO_MANTENIMIENTO[registro.estado]).lower() + '.'
+        redirect(URL('mantenimiento', 'administrar', args=request.args(1)))
     
     form = SQLFORM(db.mantenimiento, registro)
     if form.process().accepted:
@@ -163,7 +169,7 @@ def eliminar():
     registro = db.mantenimiento(request.args(0, cast=int)
                            ) or redirect(URL('mantenimiento','administrar', args=mantenimiento_contrato))
     x = registro.id
-
+    
     db(db.mantenimiento.id == x).delete()
     session.status = True
     session.msg = 'Mantenimiento eliminado correctamente'
@@ -216,3 +222,14 @@ def crear2():
         session.error = True
         session.msg = 'El formulario tiene errores'
     return dict(form=form)
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Servicios')
+)
+def get_mantenimiento_semanal():
+    mantenimientos = db(
+        (datetime.date.today() + datetime.timedelta(days=7)) > db.mantenimiento.fecha
+        ).select() 
+    return dict(mantenimientos=mantenimientos)
