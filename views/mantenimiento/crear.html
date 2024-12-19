@@ -28,11 +28,6 @@
 
           <div class="row">
 
-            <div class="form-group">
-              <label>Default Datedpicker</label>
-              <input id="fecha" class="form-control" value="{{=datetime.date.today().strftime('%d/%m/%Y')}}" type="text" readonly />
-            </div>
-
             <div class="col-sm-4">
               {{=form.custom.label.cantidad_pc}} <span class="error">*</span>
               <div class="mb-2"><input class="string form-control" id="mantenimiento_cantidad_pc" min="0" value="0"
@@ -50,7 +45,7 @@
             </div>
 
             <div class="col-sm-12">
-              {{=form.custom.label.observaciones}} <span class="error">*</span>
+              {{=form.custom.label.observaciones}}
               <div class="mb-2">{{=form.custom.widget.observaciones}}</div>
             </div>
 
@@ -69,26 +64,8 @@
   </div>
 </div>
 
-<link rel="stylesheet" type="text/css" href="{{=URL('static','frontend/air-datepicker/air-datepicker.css')}}">
-<script src="{{=URL('static','frontend/air-datepicker/air-datepicker.js')}}"></script>
-<script>
-  // $("select").select2();
+{{block page_js}}
+{{include 'components/select2.html'}}
+{{include 'components/datepicker.html'}}
+{{end page_js}}
 
-
-  let fecha = new AirDatepicker('#fecha', {
-    locale: {
-      days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-      daysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
-      daysMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
-      months: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-      monthsShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-      today: 'Hoy',
-      clear: 'Limpiar',
-      dateFormat: 'dd/MM/yyyy',
-      timeFormat: 'hh:mm aa',
-      firstDay: 1
-    }
-  });
-
-
-</script>

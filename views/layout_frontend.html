@@ -247,11 +247,26 @@
                     </li>
                     {{pass}}
                     {{if (auth.has_membership(role='Administrador') or auth.has_membership(role='Administrativo') or auth.has_membership(role='Servicios')):}}
-                    <li></li>
-                    <a href="{{=URL('mantenimiento','contrato_servicio_mantenimiento')}}"
-                        class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-cone"></span><span class="mtext">Mantenimientos</span>
-                    </a>
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="micon dw dw-cone"></span><span class="mtext"> Mantenimientos </span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="{{=URL('mantenimiento','contrato_servicio_mantenimiento')}}">Planificación</a></li>
+                            <li><a href="{{=URL('mantenimiento','cronograma')}}">Cronograma</a></li>
+                        </ul>
+                    </li>
+                    {{pass}}
+                    {{if (auth.has_membership(role='Administrador')):}}
+                    <li class="dropdown">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <span class="micon dw dw-clipboard1"></span><span class="mtext"> Reportes </span>
+                        </a>
+                        <ul class="submenu">
+                            <li><a href="#">Contratos</a></li>
+                            <li><a href="#">Mantenimientos</a></li>
+                            <li><a href="#">Usuarios</a></li>
+                        </ul>
                     </li>
                     {{pass}}
                     {{if (auth.has_membership(role='Administrador')):}}

@@ -29,7 +29,7 @@
 >>> Mostrar solo los contratos(clientes/proveedores) que no esten archivados                OK
 >>> Poner filtro (años)                                                                     Innecesario
 >>> Saber cuando toca mantenimiento
->>> Cronograma de mantenimientos
+>>> Cronograma de mantenimientos                                                            OK
 >>> Una semana antes notificar mantenimiento
 >>> Cambio de estados y aplazamientos para los mantenimientos
 >>> Planificado/Confirmado/Aplazado/Cancelado/Ejecutado
@@ -39,3 +39,8 @@
 >>> Intercambiar en los contratos el numero y la empresa (swap) para la vista movil
 >>> Sacar el icono de detalles fuera de los 3 puntos en los contratos
 >>> Las notificaciones por correo serian para contratos vencidos y mantenimientos
+
+## Pendiente
+>>> Trabajando en los agregar mantenimiento y sus validaciones
+>>> Migrar a el agregar mantenimiento generico los cambios con el date
+>>> Revisar el tema de los mantenimientos una semana antes

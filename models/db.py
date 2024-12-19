@@ -295,6 +295,10 @@ db.define_table('mantenimiento',
 db.mantenimiento.mantenimiento_contrato.requires = IS_IN_DB(db, 'mantenimiento_contrato.id', lambda row: row.contrato.numero + '/' + row.contrato.anho + ' ' + row.contrato.empresa, zero=None)
 db.mantenimiento.estado.requires = IS_IN_SET(ESTADO_MANTENIMIENTO, zero=None)
 
+# Corrigiendo widgets
+db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha', _readonly='true')
+
+
 db.define_table('notificacion_sistema',
     Field('titulo'),
     Field('mensaje'),

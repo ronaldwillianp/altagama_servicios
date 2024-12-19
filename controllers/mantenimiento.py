@@ -103,6 +103,25 @@ def administrar():
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Servicios')
 )
+def preprocess_mantenimiento(form):
+    # Selecciona el ultimo mantenimiento
+    ultimo_mantenimiento = db(
+        (db.mantenimiento.id>0) &
+        (db.mantenimiento.mantenimiento_contrato == form.vars.mantenimiento_contrato)
+        ).select(
+            orderby=~db.mantenimiento.fecha
+        ).first()
+    # Chequea que la fecha seleccionada sea mayor a la del ultimo mantenimiento
+    if ultimo_mantenimiento:
+        if ultimo_mantenimiento.fecha >= form.vars.fecha:
+            form.errors.fecha = 'La fecha debe ser mayor a ' + str(ultimo_mantenimiento.fecha.strftime('%d/%m/%Y'))
+
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Servicios')
+)
 def crear():
     registro = db.mantenimiento_contrato(request.args(0, cast=int)) or redirect(URL('mantenimiento','contrato_servicio_mantenimiento'))
     
@@ -110,7 +129,7 @@ def crear():
     form = SQLFORM(db.mantenimiento)
     form.vars.mantenimiento_contrato = registro.id
     
-    if form.process().accepted:
+    if form.process(onvalidation=preprocess_mantenimiento).accepted:
         session.status = True
         session.msg = 'Mantenimiento agregado correctamente'
         redirect(URL('mantenimiento','administrar', args = registro.id))
@@ -230,6 +249,23 @@ def crear2():
 )
 def get_mantenimiento_semanal():
     mantenimientos = db(
-        (datetime.date.today() + datetime.timedelta(days=7)) > db.mantenimiento.fecha
-        ).select() 
+        (db.mantenimiento.fecha < (datetime.datetime.now() + datetime.timedelta(days=7))) &
+        (db.mantenimiento.fecha >= datetime.datetime.now())
+        ).select()
     return dict(mantenimientos=mantenimientos)
+
+@auth.requires(
+    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrativo') or
+    auth.has_membership(role='Servicios')
+)
+def get_mantenimiento_mismo_dia():
+    mantenimientos = db(
+        (db.mantenimiento.fecha >= datetime.datetime.now())
+        ).select(
+            db.mantenimiento.fecha,
+            db.mantenimiento.id.count().as_('cantidad'),
+
+        )
+    return dict(mantenimientos=mantenimientos)
+
