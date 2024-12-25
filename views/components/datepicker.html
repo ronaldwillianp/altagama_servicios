@@ -8,7 +8,15 @@
 </div> -->
 
 <script>
-    let fecha = new AirDatepicker('.date', {
+    let date_inputs = document.getElementsByClassName('date');
+
+    for (let index = 0; index < date_inputs.length; index++) {
+        const element = date_inputs[index];
+        let element_dynamic_id = '#' + element.id
+        
+        new AirDatepicker(element_dynamic_id, {
+        autoClose: true,
+        keyboardNav: true,
         locale: {
             days: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
             daysShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
@@ -22,4 +30,9 @@
             firstDay: 1
         }
     });
+        
+    }
+        
+
+    
 </script>
