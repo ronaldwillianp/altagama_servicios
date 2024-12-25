@@ -205,6 +205,8 @@ db.contrato_cliente.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'
 
 # Corrigiendo widgets
 db.contrato_cliente.numero.widget = lambda field, value: SQLFORM.widgets.integer.widget(field, value, _class='form-control', _type='number',_min=1, _max=120, _step=1, _placeholder='No. Contrato')
+db.contrato_cliente.fecha_confeccion.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha_confeccion', _readonly='true')
+db.contrato_cliente.fecha_vencimiento.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha_vencimiento', _readonly='true')
 
 db.define_table('contrato_proveedor',
                 Field('numero', label=T('Número')),
@@ -229,6 +231,10 @@ db.contrato_proveedor.estado_contrato.requires = IS_IN_SET(ESTADO_CONTRATO, zero
 db.contrato_proveedor.fecha_confeccion.requires = IS_EMPTY_OR(IS_DATE())
 db.contrato_proveedor.fecha_vencimiento.requires = IS_EMPTY_OR(IS_DATE())
 db.contrato_proveedor.contrato_file.requires = IS_EMPTY_OR(IS_FILE(extension='pdf'))
+
+db.contrato_proveedor.fecha_confeccion.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha_confeccion', _readonly='true')
+db.contrato_proveedor.fecha_vencimiento.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha_vencimiento', _readonly='true')
+
 
 db.define_table('contacto',
                 Field('nombre', label=T('Nombre Completo')),
