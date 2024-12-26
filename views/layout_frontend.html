@@ -235,6 +235,11 @@
                             <span class="micon dw dw-home"></span><span class="mtext">Inicio</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{=URL('default','index2')}}" class="dropdown-toggle no-arrow">
+                            <span class="micon dw dw-home"></span><span class="mtext">Inicio 2</span>
+                        </a>
+                    </li>
                     {{if (auth.has_membership(role='Administrador') or auth.has_membership(role='Administrativo') or auth.has_membership(role='Jurídico')):}}
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
@@ -290,12 +295,7 @@
             <div class="min-height-200px">
                 {{include}}
             </div>
-
-            <div class="footer-wrap pd-20 mb-20 card-box">
-                SI.GE.S. - Desarrollado en la <a href="#" target="_blank">Alta Gama S.R.L.</a> -
-                Ciego
-                de Ávila
-            </div>
+            {{include 'components/footer.html'}}
         </div>
     </div>
     <!-- js -->
