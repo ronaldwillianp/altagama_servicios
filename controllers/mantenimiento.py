@@ -263,9 +263,13 @@ def get_mantenimiento_mismo_dia():
     mantenimientos = db(
         (db.mantenimiento.fecha >= datetime.datetime.now())
         ).select(
-            db.mantenimiento.fecha,
-            db.mantenimiento.id.count().as_('cantidad'),
-
         )
-    return dict(mantenimientos=mantenimientos)
+    mxd = {}
+    for item in mantenimientos:
+        if item.fecha in mxd.keys():
+            # mxd[item.fecha] = mxd[item.fecha] + 1
+            mxd[item.fecha] = [ mxd[item.fecha][0] + 1, mxd[item.fecha] + [item.id]]
+        else:
+            mxd[item.fecha] = [1, item.id]
+    return dict(mantenimientos=mantenimientos, mxd=mxd)
 
