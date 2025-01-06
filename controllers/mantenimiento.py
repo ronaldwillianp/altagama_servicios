@@ -88,7 +88,7 @@ def administrar():
         db.mantenimiento.fecha,
         db.mantenimiento.cantidad_pc,
         db.mantenimiento.estado,
-        orderby=db.mantenimiento.fecha|~db.mantenimiento.id
+        orderby=~db.mantenimiento.id|db.mantenimiento.fecha
     )
     contrato = db(db.contrato_cliente.id == registro.contrato).select(
         db.contrato_cliente.id,
@@ -115,7 +115,51 @@ def preprocess_mantenimiento(form):
     if ultimo_mantenimiento:
         if ultimo_mantenimiento.fecha >= form.vars.fecha:
             form.errors.fecha = 'La fecha debe ser mayor a ' + str(ultimo_mantenimiento.fecha.strftime('%d/%m/%Y'))
+            # form.vars.observaciones._placeholder='sadfasdfa'
+        
 
+    # Trae el Contrato_Mantenimiento correspondiente al mantenimiento
+    contrato = form.vars.mantenimiento_contrato
+    planficacion = db(db.mantenimiento_contrato.contrato == contrato).select().first().planificacion
+    
+    if planficacion == 'me':
+        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=30)
+    elif planficacion == 'tr':
+        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=90)
+    elif planficacion == 'se':
+        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=180)
+    else:
+        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=365)
+    
+def mantenimientos_pendientes(contrato):
+    # Si existen mantenimientos pendientes
+    mantenimientos = db(db.mantenimiento.mantenimiento_contrato == contrato).select()
+    mantenimientos_pendientes = []
+    for item in mantenimientos:
+        if item.estado == 'pl':
+            mantenimientos_pendientes.append(item)
+    if mantenimientos_pendientes:
+        session.error = True
+        session.msg = 'Existe %s mantenimiento(s) con estado Planificado en esta empresa. No puede planificar otro hasta Ejecutar/Cancelar/Eliminar los pendientes.'  % len(mantenimientos_pendientes)
+        redirect(URL('mantenimiento','administrar', args = contrato.contrato))
+
+def planificar_fecha(contrato, form):
+    # Si existen al menos un mantenimiento de este contrato
+    if db(db.mantenimiento.mantenimiento_contrato == contrato.id).count() > 0:
+        
+        # Seleccionamos la fecha del ultimo mantenimiento
+        ultima_fecha = db(db.mantenimiento.mantenimiento_contrato == contrato.id).select().last().fecha_siguiente_mantenimiento
+        
+        # if contrato.planificacion == 'me':
+        #     form.vars.fecha = (ultima_fecha + datetime.timedelta(days=30)).strftime('%d/%m/%Y')
+        # elif contrato.planificacion == 'tr':
+        #     form.vars.fecha = (ultima_fecha + datetime.timedelta(days=90)).strftime('%d/%m/%Y')
+        # elif contrato.planificacion == 'se':
+        #     form.vars.fecha = (ultima_fecha + datetime.timedelta(days=180)).strftime('%d/%m/%Y')
+        # else:
+        #     form.vars.fecha = (ultima_fecha + datetime.timedelta(days=365)).strftime('%d/%m/%Y')
+
+        form.vars.fecha = ultima_fecha.strftime('%d/%m/%Y')
 
 @auth.requires(
     auth.has_membership(role='Administrador') or 
@@ -125,9 +169,13 @@ def preprocess_mantenimiento(form):
 def crear():
     registro = db.mantenimiento_contrato(request.args(0, cast=int)) or redirect(URL('mantenimiento','contrato_servicio_mantenimiento'))
     
+    mantenimientos_pendientes(registro)
+    
     db.mantenimiento.mantenimiento_contrato.writable = False
     form = SQLFORM(db.mantenimiento)
     form.vars.mantenimiento_contrato = registro.id
+
+    planificar_fecha(registro, form)
     
     if form.process(onvalidation=preprocess_mantenimiento).accepted:
         session.status = True
@@ -154,6 +202,7 @@ def editar():
     registro = db.mantenimiento(request.args(0, cast=int)) or redirect(URL('mantenimiento','administrar', args=request.args(1)))
     
     db.mantenimiento.mantenimiento_contrato.writable = False
+    db.mantenimiento.fecha_siguiente_mantenimiento.writable = False
 
     if (registro.estado == 'ca') or (registro.estado == 'ej'):
         session.error = True
@@ -161,6 +210,7 @@ def editar():
         redirect(URL('mantenimiento', 'administrar', args=request.args(1)))
     
     form = SQLFORM(db.mantenimiento, registro)
+
     if form.process().accepted:
         session.status = True
         session.msg = 'Mantenimiento actualizado correctamente'
@@ -222,8 +272,15 @@ def editar_planificacion():
 
     return dict(form=form)
 
+def get_cliente(mantenimiento):
+    contrato_mantenimiento = db.mantenimiento_contrato[mantenimiento.mantenimiento_contrato]
+    cliente = db.contrato_cliente[contrato_mantenimiento.contrato]['empresa']
+    return dict(cliente=cliente)
+
 def cronograma():
     mantenimientos = db(db.mantenimiento.id>0).select()
+    for item in mantenimientos:
+        item['cliente'] = get_cliente(item)['cliente']
     return dict(mantenimientos = mantenimientos)
 
 @auth.requires(
@@ -250,7 +307,8 @@ def crear2():
 def get_mantenimiento_semanal():
     mantenimientos = db(
         (db.mantenimiento.fecha < (datetime.datetime.now() + datetime.timedelta(days=7))) &
-        (db.mantenimiento.fecha >= datetime.datetime.now())
+        (db.mantenimiento.fecha >= datetime.datetime.now()) &
+        (db.mantenimiento.estado != 'ca')
         ).select()
     return dict(mantenimientos=mantenimientos)
 
@@ -267,9 +325,12 @@ def get_mantenimiento_mismo_dia():
     mxd = {}
     for item in mantenimientos:
         if item.fecha in mxd.keys():
-            # mxd[item.fecha] = mxd[item.fecha] + 1
-            mxd[item.fecha] = [ mxd[item.fecha][0] + 1, mxd[item.fecha] + [item.id]]
+            # pass
+            cantidad = mxd[item.fecha][0] + 1 
+            mttos = mxd[item.fecha][1]
+            mttos.append(item.id) 
+            mxd[item.fecha] = [cantidad, mttos]
         else:
-            mxd[item.fecha] = [1, item.id]
+            mxd[item.fecha] = [1, [item.id]]
     return dict(mantenimientos=mantenimientos, mxd=mxd)
 

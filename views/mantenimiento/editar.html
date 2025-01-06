@@ -63,10 +63,9 @@
   </div>
 </div>
 
-{{block page_js}}
 
-<script>
-  $("select").select2();
-</script>
+{{block page_js}}
+{{include 'components/datepicker.html'}}
+{{include 'components/select2.html'}}
 
 {{end page_js}}

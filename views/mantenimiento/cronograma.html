@@ -45,7 +45,7 @@
             });
             // {{for item in mantenimientos:}}
             calendar.addEvent({
-                title: '{{if item.observaciones:}}{{=item.observaciones}}{{else:}}Sin Descripción{{pass}}',
+                title: '{{=item.cliente}}',
                 // description: 'Descripcion del evento',
                 start: '{{=item.fecha}}',
                 color: 'red',
