@@ -277,7 +277,7 @@ def get_cliente(mantenimiento):
     cliente = db.contrato_cliente[contrato_mantenimiento.contrato]['empresa']
     return dict(cliente=cliente)
 
-def cronograma():
+def calendario():
     mantenimientos = db(db.mantenimiento.id>0).select()
     for item in mantenimientos:
         item['cliente'] = get_cliente(item)['cliente']
@@ -298,39 +298,4 @@ def crear2():
         session.error = True
         session.msg = 'El formulario tiene errores'
     return dict(form=form)
-
-@auth.requires(
-    auth.has_membership(role='Administrador') or 
-    auth.has_membership(role='Administrativo') or
-    auth.has_membership(role='Servicios')
-)
-def get_mantenimiento_semanal():
-    mantenimientos = db(
-        (db.mantenimiento.fecha < (datetime.datetime.now() + datetime.timedelta(days=7))) &
-        (db.mantenimiento.fecha >= datetime.datetime.now()) &
-        (db.mantenimiento.estado != 'ca')
-        ).select()
-    return dict(mantenimientos=mantenimientos)
-
-@auth.requires(
-    auth.has_membership(role='Administrador') or 
-    auth.has_membership(role='Administrativo') or
-    auth.has_membership(role='Servicios')
-)
-def get_mantenimiento_mismo_dia():
-    mantenimientos = db(
-        (db.mantenimiento.fecha >= datetime.datetime.now())
-        ).select(
-        )
-    mxd = {}
-    for item in mantenimientos:
-        if item.fecha in mxd.keys():
-            # pass
-            cantidad = mxd[item.fecha][0] + 1 
-            mttos = mxd[item.fecha][1]
-            mttos.append(item.id) 
-            mxd[item.fecha] = [cantidad, mttos]
-        else:
-            mxd[item.fecha] = [1, [item.id]]
-    return dict(mantenimientos=mantenimientos, mxd=mxd)
 

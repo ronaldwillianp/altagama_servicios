@@ -37,10 +37,14 @@ PLANIFICACION_MANTENIMIENTO = {
 }
 
 ESTADO_MANTENIMIENTO = {
-        'pl': 'Planificado',
-        # 'ps': 'Pospuesto',          
+        'pl': 'Planificado',          
         'ca': 'Cancelado',
         'ej': 'Ejecutado',
+}
+
+ESTADO_NOTIFICACION = {
+    'pe': 'Pendiente',
+    'vi': 'Visto'
 }
 
 def get_current_year():

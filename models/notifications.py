@@ -2,36 +2,45 @@ import datetime
 
 
 # Notificaciones
+NOTIFICACIONES = []
 
-NOTIFICACIONES=False
+try:
+    NOTIFICACIONES = db(
+        (db.notificacion_sistema.usuario == auth.user.id) &
+        (db.notificacion_sistema.estado == 'pe')
+        ).select()
+except:
+    pass
 
-REPORTES_PENDIENTES=[]
+# NOTIFICACIONES=False
 
-CURRENT_DATE=datetime.datetime.now()
+# REPORTES_PENDIENTES=[]
 
-REPORTES_VENCIDOS=[]
+# CURRENT_DATE=datetime.datetime.now()
 
-if REPORTES_PENDIENTES:
+# REPORTES_VENCIDOS=[]
+
+# if REPORTES_PENDIENTES:
     
-    for reporte in REPORTES_PENDIENTES:
+#     for reporte in REPORTES_PENDIENTES:
         
-        if int(reporte.created_on.date().strftime("%w"))>2:
-            fecha_expiracion=reporte.created_on+datetime.timedelta(days=5)
+#         if int(reporte.created_on.date().strftime("%w"))>2:
+#             fecha_expiracion=reporte.created_on+datetime.timedelta(days=5)
             
-            if fecha_expiracion.date()<CURRENT_DATE.date():
-                REPORTES_VENCIDOS.append(reporte)
-        else:
-            fecha_expiracion=reporte.created_on+datetime.timedelta(days=3)
+#             if fecha_expiracion.date()<CURRENT_DATE.date():
+#                 REPORTES_VENCIDOS.append(reporte)
+#         else:
+#             fecha_expiracion=reporte.created_on+datetime.timedelta(days=3)
             
-            if fecha_expiracion.date()<CURRENT_DATE.date():
+#             if fecha_expiracion.date()<CURRENT_DATE.date():
                 
-                REPORTES_VENCIDOS.append(reporte)
+#                 REPORTES_VENCIDOS.append(reporte)
             
 
-    NOTIFICACIONES=True
+#     NOTIFICACIONES=True
 
-def expired_since(datetime):
-    since=CURRENT_DATE-datetime
-    since=since.days
-    return since
+# def expired_since(datetime):
+#     since=CURRENT_DATE-datetime
+#     since=since.days
+#     return since
 

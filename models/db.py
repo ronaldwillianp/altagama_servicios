@@ -309,13 +309,14 @@ db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget
 db.define_table('notificacion_sistema',
     Field('titulo'),
     Field('mensaje'),
-    Field('observaciones', 'text'),
-    Field('usuarios', 'list:reference auth_user'),
-    Field('created_on', 'datetime', default=request.now),
-    Field('estado', default='No leída'),
+    Field('usuario', 'reference auth_user'),
+    Field('estado'),
 )
 db.notificacion_sistema.titulo.requires = IS_NOT_EMPTY()
 db.notificacion_sistema.mensaje.requires = IS_NOT_EMPTY()
+db.notificacion_sistema.estado.requires = IS_IN_SET(ESTADO_NOTIFICACION, zero=None)
+
+
 
 # Seleccionar todas las notificaciones de un usuario
 # notificaciones = db(db.notificacion_sistema.usuarios == user_id).select()

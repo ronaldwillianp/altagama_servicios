@@ -41,6 +41,9 @@
         .error {
             color: red;
         }
+        #mCSB_1_container > ul > li> a{
+            padding: 10px 15px 10px 15px;
+        }
     </style>
     {{block head}}
 
@@ -89,13 +92,14 @@
                     <div class="dropdown-menu dropdown-menu-right">
                         <div class="notification-list mx-h-350 customscroll">
                             <ul>
+                                {{for item in NOTIFICACIONES:}}
                                 <li>
                                     <a href="#">
-                                        <img src="vendors/images/img.jpg" alt="">
-                                        <h3>{{=T('Sistema')}}</h3>
-                                        <p>Existen reporte(s) pendientes</p>
+                                        <h3>{{=item.titulo}}</h3>
+                                        <p>{{=item.mensaje}}</p>
                                     </a>
                                 </li>
+                                {{pass}}
                             </ul>
                         </div>
                     </div>
@@ -258,7 +262,7 @@
                         </a>
                         <ul class="submenu">
                             <li><a href="{{=URL('mantenimiento','contrato_servicio_mantenimiento')}}">Planificación</a></li>
-                            <li><a href="{{=URL('mantenimiento','cronograma')}}">Cronograma</a></li>
+                            <li><a href="{{=URL('mantenimiento','calendario')}}">Calendario</a></li>
                         </ul>
                     </li>
                     {{pass}}
@@ -270,6 +274,7 @@
                         <ul class="submenu">
                             <li><a href="#">Contratos</a></li>
                             <li><a href="#">Mantenimientos</a></li>
+                            <li><a href="#">Cronograma</a></li>
                             <li><a href="#">Usuarios</a></li>
                         </ul>
                     </li>
