@@ -7,6 +7,8 @@
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
 
+from models.notifications import NOTIFICACIONES
+
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
 # File is released under public domain and you can use without limitations
@@ -309,12 +311,14 @@ db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget
 db.define_table('notificacion_sistema',
     Field('titulo'),
     Field('mensaje'),
-    Field('usuario', 'reference auth_user'),
+    Field('grupo', 'reference auth_group'),
+    Field('modulo'),
     Field('estado'),
 )
 db.notificacion_sistema.titulo.requires = IS_NOT_EMPTY()
 db.notificacion_sistema.mensaje.requires = IS_NOT_EMPTY()
 db.notificacion_sistema.estado.requires = IS_IN_SET(ESTADO_NOTIFICACION, zero=None)
+db.notificacion_sistema.modulo.requires = IS_IN_SET(NOTIFICACION_MODULO, zero=None)
 
 
 

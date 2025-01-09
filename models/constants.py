@@ -47,5 +47,10 @@ ESTADO_NOTIFICACION = {
     'vi': 'Visto'
 }
 
+NOTIFICACION_MODULO = {
+    'co': 'Contratos',
+    'ma': 'Mantenimientos',
+}
+
 def get_current_year():
     return datetime.datetime.now().year

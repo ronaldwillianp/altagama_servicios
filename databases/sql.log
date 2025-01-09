@@ -2953,3 +2953,20 @@ success!
 success!
 success!
 success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2025-01-09T08:52:50.333446
+ALTER TABLE "notificacion_sistema" ADD "grupo" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE ON UPDATE CASCADE  ;
+timestamp: 2025-01-09T08:52:50.335956
+ALTER TABLE "notificacion_sistema" ADD "modulo" CHAR(512);
+success!
