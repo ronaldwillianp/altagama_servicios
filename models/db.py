@@ -6,9 +6,6 @@
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
-
-from models.notifications import NOTIFICACIONES
-
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
 # File is released under public domain and you can use without limitations
@@ -37,7 +34,7 @@ if not request.env.web2py_runtime_gae:
              migrate_enabled=configuration.get('db.migrate'),
              check_reserved=['all'])
     # Problemas con las notificaciones cuando se conecta a BD postgres.
-    # db = DAL('postgres://postgres:postgres@localhost/siged')
+    # db = DAL('postgres://altagama_servicios:Slallcheats*2020@localhost/altagama_servicios_db')
     # from gluon.contrib.redis_utils import RConn
     # from gluon.contrib.redis_session import RedisSession
     #
@@ -311,9 +308,10 @@ db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget
 db.define_table('notificacion_sistema',
     Field('titulo'),
     Field('mensaje'),
-    Field('grupo', 'reference auth_group'),
+    Field('grupo', 'list:reference auth_group'),
     Field('modulo'),
     Field('estado'),
+    Field('link'),
 )
 db.notificacion_sistema.titulo.requires = IS_NOT_EMPTY()
 db.notificacion_sistema.mensaje.requires = IS_NOT_EMPTY()
@@ -333,3 +331,4 @@ if not auth:
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+

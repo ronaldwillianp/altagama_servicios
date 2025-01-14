@@ -1,5 +1,7 @@
 import datetime
 
+NOTIFICACIONES = []
+
 TIPO_CONTRATO = {
     'sv': 'Servicios',
     'vt': 'Venta'

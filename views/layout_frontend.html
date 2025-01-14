@@ -44,8 +44,31 @@
         #mCSB_1_container > ul > li> a{
             padding: 10px 15px 10px 15px;
         }
-    </style>
-    {{block head}}
+
+        .user-notification .dropdown-menu {
+            width: 450px;
+            padding: 20px 10px;
+        }
+
+        @media (max-width: 576px) {
+           .user-notification .dropdown-menu {
+                width: 340px;
+           }
+        }
+
+        .icon-message {
+            cursor: pointer;
+            color: #ff1f1f;
+            font-size: 20px;
+
+            
+        }
+        .icon-message:hover {
+            color: #f80000;
+            border-radius: 100%;
+            transition: background-color ease-in-out ;
+        }
+    </style>{{block head}}
 
     {{end}}
     <style>
@@ -94,11 +117,14 @@
                         <div class="notification-list mx-h-350 customscroll">
                             <ul>
                                 {{for item in NOTIFICACIONES:}}
-                                <li>
-                                    <a href="#">
+                                <li class="d-flex  align-items-center justify-items-between">
+                                    <a  href="{{=item.link}}">
                                         <h3>{{=item.titulo}}</h3>
-                                        <p>{{=item.mensaje}}</p>
-                                    </a>
+                                        <p>{{=item.mensaje}}</p></a>
+                                    <div class="d-flex align-items-center icon-message justify-content-center" style="margin-right: 35px;">
+<!--                                        <i  class="icon-copy dw dw-delete-3"></i>-->
+<!--                                        <i  class="icon-copy dw dw-file-411"></i>-->
+                                    </div>
                                 </li>
                                 {{pass}}
                             </ul>
