@@ -6,6 +6,7 @@
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
+import datetime
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too
 # File is released under public domain and you can use without limitations
@@ -34,7 +35,7 @@ if not request.env.web2py_runtime_gae:
              migrate_enabled=configuration.get('db.migrate'),
              check_reserved=['all'])
     # Problemas con las notificaciones cuando se conecta a BD postgres.
-    # db = DAL('postgres://altagama_servicios:Slallcheats*2020@localhost/altagama_servicios_db')
+    # db = DAL('mysql://root:@localhost/altagama_servicios')
     # from gluon.contrib.redis_utils import RConn
     # from gluon.contrib.redis_session import RedisSession
     #
@@ -222,7 +223,6 @@ db.define_table('contrato_proveedor',
 )
 
 # Validadores para Contratos de Proveedores
-# db.contrato_proveedor.numero.requires = IS_INT_IN_RANGE(1, 121)
 db.contrato_proveedor.empresa.requires = IS_NOT_EMPTY()
 db.contrato_proveedor.anho.requires = IS_IN_SET(ANHOS_CONTRATO, zero=None)
 db.contrato_proveedor.tipo_contrato.requires = IS_IN_SET(TIPO_CONTRATO, zero=None)
@@ -281,25 +281,19 @@ db.define_table('firma_autorizada_contrato_proveedor',
 )
 db.firma_autorizada_contrato_proveedor.contrato.requires = IS_IN_DB(db, 'contrato_proveedor.id')
 
-
-db.define_table('mantenimiento_contrato',
-                Field('planificacion'), # Set
-                Field('contrato', 'reference contrato_cliente')
-)
-db.mantenimiento_contrato.planificacion.requires = IS_IN_SET(PLANIFICACION_MANTENIMIENTO, zero=None)
-
 db.define_table('mantenimiento',
-                Field('mantenimiento_contrato', 'reference mantenimiento_contrato'),
+                Field('contrato', 'reference contrato_cliente'),
                 Field('estado'), # Set
                 Field('cantidad_pc', 'integer'),
                 Field('observaciones', 'text'),
                 Field('fecha', 'date', default=datetime.date.today()),
-                Field('fecha_siguiente_mantenimiento', 'date', default=datetime.date.today()),
                 auth.signature
 )
-db.mantenimiento.mantenimiento_contrato.requires = IS_IN_DB(db, 'mantenimiento_contrato.id', lambda row: row.contrato.numero + '/' + row.contrato.anho + ' ' + row.contrato.empresa, zero=None)
+# db.mantenimiento.contrato.requires = IS_IN_DB(db, 'contrato_cliente.id','%(numero)s/%(anho)s %(empresa)s', zero=None)
 db.mantenimiento.estado.requires = IS_IN_SET(ESTADO_MANTENIMIENTO, zero=None)
+db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha', _readonly='true')
 
+db.mantenimiento.contrato.requires=IS_IN_DB(db, 'contrato_cliente.id', lambda row: str(db(db.contrato_cliente.id == row.id).select().first().numero) + '/' + str(db(db.contrato_cliente.id == row.id).select().first().anho) + ' ' + str(db(db.contrato_cliente.id == row.id).select().first().empresa), zero=None)
 
 # Corrigiendo widgets
 db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha', _readonly='true')
@@ -331,4 +325,3 @@ if not auth:
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
-

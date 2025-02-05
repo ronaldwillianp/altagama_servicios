@@ -33,7 +33,7 @@
         {{for row in rows:}}
         <tr>
           <td class="table-plus" data-toggle="tooltip" title="{{=row.contrato_cliente.empresa}}" data-placement="top">{{=row.contrato_cliente.empresa}}</td>
-          <td>{{=row.contrato_cliente.numero}}</td>
+          <td>{{=row.contrato_cliente.numero}}/{{=row.contrato_cliente.anho}}</td>
           <td>{{if row.mantenimiento_contrato.id:}}Si{{else:}}No{{pass}}</td>
           <td>
             <div class="dropdown">

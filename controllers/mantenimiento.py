@@ -74,29 +74,22 @@ def deshabilitar_mantenimiento():
     return dict()
 
 @auth.requires(
-    auth.has_membership(role='Administrador') or 
+    auth.has_membership(role='Administrador') or
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Servicios')
 )
 def administrar():
-    registro = db.mantenimiento_contrato(request.args(0, cast=int)) or redirect(URL('contrato_servicio_mantenimiento'))
     rows = db(
-        (db.contrato_cliente.id == registro.contrato) &
-        (db.mantenimiento.mantenimiento_contrato == registro.id)
+        db.mantenimiento.id>0
     ).select(
         db.mantenimiento.id,
+        db.mantenimiento.contrato,
         db.mantenimiento.fecha,
         db.mantenimiento.cantidad_pc,
         db.mantenimiento.estado,
         orderby=~db.mantenimiento.id|db.mantenimiento.fecha
     )
-    contrato = db(db.contrato_cliente.id == registro.contrato).select(
-        db.contrato_cliente.id,
-        db.contrato_cliente.numero,
-        db.contrato_cliente.empresa,
-    ).first()
-
-    return dict(rows=rows, contrato=contrato)
+    return dict(rows=rows)
 
 @auth.requires(
     auth.has_membership(role='Administrador') or 
@@ -107,7 +100,7 @@ def preprocess_mantenimiento(form):
     # Selecciona el ultimo mantenimiento
     ultimo_mantenimiento = db(
         (db.mantenimiento.id>0) &
-        (db.mantenimiento.mantenimiento_contrato == form.vars.mantenimiento_contrato)
+        (db.mantenimiento.contrato == form.vars.contrato)
         ).select(
             orderby=~db.mantenimiento.fecha
         ).first()
@@ -115,21 +108,6 @@ def preprocess_mantenimiento(form):
     if ultimo_mantenimiento:
         if ultimo_mantenimiento.fecha >= form.vars.fecha:
             form.errors.fecha = 'La fecha debe ser mayor a ' + str(ultimo_mantenimiento.fecha.strftime('%d/%m/%Y'))
-            # form.vars.observaciones._placeholder='sadfasdfa'
-        
-
-    # Trae el Contrato_Mantenimiento correspondiente al mantenimiento
-    contrato = form.vars.mantenimiento_contrato
-    planficacion = db(db.mantenimiento_contrato.contrato == contrato).select().first().planificacion
-    
-    if planficacion == 'me':
-        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=30)
-    elif planficacion == 'tr':
-        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=90)
-    elif planficacion == 'se':
-        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=180)
-    else:
-        form.vars.fecha_siguiente_mantenimiento = form.vars.fecha + datetime.timedelta(days=365)
     
 def mantenimientos_pendientes(contrato):
     # Si existen mantenimientos pendientes
@@ -166,43 +144,13 @@ def planificar_fecha(contrato, form):
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Servicios')
 )
-def crear():
-    registro = db.mantenimiento_contrato(request.args(0, cast=int)) or redirect(URL('mantenimiento','contrato_servicio_mantenimiento'))
-    
-    mantenimientos_pendientes(registro)
-    
-    db.mantenimiento.mantenimiento_contrato.writable = False
-    form = SQLFORM(db.mantenimiento)
-    form.vars.mantenimiento_contrato = registro.id
-
-    planificar_fecha(registro, form)
-    
-    if form.process(onvalidation=preprocess_mantenimiento).accepted:
-        session.status = True
-        session.msg = 'Mantenimiento agregado correctamente'
-        redirect(URL('mantenimiento','administrar', args = registro.id))
-    elif form.errors:
-        session.error = True
-        session.msg = 'El formulario tiene errores'
-    return dict(form=form)
-
-@auth.requires(
-    auth.has_membership(role='Administrador') or 
-    auth.has_membership(role='Administrativo') or
-    auth.has_membership(role='Servicios')
-)
 def editar():
-
-    if not request.args(1):
-        redirect(URL('mantenimiento','contrato_servicio_mantenimiento'))
-
     if not request.args(0):
         redirect(URL('mantenimiento','administrar', args=request.args(0)))
 
-    registro = db.mantenimiento(request.args(0, cast=int)) or redirect(URL('mantenimiento','administrar', args=request.args(1)))
+    registro = db.mantenimiento(request.args(0, cast=int)) or redirect(URL('mantenimiento','administrar'))
     
-    db.mantenimiento.mantenimiento_contrato.writable = False
-    db.mantenimiento.fecha_siguiente_mantenimiento.writable = False
+    db.mantenimiento.contrato.writable = False
 
     if (registro.estado == 'ca') or (registro.estado == 'ej'):
         session.error = True
@@ -288,14 +236,23 @@ def calendario():
     auth.has_membership(role='Administrativo') or
     auth.has_membership(role='Servicios')
 )
-def crear2():
+def crear():
+    clientes = db(
+        (db.contrato_cliente.id>0) &
+        (db.contrato_cliente.tipo_contrato == 'sv')
+    ).select()
+
+    db.mantenimiento.estado.writable = False
     form = SQLFORM(db.mantenimiento)
-    if form.process().accepted:
+    form.vars.estado = 'pl'
+
+    if form.process(onvalidation=preprocess_mantenimiento).accepted:
         session.status = True
-        session.msg = 'Mantenimiento agregado correctamente'
-        redirect(URL('mantenimiento','cronograma'))
+        session.msg = 'Mantenimiento actualizado correctamente'
+        redirect(URL('mantenimiento', 'administrar'))
     elif form.errors:
         session.error = True
         session.msg = 'El formulario tiene errores'
-    return dict(form=form)
+
+    return dict(form=form, clientes=clientes)
 

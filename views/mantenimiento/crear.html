@@ -13,14 +13,14 @@
 <div class="row">
   <div class="col-md-12">
     <div class="mb-3">
-      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('mantenimiento',
-      'contrato_servicio_mantenimiento'), _class='btn btn-success')}}
+      {{=A(SPAN(I(_class= "fa fa-list"), ' Administrar'),_href=URL('#',
+      '#'), _class='btn btn-success')}}
     </div>
 
     <div id="container">
       <div class="pd-20 card-box mb-30">
         <div class="clearfix">
-          <h4 class="text-blue h4">Planificar Mantenimiento</h4>
+          <h4 class="text-blue h4">Agregar Mantenimiento</h4>
         </div>
 
         <div class="mt-4">
@@ -28,24 +28,29 @@
 
           <div class="row">
 
-            <div class="col-sm-4">
-              {{=form.custom.label.cantidad_pc}} <span class="error">*</span>
-              <div class="mb-2"><input class="string form-control" id="mantenimiento_cantidad_pc" min="0" value="0"
-                  name="cantidad_pc" type="number"></div>
-            </div>
+            <div class="col-sm-6">
+                {{=form.custom.label.contrato}} <span class="error">*</span>
+                <div class="mb-2">
+                  <select class="generic-widget form-control" id="mantenimiento_contrato" name="contrato">
+                    {{for item in clientes:}}
+                    <option value="{{=item.id}}">{{=item.empresa}}</option>
+                    {{pass}}
+                  </select>
+                </div>
+              </div>
 
-            <div class="col-sm-4">
-              {{=form.custom.label.fecha}} <span class="error">*</span>
-              <div class="mb-2">{{=form.custom.widget.fecha}}</div>
-            </div>
+              <div class="col-sm-3">
+                {{=form.custom.label.cantidad_pc}} <span class="error">*</span>
+                <div class="mb-2"><input class="string form-control" id="mantenimiento_cantidad_pc" min="0" value="0" name="cantidad_pc" type="number"></div>
+              </div>
 
-            <div class="col-sm-4">
-              {{=form.custom.label.estado}} <span class="error">*</span>
-              <div class="mb-2">{{=form.custom.widget.estado}}</div>
-            </div>
+              <div class="col-sm-3">
+                {{=form.custom.label.fecha}} <span class="error">*</span>
+                <div class="mb-2">{{=form.custom.widget.fecha}}</div>
+              </div>
 
             <div class="col-sm-12">
-              {{=form.custom.label.observaciones}}
+              {{=form.custom.label.observaciones}} <span class="error">*</span>
               <div class="mb-2">{{=form.custom.widget.observaciones}}</div>
             </div>
 
@@ -64,9 +69,7 @@
   </div>
 </div>
 
-
 {{block page_js}}
 {{include 'components/select2.html'}}
 {{include 'components/datepicker.html'}}
 {{end page_js}}
-

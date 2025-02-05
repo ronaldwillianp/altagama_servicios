@@ -14,10 +14,7 @@
 <!-- Simple Datatable start -->
 
 <div class="pb-20">
-  <a href="{{=URL('mantenimiento', 'contrato_servicio_mantenimiento', args = request.args(0, cast=int)) or redirect(URL('contrato','administrar'))}}" class="btn btn-success">
-    <span><i class="fa fa-arrow-left"></i></span> Atrás</a
-  >
-  <a href="{{=URL('mantenimiento', 'crear', args = request.args(0, cast=int)) or redirect(URL('contrato','administrar'))}}" class="btn btn-success">
+  <a href="{{=URL('mantenimiento','crear')}}" class="btn btn-success">
     <span><i class="fa fa-plus"></i></span> Planificar Mantenimiento</a
   >
 </div>
@@ -25,14 +22,15 @@
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
   <div class="pd-20">
-    <h4 class="text-blue h4">Mantenimientos: No. {{=contrato.numero}} | {{=contrato.empresa}}</h4>
+    <h4 class="text-blue h4">Mantenimientos</h4>
   </div>
 
   <div class="pb-20">
     <table class="data-table table stripe hover nowrap">
       <thead>
         <tr>
-          <th class="table-plus">Cantidad de PCs</th>
+          <th class="table-plus">Entidad</th>
+          <th>Cantidad de PCs</th>
           <th>Fecha</th>
           <th>Estado</th>
           <th class="datatable-nosort">Administrar</th>
@@ -41,7 +39,8 @@
       <tbody>
         {{for row in rows:}}
         <tr>
-          <td class="table-plus">{{=row.cantidad_pc}}</td>
+          <td class="table-plus">{{=row.contrato.empresa}}</td>
+          <td>{{=row.cantidad_pc}}</td>
           <td>{{=row.fecha.strftime('%d/%m/%Y')}}</td>
           <td>{{=ESTADO_MANTENIMIENTO[row.estado]}}</td>
           <td>
@@ -60,7 +59,7 @@
 
             <a
               class="dropdown-item"
-              href="{{=URL('mantenimiento', 'editar', args=[row.id, request.args(0)])}}"
+              href="{{=URL('mantenimiento', 'editar', args=row.id)}}"
               ><i class="dw dw-edit2"></i> Editar</a
             >
             <a
@@ -100,7 +99,6 @@
       function (isConfirm) {
         if (isConfirm) {
           var url = "{{=URL('mantenimiento','eliminar')}}";
-          //{{session.mantenimiento_contrato = request.args(0, cast=int)}}
           location.href = url + "/" + id;
         } else {
           // event.preventDefault();
