@@ -219,7 +219,7 @@ db.define_table('contrato_proveedor',
                 Field('contrato_file', 'upload', autodelete=True),
                 Field('observaciones', 'text'),
                 auth.signature,
-                format='%(numero)s %(empresa)s'
+                # format='%(numero)s %(empresa)s'
 )
 
 # Validadores para Contratos de Proveedores
@@ -293,7 +293,7 @@ db.define_table('mantenimiento',
 db.mantenimiento.estado.requires = IS_IN_SET(ESTADO_MANTENIMIENTO, zero=None)
 db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha', _readonly='true')
 
-db.mantenimiento.contrato.requires=IS_IN_DB(db, 'contrato_cliente.id', lambda row: str(db(db.contrato_cliente.id == row.id).select().first().numero) + '/' + str(db(db.contrato_cliente.id == row.id).select().first().anho) + ' ' + str(db(db.contrato_cliente.id == row.id).select().first().empresa), zero=None)
+db.mantenimiento.contrato.requires=IS_IN_DB(db, 'contrato_cliente.id')
 
 # Corrigiendo widgets
 db.mantenimiento.fecha.widget = lambda field, value: SQLFORM.widgets.date.widget(field, value, _class='form-control date', _type='text', _name='fecha', _readonly='true')
