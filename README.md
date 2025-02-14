@@ -13,7 +13,7 @@
 >>> Total Contratos                                                                         OK
 >>> Total[primeras 5] Contratos no archivado                                                P
 >>> Porciento No Archivados/total
->>> Cantidad de empresas con mantenimiento habilitado
+>>> Cantidad de empresas (CLIENTES) con mantenimiento                                       OK                                
 >>> Porciento respecto al total de empresas de cliente con servicio
 >>> Empresa con mas mantenimientos / cantidad [primeras 5]
 >>> Empresa con menos mantenimiento mantenimientos / cantidad 

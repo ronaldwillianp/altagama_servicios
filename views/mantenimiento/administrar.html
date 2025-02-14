@@ -20,14 +20,14 @@
         <form class="ml-2">
             <select class="generic-widget form-control" multiple id="filtro" name="filtro" >
                 {{for row in clientes:}}
-                <option value="{{=row.id}}">{{=row.empresa}}</option>
+                    <option value="{{=row.id}}" {{if row.selected:}}selected{{pass}}>{{=row.empresa}}</option>
                 {{pass}}
             </select>
             <button type="submit" class="btn ml-2 p-2 btn-outline-primary"> <i class="fa fa-search mr-2"></i>Filtrar</button>
         </form>
     </div>
 </div>
-{{=clientes.as_list()}}
+
 <!-- Simple Datatable start -->
 <div class="card-box mb-30">
     <div class="pd-20">
@@ -45,7 +45,7 @@
                 <th class="datatable-nosort">Administrar</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="tbody">
             {{for row in rows:}}
             <tr>
                 <td class="table-plus">{{=row.contrato.empresa}}</td>

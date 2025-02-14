@@ -1,5 +1,11 @@
 {{extend 'layout_frontend.html'}}
 <script src="{{=URL('static/frontend', 'fullCalendar/fullcalendar.min.js')}}"></script>
+{{include 'components/html2pdf.html'}}
+
+
+<button class="btn btn-danger" id="btnTicket" onclick="printTicket()">
+    <i class="fa fa-print"></i> Imprimir Ticket
+</button>
 
 <div class="pd-20 card-box mb-30">
     <div class="calendar-wrap">
@@ -28,10 +34,12 @@
                     prevYear: 'Año Anterior',
                     nextYear: 'Año Siguiente',
                 },
+                // initialView: 'dayGridMonth',
                 initialView: 'dayGridMonth',
                 headerToolbar: {
                     left: '',
                     center: 'title',
+                    right: 'today,dayGridMonth,listMonth'
                 }
             });
             // {{for item in mantenimientos:}}
@@ -45,5 +53,37 @@
             calendar.render();
         });
 
+
+    </script>
+
+    <script>
+        function printTicket() {
+            document.getElementById("btnTicket").disabled = true;
+            let uuid4 = 'Resumen'
+            var element = document.getElementById("calendar");
+            var opt = {
+                margin: [0, 0, 0, 0], //top, left, buttom, right,
+                filename: uuid4 + ".pdf",
+                image: {type: "jpeg", quality: 0.98},
+                html2canvas: {scale: 2}, // Calidad de PDF, Lo mas alto usado es 15
+                jsPDF: {unit: "in", format: "letter", orientation: "landscape"},
+                // pagebreak: { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' }
+                pagebreak: {after: ".pageBreak"},
+            };
+
+            document.getElementById("btnTicket").innerText =
+                "Generando PDF [Calidad=" + opt.html2canvas.scale + "]. Espere...";
+
+            // New Promise-based usage:
+            html2pdf()
+                .set(opt)
+                .from(element)
+                .save()
+                .then(() => {
+                    document.getElementById("btnTicket").disabled = false;
+                    document.getElementById("btnTicket").innerHTML =
+                        '<i class="fa fa-print"></i> Imprimir Ticket';
+                });
+        }
 
     </script>
