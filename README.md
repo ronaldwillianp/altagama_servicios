@@ -31,7 +31,7 @@
 >>> Saber cuando toca mantenimiento
 >>> Cronograma de mantenimientos                                                            OK
 >>> Una semana antes notificar mantenimiento
->>> Cambio de estados y aplazamientos para los mantenimientos
+>>> Cambio de estados y aplazamientos para los mantenimientos                               Innecesario
 >>> Planificado/Confirmado/Aplazado/Cancelado/Ejecutado
 >>> Notificar si en las fechas hay otros mantenimientos que coinciden
 >>> Agregar correo electronico a los contactos

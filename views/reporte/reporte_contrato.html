@@ -1,0 +1,140 @@
+{{extend 'layout_frontend.html'}}
+
+<div class="pd-ltr-20 xs-pd-20-10">
+    <div class="min-height-200px">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <form>
+                        <div class="row">
+                            <div class="col-2">
+                                <select class="form-control" multiple id="cliente" name="cliente">
+                                    {{for item in clientes:}}
+                                    <option value="{{=item['id']}}">{{=item['empresa']}}</option>
+                                    {{pass}}
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="form-control" id="anho" name="anho">
+                                    <option value="">--Sin Seleccionar--</option>
+                                    {{for i in ANHOS_CONTRATO:}}
+                                    <option value="{{=i}}">{{=i}}</option>
+                                    {{pass}}
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="form-control" id="tipo_contrato" name="tipo_contrato">
+                                    <option value="" selected>--Sin Seleccionar--</option>
+                                    <option value="sv">Servicios</option>
+                                    <option value="vt">Venta</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="form-control" id="estado_contrato" name="estado_contrato">
+                                    <option value="">--Sin Seleccionar--</option>
+                                    <option value="1">Entregado</option>
+                                    <option value="2">Recogido</option>
+                                    <option value="3">Ejecucion</option>
+                                    <option value="4">Archivado</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <input class="form-control date" type="text" id="fecha_confeccion"
+                                       name="fecha_confeccion" readonly>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-2">
+                                <input class="form-control date" type="text" id="fecha_vencimiento"
+                                       name="fecha_vencimiento" readonly>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-outline-primary"><i
+                                        class="fa fa-search mr-2"></i>Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="invoice-wrap">
+            <div class="invoice-box">
+                <div>
+                    <div class="logo text-left">
+                        <img src="{{=URL('static','images/deskapp-logo.svg')}}" style="max-width: 200px" alt=""/>
+                    </div>
+                </div>
+                <h4 class="text-center mb-30 weight-600">Alta Gama S.R.L.</h4>
+                <div class="row pb-30">
+                    <div class="col-md-6">
+                        <h5 class="mb-15">Client Name</h5>
+                        <p class="font-14 mb-5">
+                            Date Issued: <strong class="weight-600">10 Jan 2018</strong>
+                        </p>
+                        <p class="font-14 mb-5">
+                            Invoice No: <strong class="weight-600">4556</strong>
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-right">
+                            <p class="font-14 mb-5">Your Name</p>
+                            <p class="font-14 mb-5">Your Address</p>
+                            <p class="font-14 mb-5">City</p>
+                            <p class="font-14 mb-5">Postcode</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="invoice-desc pb-30">
+                    <div class="invoice-desc-head clearfix">
+                        <div class="invoice-sub">Description</div>
+                        <div class="invoice-rate">Rate</div>
+                        <div class="invoice-hours">Hours</div>
+                        <div class="invoice-subtotal">Subtotal</div>
+                    </div>
+                    <div class="invoice-desc-body">
+                        <ul>
+                            <li class="clearfix">
+                                <div class="invoice-sub">Website Design</div>
+                                <div class="invoice-rate">$20</div>
+                                <div class="invoice-hours">100</div>
+                                <div class="invoice-subtotal">
+                                    <span class="weight-600">$2000</span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="invoice-sub">Logo Design</div>
+                                <div class="invoice-rate">$20</div>
+                                <div class="invoice-hours">100</div>
+                                <div class="invoice-subtotal">
+                                    <span class="weight-600">$2000</span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="invoice-sub">Website Design</div>
+                                <div class="invoice-rate">$20</div>
+                                <div class="invoice-hours">100</div>
+                                <div class="invoice-subtotal">
+                                    <span class="weight-600">$2000</span>
+                                </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="invoice-sub">Logo Design</div>
+                                <div class="invoice-rate">$20</div>
+                                <div class="invoice-hours">100</div>
+                                <div class="invoice-subtotal">
+                                    <span class="weight-600">$2000</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{block page_js}}
+{{include 'components/select2.html'}}
+{{include 'components/datepicker.html'}}
+{{end page_js}}
