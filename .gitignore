@@ -2,5 +2,3 @@
 /errors/
 /sessions/
 **/*.log
-**/*.sqlite
-/databases/
