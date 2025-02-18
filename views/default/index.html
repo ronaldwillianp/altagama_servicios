@@ -51,6 +51,12 @@
         background: #334148;
         color: #fff;
     }
+    .cardCustom{
+        border-radius: 5px;
+    }
+    .cartTitle{
+        border-radius: 5px 5px 0px 0px;
+    }
 </style>
 {{end head}}
 
@@ -59,7 +65,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-success">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -72,7 +78,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-success">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -85,7 +91,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-danger">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -98,7 +104,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-warning">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -111,7 +117,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-warning">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -124,7 +130,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-success">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -137,7 +143,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-primary">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -150,7 +156,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2 mb-30">
+    <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
         <div class="card-box height-100-p widget-style1 text-success">
             <div class="d-flex flex-wrap align-items-center">
                 <div class="progress-data">
@@ -163,84 +169,53 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
-
-<!-- Section of Charts -->
 <div class="row pb-10">
-    <div class="col-md-4 mb-20">
-        <div class="card-box pd-30">
-            <div class="progress-box text-center">
-                <input
-                        type="text"
-                        class="knob dial1"
-                        value="80"
-                        data-width="120"
-                        data-height="120"
-                        data-linecap="round"
-                        data-thickness="0.12"
-                        data-bgColor="#fff"
-                        data-fgColor="#1b00ff"
-                        data-angleOffset="180"
-                        readonly
-                />
-                <h5 class="text-blue padding-top-10 h5">Contratos no Archivados</h5>
-                <span class="d-block"
-                >80% Average <i class="fa fa-line-chart text-blue"></i
-                ></span>
+    <div class="col-sm-12 col-md-6 mb-30">
+        <div class="cardCustom bg-white shadow shadow-lg">
+            <div class="cartTitle p-2 bg-primary text-white">Último Contrato de Servicio</div>
+            <div class="cardContainer p-2">
+                <a href="{{=URL('contrato','contrato_cliente_detalles', args=ultimo_contrato_cliente_servicio.id)}}">
+                    {{=ultimo_contrato_cliente_servicio.numero}}/{{=ultimo_contrato_cliente_servicio.anho}} | {{=ultimo_contrato_cliente_servicio.empresa}} 
+                </a>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 mb-20">
-        <div class="card-box pd-30">
-            <div class="progress-box text-center">
-                <input
-                        type="text"
-                        class="knob dial1"
-                        value="80"
-                        data-width="120"
-                        data-height="120"
-                        data-linecap="round"
-                        data-thickness="0.12"
-                        data-bgColor="#fff"
-                        data-fgColor="#1b00ff"
-                        data-angleOffset="180"
-                        readonly
-                />
-                <h5 class="text-blue padding-top-10 h5">Contratos no Archivados</h5>
-                <span class="d-block"
-                >80% Average <i class="fa fa-line-chart text-blue"></i
-                ></span>
+    </div>  
+    <div class="col-sm-12 col-md-6 mb-30">
+        <div class="cardCustom bg-white shadow shadow-lg">
+            <div class="cartTitle p-2 bg-primary text-white">Último Contrato de Venta</div>
+            <div class="cardContainer p-2">
+                <a href="{{=URL('contrato','contrato_cliente_detalles', args=ultimo_contrato_cliente_venta.id)}}">
+                    {{=ultimo_contrato_cliente_venta.numero}}/{{=ultimo_contrato_cliente_venta.anho}} | {{=ultimo_contrato_cliente_venta.empresa}}
+                </a>
             </div>
         </div>
-    </div>
-    <div class="col-md-4 mb-20">
-        <div class="card-box pd-30">
-            <div class="progress-box text-center">
-                <input
-                        type="text"
-                        class="knob dial1"
-                        value="80"
-                        data-width="120"
-                        data-height="120"
-                        data-linecap="round"
-                        data-thickness="0.12"
-                        data-bgColor="#fff"
-                        data-fgColor="#1b00ff"
-                        data-angleOffset="180"
-                        readonly
-                />
-                <h5 class="text-blue padding-top-10 h5">Contratos no Archivados</h5>
-                <span class="d-block"
-                >80% Average <i class="fa fa-line-chart text-blue"></i
-                ></span>
-            </div>
-        </div>
-    </div>
+    </div>      
 </div>
-<!-- End Section of Charts -->
+
+<div class="row pb-10">
+    <div class="col-sm-12 col-md-6 mb-30">
+        <div class="cardCustom bg-white shadow shadow-lg">
+            <div class="cartTitle p-2 bg-primary text-white">Porciento de Contratos no Archivados</div>
+            <div class="cardContainer p-3">
+                <div class="progress">
+                    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{=porciento_no_archivados_total}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{=porciento_no_archivados_total}}%</div>
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="col-sm-12 col-md-6 mb-30">
+        <div class="cardCustom bg-white shadow shadow-lg">
+            <div class="cartTitle p-2 bg-primary text-white">Porciento de Clientes con Mantenimiento</div>
+            <div class="cardContainer p-3">
+                <div class="progress">
+                    <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" style="width: {{=porciento_clientes_mantenimiento}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{=porciento_clientes_mantenimiento}}%</div>
+                </div>
+            </div>
+        </div>
+    </div>      
+</div>
 
 <!-- Section of List -->
 <div class="row">
@@ -479,181 +454,3 @@
     </div>
 </div>
 <!-- End Section List -->
-
-{{block page_js}}
-<script src="{{=URL('static/frontend', 'src/plugins/apexcharts/apexcharts.min.js')}}"></script>
-<script src="{{=URL('static/frontend', 'src/plugins/jQuery-Knob-master/jquery.knob.min.js')}}"></script>
-
-<script>
-    $(".dial1").knob();
-    $({animatedVal: 0}).animate(
-        {animatedVal: 80},
-        {
-            duration: 3000,
-            easing: "swing",
-            step: function () {
-                $(".dial1").val(Math.ceil(this.animatedVal)).trigger("change");
-            },
-        }
-    );
-
-    $(".dial2").knob();
-    $({animatedVal: 0}).animate(
-        {animatedVal: 30},
-        {
-            duration: 3000,
-            easing: "swing",
-            step: function () {
-                $(".dial2").val(Math.ceil(this.animatedVal)).trigger("change");
-            },
-        }
-    );
-
-    let data = [];
-    let categories = [];
-
-    // Esto es codigo python q funciona
-    // debido al sistema de plantillas de web2py
-
-    data.push(parseInt("15"));
-    categories.push("1");
-
-    // var options = {
-    //   series: [
-    //     {
-    //       name: "Reportes",
-    //       data: data,
-    //     },
-    //   ],
-    //   chart: {
-    //     height: 450,
-    //     type: "line",
-    //     toolbar: {
-    //       show: true,
-    //     },
-    //   },
-    //   grid: {
-    //     show: true,
-    //     padding: {
-    //       left: 0,
-    //       right: 0,
-    //     },
-    //   },
-    //   stroke: {
-    //     width: 7,
-    //     curve: "smooth",
-    //   },
-    //   xaxis: {
-    //     type: "date",
-    //     // type: 'datetime',
-    //     categories: categories,
-    //   },
-    //   title: {
-    //     // text: "Estado de los Reportes",
-    //     align: "center",
-    //     style: {
-    //       fontSize: "16px",
-    //       color: "#666",
-    //     },
-    //   },
-    //   fill: {
-    //     type: "gradient",
-    //     gradient: {
-    //       shade: "dark",
-    //       gradientToColors: ["#1b00ff"],
-    //       shadeIntensity: 1,
-    //       type: "horizontal",
-    //       opacityFrom: 1,
-    //       opacityTo: 1,
-    //       stops: [0, 100, 100, 100],
-    //     },
-    //   },
-    //   markers: {
-    //     size: 4,
-    //     colors: ["#FFA41B"],
-    //     strokeColors: "#fff",
-    //     strokeWidth: 2,
-    //     hover: {
-    //       size: 7,
-    //     },
-    //   },
-    //   yaxis: {
-    //     min: 0,
-    //     max: 10,
-    //     title: {
-    //       text: "Cantidad de Contratos",
-    //     },
-    //   },
-    // };
-    // var chart = new ApexCharts(
-    //   document.querySelector("#activities-chart"),
-    //   options
-    // );
-    // chart.render();
-
-    var options3 = {
-        series: [
-            {
-                name: "Elaboración",
-                data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-            },
-            {
-                name: "Archivados",
-                data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-            },
-        ],
-        chart: {
-            type: "bar",
-            height: 350,
-            toolbar: {
-                show: false,
-            },
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: "25%",
-                endingShape: "rounded",
-            },
-        },
-        dataLabels: {
-            enabled: false,
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ["transparent"],
-        },
-        xaxis: {
-            categories: [
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-            ],
-        },
-        yaxis: {
-            title: {
-                text: "Cantidad de Contratos",
-            },
-        },
-        fill: {
-            opacity: 1,
-        },
-        tooltip: {
-            y: {
-                formatter: function (val) {
-                    return "$" + val + "thousands";
-                },
-            },
-        },
-    };
-    var chart = new ApexCharts(document.querySelector("#chart3"), options3);
-    chart.render();
-</script>
-{{end page_js}}

@@ -8,14 +8,14 @@
 
 ## Dashboard
 >>> Cant. Empresas Proveedoras                                                              OK
->>> Ultimo Contrato Cliente Servicio                                                        P
->>> Ultimo Contrato Cliente Compraventa                                                     P
+>>> Ultimo Contrato Cliente Servicio                                                        OK
+>>> Ultimo Contrato Cliente Compraventa                                                     OK
 >>> Total Contratos                                                                         OK
->>> Total[primeras 5] Contratos no archivado                                                P
->>> Porciento No Archivados/total
+>>> Total[primeras 5] Contratos no archivado                                                Innecesario
+>>> Porciento No Archivados/total                                                           OK
 >>> Cantidad de empresas (CLIENTES) con mantenimiento                                       OK                                
->>> Porciento respecto al total de empresas de cliente con servicio
->>> Empresa con mas mantenimientos / cantidad [primeras 5]
+>>> Porciento respecto al total de empresas de cliente con servicio                         OK
+>>> Empresa con mas mantenimientos / cantidad [primeras 5]                                  
 >>> Empresa con menos mantenimiento mantenimientos / cantidad 
 
 

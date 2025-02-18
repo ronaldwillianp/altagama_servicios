@@ -17,12 +17,41 @@ def index():
     total_recogidos = db(db.contrato_cliente.estado_contrato == 'ee').count() + db(db.contrato_proveedor.estado_contrato == 'ee').count()
     total_ejecucion = db(db.contrato_cliente.estado_contrato == 'ej').count() + db(db.contrato_proveedor.estado_contrato == 'ej').count()
     total_clientes_mantenimiento = len(db(db.mantenimiento.id>0).select(orderby=db.mantenimiento.id, groupby=db.mantenimiento.contrato))
+    porciento_no_archivados_total = round((total_contratos-total_archivados)*100/total_contratos, 2)
+    porciento_clientes_mantenimiento = round((total_clientes_mantenimiento)*100/total_contratos_clientes, 2)
     ultimo_contrato_cliente_servicio = db(
         (db.contrato_cliente.id>0) &
-        (db.contrato_cliente.estado_contrato != 'ar') &
         (db.contrato_cliente.tipo_contrato == 'sv')
-    ).select().last()
-    print(ultimo_contrato_cliente_servicio)
+    ).select(
+        db.contrato_cliente.id, 
+        db.contrato_cliente.numero, 
+        db.contrato_cliente.anho, 
+        db.contrato_cliente.empresa
+    ).last()
+    ultimo_contrato_cliente_venta = db(
+        (db.contrato_cliente.id>0) &
+        (db.contrato_cliente.tipo_contrato == 'vt')
+    ).select(
+        db.contrato_cliente.id, 
+        db.contrato_cliente.numero, 
+        db.contrato_cliente.anho, 
+        db.contrato_cliente.empresa
+    ).last()
+
+    # contratos_cliente_tramite = db(
+    #     (db.contrato_cliente.estado_contrato == 'ec') &
+    #     (db.contrato_cliente.estado_contrato == 'ee')
+    # ).select().as_list()
+
+    # contratos_proveedor_tramite = db(
+    #     (db.contrato_proveedor.estado_contrato == 'ec') &
+    #     (db.contrato_proveedor.estado_contrato == 'ee')
+    # ).select().as_list()
+
+    # contratos_tramite = []
+    # contratos_tramite.append(contratos_cliente_tramite)
+    # contratos_tramite.append(contratos_proveedor_tramite)
+    # print(contratos_tramite)
 
     return dict(
         total_contratos_clientes = total_contratos_clientes,
@@ -33,7 +62,10 @@ def index():
         total_recogidos=total_recogidos,
         total_ejecucion=total_ejecucion,
         total_clientes_mantenimiento = total_clientes_mantenimiento,
-        ultimo_contrato_cliente_servicio=ultimo_contrato_cliente_servicio
+        ultimo_contrato_cliente_servicio=ultimo_contrato_cliente_servicio,
+        ultimo_contrato_cliente_venta = ultimo_contrato_cliente_venta,
+        porciento_no_archivados_total = porciento_no_archivados_total,
+        porciento_clientes_mantenimiento = porciento_clientes_mantenimiento
     )
 
 @auth.requires_login()
