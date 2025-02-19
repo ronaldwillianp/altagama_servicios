@@ -217,240 +217,55 @@
     </div>      
 </div>
 
-<!-- Section of List -->
-<div class="row">
-    <!-- Listado de contratos no archivados -->
-    <div class="col-lg-4 mb-30 col-md-6 col-sm-12">
-        <div class="card-box height-100-p pd-20 min-height-200px">
-            <div class="d-flex justify-content-between pb-10">
-                <div class="h5 mb-0">Listado de Contratos No Archivados</div>
-            </div>
-            <div class="user-list">
-                <ul>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                </ul>
+<div class="row pb-10">
+    <div class="col-sm-12 col-md-6 mb-30">
+        <div class="cardCustom bg-white shadow shadow-lg">
+            <div class="cartTitle p-3 bg-primary text-white">Empresas con más Mantenimientos</div>
+            <div class="cardContainer p-3">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for i in empresas_mas_mantenimientos:}}
+                            <tr>
+                                <th scope="row">{{=i[0]}}</th>
+                                <td><span class="badge badge-success">{{=i[1]}}</span></td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Listado Empresas con mas Mantenimientos  -->
-    <div class="col-lg-4 mb-30 col-md-6 col-sm-12">
-        <div class="card-box height-100-p pd-20 min-height-200px">
-            <div class="d-flex justify-content-between pb-10">
-                <div class="h5 mb-0">Listado Empresas con más Mantenimientos</div>
-            </div>
-            <div class="user-list">
-                <ul>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                </ul>
+    <div class="col-sm-12 col-md-6 mb-30">
+        <div class="cardCustom bg-white shadow shadow-lg">
+            <div class="cartTitle p-3 bg-primary text-white">Empresas con menos Mantenimientos</div>
+            <div class="cardContainer p-3">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Empresa</th>
+                                <th scope="col">Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for i in empresas_menos_mantenimientos:}}
+                            <tr>
+                                <th scope="row">{{=i[0]}}</th>
+                                <td><span class="badge badge-danger">{{=i[1]}}</span></td>
+                            </tr>
+                            {{pass}}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
-
-    <!-- Listado Empresas con menos Mantenimientos -->
-    <div class="col-lg-4 mb-30 col-md-6 col-sm-12">
-        <div class="card-box height-100-p pd-20 min-height-200px">
-            <div class="d-flex justify-content-between pb-10">
-                <div class="h5 mb-0">Listado Empresas con menos Mantenimientos</div>
-            </div>
-            <div class="user-list">
-                <ul>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                    <li class="d-flex mb-20 align-items-center justify-content-between">
-                        <div class="name-avatar d-flex align-items-center pr-2">
-                            <div class="txt">
-                <span style="font-size: 12px; font-weight: 600"
-                >Contrato No. 1</span
-                >
-                                <div class="font-14 weight-600">Guajiritos S.R.L</div>
-                            </div>
-                        </div>
-                        <div class="cta flex-shrink-0">
-                            <a href="#" class="btn btn-sm btn-outline-danger">No archivado</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    </div>  
 </div>
-<!-- End Section List -->

@@ -15,8 +15,8 @@
 >>> Porciento No Archivados/total                                                           OK
 >>> Cantidad de empresas (CLIENTES) con mantenimiento                                       OK                                
 >>> Porciento respecto al total de empresas de cliente con servicio                         OK
->>> Empresa con mas mantenimientos / cantidad [primeras 5]                                  
->>> Empresa con menos mantenimiento mantenimientos / cantidad 
+>>> Empresa con mas mantenimientos / cantidad [primeras 5]                                  OK                       
+>>> Empresa con menos mantenimiento mantenimientos / cantidad                               OK
 
 
 # Yosley Dashboard

@@ -163,3 +163,44 @@ def get_monthy_expired_contracts():
 
         if check_notificacion_vs_user_role(contrato) is True:
             NOTIFICACIONES.append(contrato)
+
+def get_5_enterprise_mantainences():
+    '''
+    Returns a dictionary sorted with a top 5 enterprises.
+    Is search for enterprises with most maintainences in the current year. 
+    '''
+    anho_actual = datetime.datetime.now().year
+    clientes = {}
+    mantenimientos = db(
+        (db.mantenimiento.id>0) &
+        (db.mantenimiento.fecha.year() == anho_actual)
+    ).select()
+
+    for i in mantenimientos:
+        if i.contrato.empresa in clientes:
+            clientes[i.contrato.empresa] = clientes[i.contrato.empresa] + 1
+        else:
+            clientes[i.contrato.empresa] = 1
+    clientes = list(sorted(clientes.items(), key=lambda item: item[1], reverse=True))[:5]
+    return dict(clientes=clientes)
+
+def get_inverted_5_enterprise_mantainences():
+    '''
+    Returns a dictionary sorted with a top 5 enterprises.
+    Is search for enterprises with less maintainences in the current year. 
+    '''
+    anho_actual = datetime.datetime.now().year
+    clientes = {}
+    mantenimientos = db(
+        (db.mantenimiento.id>0) &
+        (db.mantenimiento.fecha.year() == anho_actual)
+    ).select()
+
+    for i in mantenimientos:
+        if i.contrato.empresa in clientes:
+            clientes[i.contrato.empresa] = clientes[i.contrato.empresa] + 1
+        else:
+            clientes[i.contrato.empresa] = 1
+    clientes = list(sorted(clientes.items(), key=lambda item: item[1]))[:5]
+    return dict(clientes=clientes)
+    

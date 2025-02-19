@@ -3,12 +3,12 @@
 # This is a sample controller
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
-from itertools import groupby
-
 
 # ---- example index page ----
 @auth.requires_login()
 def index():
+    empresas_mas_mantenimientos = get_5_enterprise_mantainences()['clientes']
+    empresas_menos_mantenimientos = get_inverted_5_enterprise_mantainences()['clientes']
     total_contratos_clientes = db(db.contrato_cliente.id>0).count()
     total_contratos_proveedores = db(db.contrato_proveedor.id>0).count()
     total_contratos = total_contratos_clientes + total_contratos_proveedores
@@ -19,6 +19,8 @@ def index():
     total_clientes_mantenimiento = len(db(db.mantenimiento.id>0).select(orderby=db.mantenimiento.id, groupby=db.mantenimiento.contrato))
     porciento_no_archivados_total = round((total_contratos-total_archivados)*100/total_contratos, 2)
     porciento_clientes_mantenimiento = round((total_clientes_mantenimiento)*100/total_contratos_clientes, 2)
+    
+
     ultimo_contrato_cliente_servicio = db(
         (db.contrato_cliente.id>0) &
         (db.contrato_cliente.tipo_contrato == 'sv')
@@ -38,21 +40,6 @@ def index():
         db.contrato_cliente.empresa
     ).last()
 
-    # contratos_cliente_tramite = db(
-    #     (db.contrato_cliente.estado_contrato == 'ec') &
-    #     (db.contrato_cliente.estado_contrato == 'ee')
-    # ).select().as_list()
-
-    # contratos_proveedor_tramite = db(
-    #     (db.contrato_proveedor.estado_contrato == 'ec') &
-    #     (db.contrato_proveedor.estado_contrato == 'ee')
-    # ).select().as_list()
-
-    # contratos_tramite = []
-    # contratos_tramite.append(contratos_cliente_tramite)
-    # contratos_tramite.append(contratos_proveedor_tramite)
-    # print(contratos_tramite)
-
     return dict(
         total_contratos_clientes = total_contratos_clientes,
         total_contratos_proveedores= total_contratos_proveedores,
@@ -65,7 +52,9 @@ def index():
         ultimo_contrato_cliente_servicio=ultimo_contrato_cliente_servicio,
         ultimo_contrato_cliente_venta = ultimo_contrato_cliente_venta,
         porciento_no_archivados_total = porciento_no_archivados_total,
-        porciento_clientes_mantenimiento = porciento_clientes_mantenimiento
+        porciento_clientes_mantenimiento = porciento_clientes_mantenimiento,
+        empresas_mas_mantenimientos = empresas_mas_mantenimientos,
+        empresas_menos_mantenimientos = empresas_menos_mantenimientos
     )
 
 @auth.requires_login()
