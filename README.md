@@ -37,7 +37,7 @@
 >>> Agregar correo electronico a los contactos
 >>> Modificar en contactos el verificar_mantenimiento, correo
 >>> Intercambiar en los contratos el numero y la empresa (swap) para la vista movil
->>> Sacar el icono de detalles fuera de los 3 puntos en los contratos
+>>> Sacar el icono de detalles fuera de los 3 puntos en los contratos                       OK
 >>> Las notificaciones por correo serian para contratos vencidos y mantenimientos
 
 ## Pendiente

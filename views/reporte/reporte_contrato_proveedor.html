@@ -1,0 +1,137 @@
+{{extend 'layout_frontend.html'}}
+
+<style>
+    thead{
+        background-color: #eaeaea;
+    }
+</style>
+
+<div class="pd-ltr-20">
+    
+        <div class="page-header">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <form>
+                        <div class="row">
+                            <div class="col-8">
+                                <select class="form-control" multiple id="proveedor" name="proveedor">
+                                    {{for item in proveedores:}}
+                                    <option {{if item['selected']:}}selected{{pass}} value="{{=item['id']}}">{{=item['empresa']}}</option>
+                                    {{pass}}
+                                </select>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-outline-primary"><i
+                                            class="fa fa-search mr-2"></i>Filtrar
+                                    </button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" id="btnTicket" onclick="printTicket()" class="btn btn-outline-danger"><i
+                                        class="fa fa-print mr-2"></i>Imprimir
+                                </button></div>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<div class="pt-10">
+        <div class="page-header" id="area_reporte">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                        <div class="p-5">
+                            <div>
+                                <div class="logo text-left">
+                                    <img src="{{=URL('static','images/deskapp-logo.svg')}}" style="max-width: 200px" alt=""/>
+                                </div>
+                            </div>
+                            <h5 class="text-left mb-30 weight-600">Alta Gama S.R.L.</h5>
+                            <div class="row pb-30">
+                                <div class="col-md-6">
+                                    <h4 class="mb-15">Sistema de Gestión de Servicios</h4>
+                                    <p class="font-14 mb-5">
+                                        Emitido: <strong class="weight-600">{{=datetime.datetime.now().strftime('%d/%m/%Y')}}</strong>
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="text-right">
+                                        <p class="font-14 mb-5">{{=auth.user.first_name}} {{=auth.user.last_name}}</p>
+                                        <p class="font-14 mb-5">{{=auth.user.email}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Número</th>
+                                        <th scope="col">Empresa</th>
+                                        <th scope="col">Tipo de Contrato</th>
+                                        <th scope="col">Estado de Contrato</th>
+                                        <th scope="col">Confeccionado</th>
+                                        <th scope="col">Vencimiento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{for i in contratos:}}
+                                    <tr>
+                                        <td>{{=i.numero}}/{{=i.anho}}</td>
+                                        <th scope="row">{{=i['empresa']}}</th>
+                                        <td>{{=TIPO_CONTRATO[i.tipo_contrato]}}</td>
+                                        <td>{{=ESTADO_CONTRATO[i.estado_contrato]}}</td>
+                                        <td>{{=i.fecha_confeccion.strftime('%d/%m/%Y')}}</td>
+                                        <td>{{=i.fecha_vencimiento.strftime('%d/%m/%Y')}}</td>
+                                    </tr>
+                                    {{pass}}
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    function printTicket() {
+        document.getElementById("btnTicket").disabled = true;
+        let uuid4 = 'Resumen'
+        var element = document.getElementById("area_reporte");
+        var opt = {
+            margin: [0, 0, 0, 0], //top, left, buttom, right,
+            filename: uuid4 + ".pdf",
+            image: {type: "jpeg", quality: 0.98},
+            html2canvas: {scale: 2}, // Calidad de PDF, Lo mas alto usado es 15
+            jsPDF: {unit: "in", format: "letter", orientation: "landscape"},
+            // pagebreak: { before: '.beforeClass', after: ['#after1', '#after2'], avoid: 'img' }
+            pagebreak: {after: ".pageBreak"},
+        };
+
+        document.getElementById("btnTicket").innerText =
+            "Generando PDF [Calidad=" + opt.html2canvas.scale + "]. Espere...";
+
+        // New Promise-based usage:
+        html2pdf()
+            .set(opt)
+            .from(element)
+            .save()
+            .then(() => {
+                document.getElementById("btnTicket").disabled = false;
+                document.getElementById("btnTicket").innerHTML =
+                    '<i class="fa fa-print"></i> Imprimir Ticket';
+            });
+    }
+
+</script>
+
+
+{{block page_js}}
+{{include 'components/select2.html'}}
+{{include 'components/datepicker.html'}}
+{{include 'components/html2pdf.html'}}
+{{end page_js}}

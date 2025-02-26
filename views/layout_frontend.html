@@ -267,11 +267,6 @@
                             <span class="micon dw dw-home"></span><span class="mtext">Inicio</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{=URL('default','index2')}}" class="dropdown-toggle no-arrow">
-                            <span class="micon dw dw-home"></span><span class="mtext">Inicio 2</span>
-                        </a>
-                    </li>
                     {{if (auth.has_membership(role='Administrador') or auth.has_membership(role='Administrativo') or auth.has_membership(role='Jurídico')):}}
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle">
@@ -300,10 +295,9 @@
                             <span class="micon dw dw-clipboard1"></span><span class="mtext"> Reportes </span>
                         </a>
                         <ul class="submenu">
-                            <li><a href="{{=URL('reporte','reporte_contrato')}}">Contratos</a></li>
+                            <li><a href="{{=URL('reporte','reporte_contrato_cliente')}}">Contratos (Clientes)</a></li>
+                            <li><a href="{{=URL('reporte','reporte_contrato_proveedor')}}">Contratos (Proveedores)</a></li>
                             <li><a href="#">Mantenimientos</a></li>
-                            <li><a href="#">Cronograma</a></li>
-                            <li><a href="#">Usuarios</a></li>
                         </ul>
                     </li>
                     {{pass}}
