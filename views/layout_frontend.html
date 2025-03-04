@@ -4,7 +4,7 @@
 <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8">
-    <title>SIGED</title>
+    <title>SGM</title>
 
     <!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180"
@@ -106,6 +106,7 @@
                     </a>
                 </div>
             </div>
+            
             {{if NOTIFICACIONES:}}
             <div class="user-notification">
                 <div class="dropdown">
@@ -317,14 +318,14 @@
     </div>
     <div class="mobile-menu-overlay"></div>
 
-    <div class="main-container">
-        <div class="pd-ltr-20 xs-pd-20-10">
-            <div class="min-height-200px">
-                {{include}}
-            </div>
-            {{include 'components/footer.html'}}
+    <div class="main-container" style="height: 100%;">
+        <div class="min-height-500px">
+            {{include}}
         </div>
+
+        {{include 'components/footer.html'}}
     </div>
+    
     <!-- js -->
     <script src="{{=URL('static/frontend','vendors/scripts/core.js')}}"></script>
     <script src="{{=URL('static/frontend','vendors/scripts/script.min.js')}}"></script>

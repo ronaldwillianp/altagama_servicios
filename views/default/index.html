@@ -26,7 +26,6 @@
 
     .widget-style3 {
         padding: 0;
-        overflow: hidden;
     }
 
     .widget-style3 .widget-data {
@@ -37,7 +36,6 @@
     .widget-style3 .widget-icon {
         width: 60px;
         font-size: 30px;
-        line-height: 1;
         text-align: center;
         display: -webkit-box;
         display: -ms-flexbox;
@@ -59,6 +57,41 @@
     .cartTitle{
         border-radius: 5px 5px 0px 0px;
     }
+
+    .cardStatus {
+        height: 100px;
+        background-color: white;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+    }
+
+    .cardStatus .cardIcon {
+        height: 100%;
+        width: 60px;
+        display: flex;
+        font-size: 30px;
+        color: white;
+        border-radius: 10px 0px 0px 10px;
+        justify-content: center;
+        align-items: center;
+        background-color: #1b00ff ;
+    }
+
+    .cardContent {
+        margin-left: 15px;
+    }
+
+    .cardContent .number {
+        font-weight: 600;
+        font-size: 25px;
+    }
+  
+    .cardContent .title {
+        font-weight: 600;
+        font-size: 18px;
+    }
 </style>
 {{end head}}
 
@@ -69,110 +102,117 @@
 
 <div class="row">
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-success">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-user"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-user"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-success">{{=total_contratos_clientes}}</div>
-                    <div class="weight-600 font-20">Total de Clientes</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_contratos_clientes}}</div>
+                <div class="title">    Total de Clientes</div>
             </div>
         </div>
     </div>
+
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-success">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-delivery-truck-2"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-delivery-truck-2"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-success">{{=total_contratos_proveedores}}</div>
-                    <div class="weight-600 font-20">Total de Proveedores</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_contratos_proveedores}}</div>
+                <div class="title">Total de Proveedores</div>
             </div>
         </div>
     </div>
+  
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-danger">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-folder-33"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-folder-33"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-danger">{{=total_archivados}}</div>
-                    <div class="weight-600 font-20">Contratos Archivados</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_archivados}}</div>
+                <div class="title">Contratos Archivados</div>
             </div>
         </div>
     </div>
+   
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-warning">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-folder-144"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-folder-144"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-warning">{{=total_entregados}}</div>
-                    <div class="weight-600 font-20">Contratos Entregados</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_entregados}}</div>
+                <div class="title">Contratos Entregados</div>
             </div>
         </div>
     </div>
+  
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-warning">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-folder-144"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-folder-144"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-warning">{{=total_recogidos}}</div>
-                    <div class="weight-600 font-20">Contratos Recogidos</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_recogidos}}</div>
+                <div class="title">Contratos Recogidos</div>
             </div>
         </div>
     </div>
+   
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-success">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-folder-142"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-folder-142"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-success">{{=total_ejecucion}}</div>
-                    <div class="weight-600 font-20">Contratos en Ejecución</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_ejecucion}}</div>
+                <div class="title">Contratos en Ejecución</div>
             </div>
         </div>
     </div>
+   
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-primary">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-file-115"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-file-115"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-primary">{{=total_contratos}}</div>
-                    <div class="weight-600 font-20">Total de Contratos</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_contratos}}</div>
+                <div class="title">Total de Contratos</div>
             </div>
         </div>
     </div>
+   
     <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3 mb-30">
-        <div class="card-box height-100-p widget-style1 text-success">
-            <div class="d-flex flex-wrap align-items-center">
-                <div class="progress-data">
-                    <div class="icono"><i class="dw dw-cone"></i></div>
+            <div class="cardStatus card-box">
+            <div class="cardIcon">
+                <div class="icon">
+                    <i class="icon-copy dw dw-cone"></i>
                 </div>
-                <div class="widget-data">
-                    <div class="h4 mb-0 text-success">{{=total_clientes_mantenimiento}}</div>
-                    <div class="weight-600 font-20">Clientes con Mantenimiento</div>
-                </div>
+            </div>
+            <div class="cardContent">
+                <div class=" weight-700 font-24">{{=total_clientes_mantenimiento}}</div>
+                <div class="title">Clientes con Mantenimiento</div>
             </div>
         </div>
     </div>
-</div>
+</div> 
 
 <div class="row pb-10">
     <div class="col-sm-12 col-md-6 mb-30">

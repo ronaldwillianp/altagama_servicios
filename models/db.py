@@ -179,6 +179,35 @@ if configuration.get('scheduler.enabled'):
 lazy_tables = True
 T.force('es')
 
+db.define_table('empresa',
+                Field('nombre'),
+                Field('reeup', label=T('R.E.E.U.P.')),
+                Field('nit', label=T('Número de Identidad Tributaria')),
+                Field('direccion'),
+                Field('correo'),
+                Field('logo', 'upload', autodelete=True),
+                Field('slogan'),
+)
+db.empresa.nombre.requires = IS_NOT_EMPTY()
+db.empresa.reeup.requires = IS_NOT_EMPTY()
+db.empresa.nit.requires = IS_NOT_EMPTY()
+db.empresa.correo.requires = IS_EMAIL()
+db.empresa.logo.requires = IS_FILE(extension='png')
+db.empresa.slogan.requires = IS_NOT_EMPTY()
+
+EMPRESA = {
+    'nombre': '',
+    'reeup': '',
+    'nit': '',
+    'direccion': '',
+    'correo': '',
+    'logo': '',
+    'slogan': '',
+}
+empresa = db(db.empresa.id>0).select().first()
+if empresa:
+    EMPRESA['nombre'] = empresa.nombre
+
 db.define_table('contrato_cliente',
                 Field('numero', label=T('Número')),
                 Field('anho', label=T('Año')),

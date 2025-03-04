@@ -18,10 +18,29 @@
         <div id="container">
             <div class="pd-20 card-box mb-30 profile-info">
 
-                <div class="clearfix" style="margin-bottom: 20px!important;">
-                    <h4 class="text-blue h4">Perfil</h4>
+                <div class="clearfix" >
+                  <h5 class="h4 text-blue mb-20">Perfil</h5>
                 </div>
-                <ul class="details">
+
+             <div class="row ">
+                <div class="d-flex col-4 flex-column">
+                    <div class="mb-2 h5">Nombre Completo</div>
+                    <div class="h6 text-muted">{{=usuario.first_name + " " + usuario.last_name}}</div>
+                </div>
+                <div class="d-flex col-4 flex-column">
+                    <div class="mb-2 h5">Usuario</div>
+                    <div class="h6 text-muted">{{=usuario.username}}</div>
+                </div>
+                <div class="d-flex col-4 flex-column">
+                    <div class="mb-2 h5">Correo</div>
+                    <div class="h6 text-muted">{{=usuario.email}}</div>
+                </div>
+                <div class="d-flex col-4 mt-3 flex-column">
+                    <div class="mb-2 h5">Rol</div>
+                    <div class="h6 text-muted">{{=rol}}</div>
+                </div>
+             </div>
+                <!-- <ul class="details">
                     <li>
                         <span>Nombre completo:</span>
                         {{=usuario.first_name + " " + usuario.last_name}}
@@ -38,7 +57,7 @@
                         <span>Rol:</span>
                         {{=rol}}
                     </li>
-                </ul>
+                </ul> -->
 
 
             </div>

@@ -138,11 +138,9 @@ def reporte_mantenimiento():
 
         # Se evalua el tipo de peticion, en este caso si es instancia de la clase <str>
         elif type(request.vars['proveedor']) == str:
-            print(1)
             # Com es instancia de <str> quiere decir que es un solo id, por lo que selecciona solo los mantenimientos de este unico cliente
             for mantenimiento in db(db.mantenimiento.contrato == request.vars['proveedor']).select():
                 contratos.append(mantenimiento)
-            print('Hereee')
 
             for cliente in clientes:
                 # Esta parte se encarga de agregarle a los rows un valor 'selected' de tipo <boolean> para contrlar si un registro ha sid seleccinado o no para la vista del dropdown

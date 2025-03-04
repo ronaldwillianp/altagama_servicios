@@ -44,3 +44,25 @@
 >>> Trabajando en los agregar mantenimiento y sus validaciones
 >>> Migrar a el agregar mantenimiento generico los cambios con el date
 >>> Revisar el tema de los mantenimientos una semana antes
+
+
+## Modificaciones de hoy 26/2/2025
+>>> Mantenimiento/Administrar
+>>> Los card del dashbaord
+>>> Reporte Contrato Cliente 
+>>> Reporte Contrato Proveedor 
+>>> Reporte Contrato Mantinimiento 
+>>> Footer
+>>> DB.py
+
+## Pendiente 
+>>> Buscar como hacer el scroll vertical a los select multiples.                                OK
+>>> Cambiar el diseño de los card del dashboard. El background del icon ponerle un color        Pendiente a revision
+>>> Arregle el diseño de la barra de busqueda de los reportes.                                  Pendiente
+>>> Arreglar la header de los reportes. Poner el icono primero y el nombre de la empresa al final. Bajar un poco el tamaño de la letra del (Sistema de Gestión de Servicios).                                                                                     OK
+>>> Revisar el padding-bottom del footer que en algunas vistas se pierde.                       Pendiente
+>>> Modificar la vista de detalles de usuario.                                                  OK
+>>> Modificar el diseño de la vista de las notificaciones.
+>>> Agregarle el placeholder a los select2.
+>>> Modificar las variables de configuacion que salen a la derecha. Revisar el archivo js layout-settings.js y buscar la clase css header-white.
+>>> Poner un nombre al inicio de los reportes.                                                  OK

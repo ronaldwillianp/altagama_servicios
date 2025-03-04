@@ -4,55 +4,92 @@
     thead{
         background-color: #eaeaea;
     }
+
+    .cardFiltro {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        column-gap: 10px;
+    }
+     .cardTitle{
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    .customSelect {
+        width: 100%;
+    }
+
+    @media (max-width: 600px) {
+        .customSelect {
+            width: 100px;
+        }
+    }
+
+    /* @media (max-width: 500px) {
+        .selection {
+            width: 50px;
+        }
+    }
+    
+    @media (min-width: 300px) and (max-width: 500px) {
+        .select2-container--default .select2-selection--multiple {
+            width: 50px;
+            background-color: ;
+        }
+    } */
+
+    .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+        max-height: 120px; /* Altura máxima antes de que aparezca el scroll vertical */
+        overflow-y: auto; /* Muestra el scroll vertical solo si es necesario */
+        overflow-x: hidden; /* Oculta el scroll horizontal */
+        white-space: normal; /* Permite que el texto se ajuste a varias líneas */
+    }
 </style>
 
-<div class="pd-ltr-20">
-    
-        <div class="page-header">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <form>
-                        <div class="row">
-                            <div class="col-8">
-                                <select class="form-control" multiple id="cliente" name="cliente">
-                                    {{for item in clientes:}}
-                                    <option {{if item['selected']:}}selected{{pass}} value="{{=item['id']}}">{{=item['empresa']}}</option>
-                                    {{pass}}
-                                </select>
-                            </div>
+<div>    
+    <div class="title pb-10">
+        <h2 class="h3 mb-0">Reporte Contrato Cliente</h2>
+    </div>
 
-                            <div class="col-4">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <button type="submit" class="btn btn-outline-primary"><i
-                                            class="fa fa-search mr-2"></i>Filtrar
-                                    </button>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <button type="button" id="btnTicket" onclick="printTicket()" class="btn btn-outline-danger"><i
-                                        class="fa fa-print mr-2"></i>Imprimir
-                                </button></div>
-                                </div>
-                            </div>
-                    </form>
+    <div class="page-header">
+        <form>
+            <div class="row justify-content-end mr-2">
+                <div>
+                    <select class="form-control" multiple id="cliente" name="cliente">
+                        {{for item in clientes:}}
+                        <option {{if item['selected']:}}selected{{pass}} value="{{=item['id']}}">{{=item['empresa']}}</option>
+                        {{pass}}
+                    </select>
+                </div>
+
+                <div class="ml-4">
+                    <button type="submit" class="btn btn-outline-primary mr-2"><i
+                        class="fa fa-search mr-2"></i>Filtrar
+                    </button>
+                    <button type="button" id="btnTicket" onclick="printTicket()" class="btn btn-outline-danger"><i
+                        class="fa fa-print mr-2"></i>Imprimir
+                    </button>
                 </div>
             </div>
-        </div>
+        </form>
+    </div>
 </div>
-
-
 
 <div class="pt-10">
         <div class="page-header" id="area_reporte">
+             
             <div class="row">
                 <div class="col-md-12 col-sm-12">
                         <div class="p-5">
-                            <div>
-                                <div class="logo text-left">
-                                    <img src="{{=URL('static','images/deskapp-logo.svg')}}" style="max-width: 200px" alt=""/>
+                            <div class="row justify-content-between align-items-center">
+                                 <div class="logo">
+                                    <img src="{{=URL('static','images/deskapp-logo.svg')}}" alt=""/>
+                                </div>
+                                <div>
+                                    <h5 class="text-center weight-600">Alta Gama S.R.L.</h5>
                                 </div>
                             </div>
-                            <h5 class="text-left mb-30 weight-600">Alta Gama S.R.L.</h5>
                             <div class="row pb-30">
                                 <div class="col-md-6">
                                     <h4 class="mb-15">Sistema de Gestión de Servicios</h4>
